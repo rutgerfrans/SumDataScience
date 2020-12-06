@@ -70,6 +70,8 @@ Created on Sat Dec  5 14:16:21 2020
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LogisticRegression
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 df = pd.read_csv('Dataset Heart.csv')
 df.head()
@@ -91,6 +93,8 @@ while i < len(y_pred):
     i += 1
 
 print('ROC score: ', score)
+
+sns.pairplot(df)
 ~~~~
 
 
@@ -105,6 +109,8 @@ Person  5 :  1
 ..
 ROC score:  0.8514851485148515
 ~~~~
+
+![]()
 
 #### Conclusie
 Op basis van de 13 attributen uit de dataset heeft dit model met een ROC score van ongeveer 85 procent betrouwbaarheid een voorspelling kunnen maken op de kans van een hartaanval.
