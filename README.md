@@ -9,7 +9,19 @@ Voor de minor Data Science pi7 zijn 6 opdrachten gemaakt verdeelt in 3 fases.
 
 
 ## Fase 1
-### Multiple regression
+### Multiple linear regression
+
+#### Beschrijving
+
+#### Data opzet
+
+#### Code
+
+#### Output
+
+#### Conclusie
+
+#### Feedback
 
 
 ### Logistic regression
@@ -96,6 +108,8 @@ ROC score:  0.8514851485148515
 
 #### Conclusie
 Op basis van de 13 attributen uit de dataset heeft dit model met een ROC score van ongeveer 85 procent betrouwbaarheid een voorspelling kunnen maken op de kan van een hartaanval.
+
+#### Feedback
 
 ## Fase 2
 ### Random forests
