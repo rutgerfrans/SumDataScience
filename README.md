@@ -107,7 +107,7 @@ ROC score:  0.8514851485148515
 ~~~~
 
 #### Conclusie
-Op basis van de 13 attributen uit de dataset heeft dit model met een ROC score van ongeveer 85 procent betrouwbaarheid een voorspelling kunnen maken op de kan van een hartaanval.
+Op basis van de 13 attributen uit de dataset heeft dit model met een ROC score van ongeveer 85 procent betrouwbaarheid een voorspelling kunnen maken op de kans van een hartaanval.
 
 #### Feedback
 
