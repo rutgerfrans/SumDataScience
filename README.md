@@ -44,9 +44,12 @@ Deze dataset bevat van ongeveer 300 patienten, 13 attributen die kunnen inschatt
 | 3       | 41  | 0   | 1  | 130      | 204  | 0   | 0       | 172     | 0     | 14      | 2     | 0  | 2    | 1      |
 | 4       | 56  | 1   | 1  | 120      | 236  | 0   | 1       | 178     | 0     | 8       | 2     | 0  | 2    | 1      |
 | 5       | 57  | 0   | 0  | 120      | 354  | 0   | 1       | 163     | 1     | 6       | 2     | 0  | 2    | 1      |
+|..       |..   |..   |..  |..        |..    |..   |..       |..       |..     |..       |..     |..  |..    |..      |
 
 #### Code
-
+~~~~
+print('helloworld')
+~~~~
 #### Output
 
 #### Conclusie
