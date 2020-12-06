@@ -99,6 +99,7 @@ sns.pairplot(df)
 
 
 #### Output
+##### Code  output
 ~~~~
 Person  0 :  1
 Person  1 :  1
@@ -109,7 +110,7 @@ Person  5 :  1
 ..
 ROC score:  0.8514851485148515
 ~~~~
-
+##### Visualisatie output pairplot
 ![](HeartVis.png)
 
 #### Conclusie
