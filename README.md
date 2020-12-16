@@ -14,8 +14,67 @@ Voor de minor Data Science pi7 zijn 6 opdrachten gemaakt verdeelt in 3 fases.
 #### Beschrijving
 
 #### Data opzet
+| car_ID | symboling | CarName                    | fueltype | aspiration | doornumber | carbody     | drivewheel | enginelocation | wheelbase | carlength | carwidth | carheight | curbweight | enginetype | cylindernumber | enginesize | fuelsystem | boreratio | stroke | compressionratio | horsepower | peakrpm | citympg | highwaympg | price |
+|--------|-----------|----------------------------|----------|------------|------------|-------------|------------|----------------|-----------|-----------|----------|-----------|------------|------------|----------------|------------|------------|-----------|--------|------------------|------------|---------|---------|------------|-------|
+| 1      | 3         | alfa-romero   giulia       | gas      | std        | two        | convertible | rwd        | front          | 886       | 1688      | 641      | 488       | 2548       | dohc       | four           | 130        | mpfi       | 347       | 268    | 9                | 111        | 5000    | 21      | 27         | 13495 |
+| 2      | 3         | alfa-romero stelvio        | gas      | std        | two        | convertible | rwd        | front          | 886       | 1688      | 641      | 488       | 2548       | dohc       | four           | 130        | mpfi       | 347       | 268    | 9                | 111        | 5000    | 21      | 27         | 16500 |
+| 3      | 1         | alfa-romero   Quadrifoglio | gas      | std        | two        | hatchback   | rwd        | front          | 945       | 1712      | 655      | 524       | 2823       | ohcv       | six            | 152        | mpfi       | 268       | 347    | 9                | 154        | 5000    | 19      | 26         | 16500 |
+| 4      | 2         | audi 100 ls                | gas      | std        | four       | sedan       | fwd        | front          | 998       | 1766      | 662      | 543       | 2337       | ohc        | four           | 109        | mpfi       | 319       | 34     | 10               | 102        | 5500    | 24      | 30         | 13950 |
+| 5      | 2         | audi 100ls                 | gas      | std        | four       | sedan       | 4wd        | front          | 994       | 1766      | 664      | 543       | 2824       | ohc        | five           | 136        | mpfi       | 319       | 34     | 8                | 115        | 5500    | 18      | 22         | 17450 |
 
 #### Code
+~~~
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Dec 15 17:02:10 2020
+
+@author: Rutger
+"""
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import r2_score
+from sklearn.preprocessing import normalize
+import seaborn as sns
+import math
+
+
+
+df = pd.read_csv('Dataset Carprices.csv')
+df.head()
+df = df.drop('car_ID', 1)
+
+df = pd.get_dummies(df, columns=['CarName','fueltype','aspiration','doornumber','carbody',
+                                 'drivewheel','enginelocation','enginetype','cylindernumber',
+                                 'fuelsystem'], prefix="", prefix_sep="")
+       
+y = df.price
+x = df.drop('price', 1)
+
+
+x_train, x_test, y_train, y_test = train_test_split(x,y,test_size=0.5,random_state=0)#wat is random state?
+
+lg = LinearRegression()
+
+lg.fit(x_train, y_train)
+
+y_pred = lg.predict(x_test)
+
+mse = mean_squared_error(y_test, y_pred)
+rtwo = r2_score(y_test, y_pred)
+print('\nrmse: ',math.sqrt(mse), '\nr2: ', rtwo)
+
+plt.scatter(y_test, y_pred)
+    
+z = np.polyfit(y_test, y_pred, 1)
+p = np.poly1d(z)
+plt.plot(y_test,p(y_test),"r--")
+
+plt.show()
+~~~
 
 #### Output
 
