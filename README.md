@@ -52,6 +52,8 @@ Voor de minor Data Science pi7 zijn 6 opdrachten gemaakt verdeelt in 3 fases.
 |     75%    |   2.000000  |  102.400000 | 183.100000 | 66.900000        | 55.500000    |
 |     max    |   3.000000  |  120.900000 | 208.100000 | 72.300000        | 59.800000    |
 | curbweight |  enginesize |  boreratio  | stroke     | compressionratio | \            |
+
+|:----------:|:-----------:|:-----------:|------------|------------------|--------------|
 |    count   |  205.000000 |  205.000000 | 205.000000 | 205.000000       | 205.000000   |
 |    mean    | 2555.565854 |  126.907317 | 3.329756   | 3.255415         | 10.142537    |
 |     std    |  520.680204 |  41.642693  | 0.270844   | 0.313597         | 3.972040     |
@@ -60,7 +62,9 @@ Voor de minor Data Science pi7 zijn 6 opdrachten gemaakt verdeelt in 3 fases.
 |     50%    | 2414.000000 |  120.000000 | 3.310000   | 3.290000         | 9.000000     |
 |     75%    | 2935.000000 |  141.000000 | 3.580000   | 3.410000         | 9.400000     |
 |     max    | 4066.000000 |  326.000000 | 3.940000   | 4.170000         | 23.000000    |
+
 | horsepower |   peakrpm   |   citympg   | highwaympg | price            |              |
+|:----------:|:-----------:|:-----------:|------------|------------------|--------------|
 |    count   |  205.000000 |  205.000000 | 205.000000 | 205.000000       | 205.000000   |
 |    mean    |  104.117073 | 5125.121951 | 25.219512  | 30.751220        | 13276.710571 |
 |     std    |  39.544167  |  476.985643 | 6.542142   | 6.886443         | 7988.852332  |
@@ -69,6 +73,14 @@ Voor de minor Data Science pi7 zijn 6 opdrachten gemaakt verdeelt in 3 fases.
 |     50%    |  95.000000  | 5200.000000 | 24.000000  | 30.000000        | 10295.000000 |
 |     75%    |  116.000000 | 5500.000000 | 30.000000  | 34.000000        | 16503.000000 |
 | max        | 288.000000  | 6600.000000 | 49.000000  | 54.000000        | 45400.000000 |
+
+#### Data preperatie
+De kolom "CarName" is bewerkt om een betere uitkomst te resulteren. Om de r2 score zo hoog mogelijk te krijgen en de rmse zo laag mogelijk is het van belang dat de dataset goed voorbereid wordt. Zodoende is besloten om de kolom "CarName" te verbeteren. De kolom "CarName" had 205 waardes die bestonden uit unieke auto merken en types. Als deze kolom gestandaardiseerd werd, resulteerde dit in 205 nieuwe kolommen met 204 nullen en één 1. Dit leidde in de versie 1, tot een lage r2 score en een hoge rmse bij een test set van 30 procent. Om de kolom "CarName" te verbeteren is er gekozen om alle merken te categoriseren, zodoende werden alle type auto's van hetzelfde merk onder één naam gezet. Dit resulteerde in 26 kolommen i.p.v. 205. Uiteindelijk zorgde dit ervoor dat er een hogere r2 score en een lagere rmse score naar voren kwam. 
+
+| Voor  |                     | Na    |                    |
+|-------|---------------------|-------|--------------------|
+| rmse: | 7558.48034923494    | rmse: | 2994.0165610391055 |
+| r2:   | 0.06955780289800828 | r2:   | 0.8361176251942362 |
 
 #### Code
 ~~~
@@ -95,15 +107,29 @@ df = pd.read_csv('Dataset Carprices.csv')
 df.head()
 df = df.drop('car_ID', 1)
 
+
+#Preperatie op CarName
+i =0
+while i < len(df.CarName):
+    df.CarName[i] = df.CarName[i].split()[0]
+    i += 1
+    
+pd.set_option('display.max_columns', 200)
+print(df.describe())
+
+#Dataset standaardiseren
 df = pd.get_dummies(df, columns=['CarName','fueltype','aspiration','doornumber','carbody',
                                  'drivewheel','enginelocation','enginetype','cylindernumber',
                                  'fuelsystem'], prefix="", prefix_sep="")
-       
+
+print(df.info())
+
+      
 y = df.price
 x = df.drop('price', 1)
 
 
-x_train, x_test, y_train, y_test = train_test_split(x,y,test_size=0.5,random_state=0)#wat is random state?
+x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.3 ,random_state=7)
 
 lg = LinearRegression()
 
@@ -121,12 +147,19 @@ z = np.polyfit(y_test, y_pred, 1)
 p = np.poly1d(z)
 plt.plot(y_test,p(y_test),"r--")
 
-plt.show()
+plt.show(
 ~~~
 
 #### Output
+Random_state: 7
+Data test set: 30 procent
+Data train set: 70 procent
+
+rmse:  2994.0165610391055 
+r2:  0.8361176251942362
 
 #### Conclusie
+
 
 #### Feedback
 
