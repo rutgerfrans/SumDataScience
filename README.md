@@ -174,8 +174,8 @@ plt.show()
 - Data test set: 30 procent
 - Data train set: 70 procent
 
-- rmse:  3031.144264619707 
-- r2:  0.8320279333635224
+- rmse:  3041.884027168188 
+- r2:  0.8308355282333387
 
 ![](LinearverbandPredyTesty.png)
 
