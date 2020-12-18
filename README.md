@@ -7,11 +7,10 @@ Voor de minor Data Science pi7 zijn 6 opdrachten gemaakt verdeelt in 3 fases.
 2. Fase 2: Random Forests en Neurale netwerken 
 3. Fase 3: Support vector machines en Bayesian networks
 
+### Dataset Beschrijving attributen en target
 
-## Fase 1
-### Multiple linear regression
 
-#### Dataset Beschrijving attributen en target
+
 |  1 |           Car_ID          |                                                 Unique id of each   observation (Interger)                                                |
 |:--:|:-------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------:|
 |  2 |         Symboling         | Its assigned insurance risk   rating, A value of +3 indicates that the auto is risky, -3 that it is   probably pretty safe.(Categorical)  |
@@ -76,17 +75,24 @@ Voor de minor Data Science pi7 zijn 6 opdrachten gemaakt verdeelt in 3 fases.
 | max        | 288.000000  | 6600.000000 | 49.000000  | 54.000000        | 45400.000000 |
 
 #### Data preperatie
-Voordat begonnen is aan normalizatie en standaardisatie is gekeken of dit daadwerkelijk nodig was. Er is begonnen door eerst een heatmap te genereren om te kijken of er waardes zijn met een hoge correlatie, zodat deze eruit gefilterd kunnen worden om een bias te voorkomen. Zie de heatmap. Te zien is hoe "highwaympg" en "citympg" een correlatie hebben van 0.97. In het model laten we deze dan ook weg.
+##### Heatmap analyse
+Voordat begonnen is aan normalisatie en standaardisatie is gekeken of dit daadwerkelijk nodig was. Er is begonnen door eerst een heatmap te genereren om te kijken of er waardes zijn met een hoge correlatie, zodat deze eruit gefilterd kunnen worden om een bias te voorkomen. Zie de heatmap. Te zien is hoe "highwaympg" en "citympg" een correlatie hebben van 0.97. In het model laten we deze dan ook weg.
 
 ![](HeatmapmlrCarPrices.png)
 
-Als tweede stap is gekeken of er kolommen zijn die het resultaat kunnen beïnvloeden, door de opzet van de kolom. De kolom "CarName" is bijvoorbeeld bewerkt om een betere uitkomst te resulteren. Zodoende is besloten om de kolom "CarName" te verbeteren, de kolom "CarName" had 205 waardes die bestonden uit unieke auto merken en types. Als deze kolom gestandaardiseerd werd, resulteerde dit in 205 nieuwe kolommen met 204 nullen en één 1. Dit leidde in de versie 1, tot een lage r2 score en een hoge rmse bij een test set van 30 procent. Om de kolom "CarName" te verbeteren is er gekozen om alle merken te categoriseren, zodoende werden alle type auto's van hetzelfde merk onder één naam gezet. Dit resulteerde in 26 kolommen i.p.v. 205. Uiteindelijk zorgde dit ervoor dat er een hogere r2 score en een lagere rmse score naar voren kwam. 
+##### Standaardisatie
+Als tweede stap is gekeken naar standaardisatie, zijn er kolommen die aangepast moeten worden om tot een beter resultaat te komen? Alle kolommen die geen nummerieke waarden bevatten zijn omgezet naar tabellen die wel nummerieke waarde bevatten, doormiddel van de "get_dummies()" functie van Pandas. Echter is een kolom, "CarName", niet efficiënt om op deze manier te standaardiseren. De kolom "CarName" heeft 205 waardes die bestaan uit unieke auto merken en types. Als deze kolom gestandaardiseerd word, resulteert dit in 205 nieuwe kolommen met 204 nullen en één 1. Dit leidde in de versie 1, tot een lage r2 score en een hoge rmse bij een test set van 30 procent. Om de kolom "CarName" te verbeteren is er gekozen om alle merken te categoriseren, zodoende werden alle type auto's van hetzelfde merk onder één naam gezet.
 
-| Voor  |                     | Na    |                    |
-|-------|---------------------|-------|--------------------|
-| rmse: |   7558.48034923494  | rmse: | 2994.0165610391055 |
-| r2:   | 0.06955780289800828 | r2:   | 0.8361176251942362 |
+##### Normalisatie
+Als derde stap is gekeken of normalisatie nodig zou zijn. In eerste instantie waren er geen kolommen die uitschietende waardes hadden. Alleen de target kolom had hoge waardes omdat er prijzen gehanteerd worden, maar aangezien dit de target kolom was zou deze sowieso niet meegenomen worden in de normalisatie. Om toch te kijken of normalisatie een positief effect zou hebben, is deze toegepast. Echter waren de waardes na normalisatie zo abnormaal dat normalisatie niet is toegepast.
 
+| Na Normalisatie bij multiple linear regression |                         |
+|------------------------------------------------|-------------------------|
+| rmse:                                          | 30267727458.953026      |
+| r2:                                            | -2.7177251408947733e+22 |
+
+## Fase 1
+### Multiple linear regression
 #### Code
 ~~~
 # -*- coding: utf-8 -*-
@@ -102,7 +108,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import r2_score
-from sklearn.preprocessing import normalize
 import seaborn as sns
 import math
 
@@ -110,7 +115,11 @@ import math
 
 df = pd.read_csv('Dataset Carprices.csv')
 df.head()
-df = df.drop('car_ID', 1)
+df = df.drop(['car_ID', 'highwaympg', 'citympg'], 1)
+
+#Heatmap
+#sns.set(rc={'figure.figsize':(11.7,8.27)})
+#sns.heatmap(df.corr().round(2),square=True,cmap="RdYlGn",annot=True)
 
 
 #Preperatie op CarName
@@ -129,9 +138,12 @@ df = pd.get_dummies(df, columns=['CarName','fueltype','aspiration','doornumber',
 
 print(df.info())
 
+#Normalisatie (n.v.t.)
+#df = (df-df.min())/(df.max()-df.min())
       
 y = df.price
 x = df.drop('price', 1)
+
 
 
 x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.3 ,random_state=7)
@@ -152,7 +164,7 @@ z = np.polyfit(y_test, y_pred, 1)
 p = np.poly1d(z)
 plt.plot(y_test,p(y_test),"r--")
 
-plt.show(
+plt.show()
 ~~~
 
 #### Output
@@ -163,13 +175,14 @@ Data train set: 70 procent
 rmse:  3031.144264619707 
 r2:  0.8320279333635224
 
-![](HeatmapmlrCarPrices.png)
+![](LinearverbandPredyTesty.png)
 
 #### Conclusie
 Het uiteindelijke resultaat laat zien dat er een rmse is van ongeveer 3000 euro met r2 score van ongeveer 83 procent. Dit laat zien dat er een goed verband is tussen alle attributen en dat er een vrij goede voorspelling gedaan kan worden over de dataset.
 
 #### Feedback
-
+In de feedback momenten, werd er vooral aangekaart dat we meer aandacht moesten bieden aan het voorbereiden van de data. De geschreven code was prima, maar er moest meer gefocussed worden op het analyseren van de verbanden in de dataset om te kijken hoe de uitkomst het beste zou worden.
+Zo is er aangeraden om de kolom "CarName" op te splitsen in merknamen i.p.v. type auto's. Ook werd als tip gegeven om aan de hand van de heatmap te kijken welke attributen een goede correlatie hadden en dus een biassed uitkomst konden leveren.
 
 ### Logistic regression
 Voor de opdracht van logistic regression is er een dataset toegepast over de kans op een hartaanval; https://www.kaggle.com/nareshbhat/health-care-data-set-on-heart-attack-possibility.
