@@ -78,7 +78,7 @@ Voor de minor Data Science pi7 zijn 6 opdrachten gemaakt verdeelt in 3 fases.
 #### Data preperatie
 Voordat begonnen is aan normalizatie en standaardisatie is gekeken of dit daadwerkelijk nodig was. Er is begonnen door eerst een heatmap te genereren om te kijken of er waardes zijn met een hoge correlatie, zodat deze eruit gefilterd kunnen worden om een bias te voorkomen. Zie de heatmap.
 
-
+![](HeatmapmlrCarPrices.png)
 
 
 
@@ -258,7 +258,7 @@ Person  5 :  1
 ROC score:  0.8514851485148515
 ~~~~
 ##### Visualisatie output pairplot
-![](HeartVis.png)
+
 
 #### Conclusie
 Op basis van de 13 attributen uit de dataset heeft dit model met een ROC score van ongeveer 85 procent betrouwbaarheid een voorspelling kunnen maken op de kans van een hartaanval.
