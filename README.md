@@ -76,17 +76,15 @@ Voor de minor Data Science pi7 zijn 6 opdrachten gemaakt verdeelt in 3 fases.
 | max        | 288.000000  | 6600.000000 | 49.000000  | 54.000000        | 45400.000000 |
 
 #### Data preperatie
-Voordat begonnen is aan normalizatie en standaardisatie is gekeken of dit daadwerkelijk nodig was. Er is begonnen door eerst een heatmap te genereren om te kijken of er waardes zijn met een hoge correlatie, zodat deze eruit gefilterd kunnen worden om een bias te voorkomen. Zie de heatmap.
+Voordat begonnen is aan normalizatie en standaardisatie is gekeken of dit daadwerkelijk nodig was. Er is begonnen door eerst een heatmap te genereren om te kijken of er waardes zijn met een hoge correlatie, zodat deze eruit gefilterd kunnen worden om een bias te voorkomen. Zie de heatmap. Te zien is hoe "highwaympg" en "citympg" een correlatie hebben van 0.97. In het model laten we deze dan ook weg.
 
 ![](HeatmapmlrCarPrices.png)
 
-
-
-De kolom "CarName" is bewerkt om een betere uitkomst te resulteren. Om de r2 score zo hoog mogelijk te krijgen en de rmse zo laag mogelijk is het van belang dat de dataset goed voorbereid wordt. Zodoende is besloten om de kolom "CarName" te verbeteren. De kolom "CarName" had 205 waardes die bestonden uit unieke auto merken en types. Als deze kolom gestandaardiseerd werd, resulteerde dit in 205 nieuwe kolommen met 204 nullen en één 1. Dit leidde in de versie 1, tot een lage r2 score en een hoge rmse bij een test set van 30 procent. Om de kolom "CarName" te verbeteren is er gekozen om alle merken te categoriseren, zodoende werden alle type auto's van hetzelfde merk onder één naam gezet. Dit resulteerde in 26 kolommen i.p.v. 205. Uiteindelijk zorgde dit ervoor dat er een hogere r2 score en een lagere rmse score naar voren kwam. 
+Als tweede stap is gekeken of er kolommen zijn die het resultaat kunnen beïnvloeden, door de opzet van de kolom. De kolom "CarName" is bijvoorbeeld bewerkt om een betere uitkomst te resulteren. Zodoende is besloten om de kolom "CarName" te verbeteren, de kolom "CarName" had 205 waardes die bestonden uit unieke auto merken en types. Als deze kolom gestandaardiseerd werd, resulteerde dit in 205 nieuwe kolommen met 204 nullen en één 1. Dit leidde in de versie 1, tot een lage r2 score en een hoge rmse bij een test set van 30 procent. Om de kolom "CarName" te verbeteren is er gekozen om alle merken te categoriseren, zodoende werden alle type auto's van hetzelfde merk onder één naam gezet. Dit resulteerde in 26 kolommen i.p.v. 205. Uiteindelijk zorgde dit ervoor dat er een hogere r2 score en een lagere rmse score naar voren kwam. 
 
 | Voor  |                     | Na    |                    |
 |-------|---------------------|-------|--------------------|
-| rmse: | 7558.48034923494    | rmse: | 2994.0165610391055 |
+| rmse: |   7558.48034923494  | rmse: | 2994.0165610391055 |
 | r2:   | 0.06955780289800828 | r2:   | 0.8361176251942362 |
 
 #### Code
@@ -162,11 +160,13 @@ Random_state: 7
 Data test set: 30 procent
 Data train set: 70 procent
 
-rmse:  2994.0165610391055 
-r2:  0.8361176251942362
+rmse:  3031.144264619707 
+r2:  0.8320279333635224
+
+![](HeatmapmlrCarPrices.png)
 
 #### Conclusie
-
+Het uiteindelijke resultaat laat zien dat er een rmse is van ongeveer 3000 euro met r2 score van ongeveer 83 procent. Dit laat zien dat er een goed verband is tussen alle attributen en dat er een vrij goede voorspelling gedaan kan worden over de dataset.
 
 #### Feedback
 
