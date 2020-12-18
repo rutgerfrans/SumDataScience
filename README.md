@@ -11,43 +11,64 @@ Voor de minor Data Science pi7 zijn 6 opdrachten gemaakt verdeelt in 3 fases.
 ## Fase 1
 ### Multiple linear regression
 
-#### Beschrijving
-|  1 |           Car_ID          |   |   |                                                 Unique id of each   observation (Interger)                                                |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-|:--:|:-------------------------:|:-:|:-:|:-----------------------------------------------------------------------------------------------------------------------------------------:|:-:|:-:|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-|  2 |         Symboling         |   |   | Its assigned insurance risk   rating, A value of +3 indicates that the auto is risky, -3 that it is   probably pretty safe.(Categorical)  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-|  3 |         carCompany        |   |   |                                                    Name of car company   (Categorical)                                                    |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-|  4 |          fueltype         |   |   |                                              Car fuel type i.e gas or   diesel (Categorical)                                              |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-|  5 |         aspiration        |   |   |                                                  Aspiration used in a car   (Categorical)                                                 |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-|  6 |         doornumber        |   |   |                                                  Number of doors in a car   (Categorical)                                                 |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-|  7 |          carbody          |   |   |                                                         body of car (Categorical)                                                         |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-|  8 |         drivewheel        |   |   |                                                    type of drive wheel   (Categorical)                                                    |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-|  9 |       enginelocation      |   |   |                                                   Location of car engine   (Categorical)                                                  |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| 10 |         wheelbase         |   |   |                                                         Weelbase of car (Numeric)                                                         |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| 11 |         carlength         |   |   |                                                          Length of car (Numeric)                                                          |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| 12 |          carwidth         |   |   |                                                           Width of car (Numeric)                                                          |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| 13 |         carheight         |   |   |                                                          height of car (Numeric)                                                          |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| 14 |         curbweight        |   |   |                                        The weight of a car without occupants or baggage. (Numeric)                                        |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| 15 |         enginetype        |   |   |                                                      Type of engine.   (Categorical)                                                      |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| 16 |       cylindernumber      |   |   |                                                 cylinder placed in the car   (Categorical)                                                |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| 17 |         enginesize        |   |   |                                                           Size of car (Numeric)                                                           |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| 18 |         fuelsystem        |   |   |                                                     Fuel system of car   (Categorical)                                                    |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| 19 |         boreratio         |   |   |                                                         Boreratio of car (Numeric)                                                        |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| 20 |           stroke          |   |   |                                               Stroke or volume inside the   engine (Numeric)                                              |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| 21 |      compressionratio     |   |   |                                                    compression ratio of car   (Numeric)                                                   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| 22 |         horsepower        |   |   |                                                            Horsepower (Numeric)                                                           |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| 23 |          peakrpm          |   |   |                                                           car peak rpm (Numeric)                                                          |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| 24 |          citympg          |   |   |                                                         Mileage in city (Numeric)                                                         |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| 25 |         highwaympg        |   |   |                                                       Mileage on highway   (Numeric)                                                      |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
-| 26 | price(Dependent variable) |   |   |                                                           Price of car (Numeric)                                                          |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |
+#### Dataset Beschrijving attributen en target
+|  1 |           Car_ID          |                                                 Unique id of each   observation (Interger)                                                |
+|:--:|:-------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------:|
+|  2 |         Symboling         | Its assigned insurance risk   rating, A value of +3 indicates that the auto is risky, -3 that it is   probably pretty safe.(Categorical)  |
+|  3 |         carCompany        |                                                    Name of car company   (Categorical)                                                    |
+|  4 |          fueltype         |                                              Car fuel type i.e gas or   diesel (Categorical)                                              |
+|  5 |         aspiration        |                                                  Aspiration used in a car   (Categorical)                                                 |
+|  6 |         doornumber        |                                                  Number of doors in a car   (Categorical)                                                 |
+|  7 |          carbody          |                                                         body of car (Categorical)                                                         |
+|  8 |         drivewheel        |                                                    type of drive wheel   (Categorical)                                                    |
+|  9 |       enginelocation      |                                                   Location of car engine   (Categorical)                                                  |
+| 10 |         wheelbase         |                                                         Weelbase of car (Numeric)                                                         |
+| 11 |         carlength         |                                                          Length of car (Numeric)                                                          |
+| 12 |          carwidth         |                                                           Width of car (Numeric)                                                          |
+| 13 |         carheight         |                                                          height of car (Numeric)                                                          |
+| 14 |         curbweight        |                                        The weight of a car without occupants or baggage. (Numeric)                                        |
+| 15 |         enginetype        |                                                      Type of engine.   (Categorical)                                                      |
+| 16 |       cylindernumber      |                                                 cylinder placed in the car   (Categorical)                                                |
+| 17 |         enginesize        |                                                           Size of car (Numeric)                                                           |
+| 18 |         fuelsystem        |                                                     Fuel system of car   (Categorical)                                                    |
+| 19 |         boreratio         |                                                         Boreratio of car (Numeric)                                                        |
+| 20 |           stroke          |                                               Stroke or volume inside the   engine (Numeric)                                              |
+| 21 |      compressionratio     |                                                    compression ratio of car   (Numeric)                                                   |
+| 22 |         horsepower        |                                                            Horsepower (Numeric)                                                           |
+| 23 |          peakrpm          |                                                           car peak rpm (Numeric)                                                          |
+| 24 |          citympg          |                                                         Mileage in city (Numeric)                                                         |
+| 25 |         highwaympg        |                                                       Mileage on highway   (Numeric)                                                      |
+| 26 | price(Dependent variable) |                                                           Price of car (Numeric)                                                          |
 
 #### Data opzet
-| car_ID | symboling | CarName                    | fueltype | aspiration | doornumber | carbody     | drivewheel | enginelocation | wheelbase | carlength | carwidth | carheight | curbweight | enginetype | cylindernumber | enginesize | fuelsystem | boreratio | stroke | compressionratio | horsepower | peakrpm | citympg | highwaympg | price |
-|--------|-----------|----------------------------|----------|------------|------------|-------------|------------|----------------|-----------|-----------|----------|-----------|------------|------------|----------------|------------|------------|-----------|--------|------------------|------------|---------|---------|------------|-------|
-| 1      | 3         | alfa-romero   giulia       | gas      | std        | two        | convertible | rwd        | front          | 886       | 1688      | 641      | 488       | 2548       | dohc       | four           | 130        | mpfi       | 347       | 268    | 9                | 111        | 5000    | 21      | 27         | 13495 |
-| 2      | 3         | alfa-romero stelvio        | gas      | std        | two        | convertible | rwd        | front          | 886       | 1688      | 641      | 488       | 2548       | dohc       | four           | 130        | mpfi       | 347       | 268    | 9                | 111        | 5000    | 21      | 27         | 16500 |
-| 3      | 1         | alfa-romero   Quadrifoglio | gas      | std        | two        | hatchback   | rwd        | front          | 945       | 1712      | 655      | 524       | 2823       | ohcv       | six            | 152        | mpfi       | 268       | 347    | 9                | 154        | 5000    | 19      | 26         | 16500 |
-| 4      | 2         | audi 100 ls                | gas      | std        | four       | sedan       | fwd        | front          | 998       | 1766      | 662      | 543       | 2337       | ohc        | four           | 109        | mpfi       | 319       | 34     | 10               | 102        | 5500    | 24      | 30         | 13950 |
-| 5      | 2         | audi 100ls                 | gas      | std        | four       | sedan       | 4wd        | front          | 994       | 1766      | 664      | 543       | 2824       | ohc        | five           | 136        | mpfi       | 319       | 34     | 8                | 115        | 5500    | 18      | 22         | 17450 |
+|  symboling |  wheelbase  |  carlength  | carwidth   | carheight        | \            |
+|:----------:|:-----------:|:-----------:|------------|------------------|--------------|
+|    count   |  205.000000 |  205.000000 | 205.000000 | 205.000000       | 205.000000   |
+|    mean    |   0.834146  |  98.756585  | 174.049268 | 65.907805        | 53.724878    |
+|     std    |   1.245307  |   6.021776  | 12.337289  | 2.145204         | 2.443522     |
+|     min    |  -2.000000  |  86.600000  | 141.100000 | 60.300000        | 47.800000    |
+|     25%    |   0.000000  |  94.500000  | 166.300000 | 64.100000        | 52.000000    |
+|     50%    |   1.000000  |  97.000000  | 173.200000 | 65.500000        | 54.100000    |
+|     75%    |   2.000000  |  102.400000 | 183.100000 | 66.900000        | 55.500000    |
+|     max    |   3.000000  |  120.900000 | 208.100000 | 72.300000        | 59.800000    |
+| curbweight |  enginesize |  boreratio  | stroke     | compressionratio | \            |
+|    count   |  205.000000 |  205.000000 | 205.000000 | 205.000000       | 205.000000   |
+|    mean    | 2555.565854 |  126.907317 | 3.329756   | 3.255415         | 10.142537    |
+|     std    |  520.680204 |  41.642693  | 0.270844   | 0.313597         | 3.972040     |
+|     min    | 1488.000000 |  61.000000  | 2.540000   | 2.070000         | 7.000000     |
+|     25%    | 2145.000000 |  97.000000  | 3.150000   | 3.110000         | 8.600000     |
+|     50%    | 2414.000000 |  120.000000 | 3.310000   | 3.290000         | 9.000000     |
+|     75%    | 2935.000000 |  141.000000 | 3.580000   | 3.410000         | 9.400000     |
+|     max    | 4066.000000 |  326.000000 | 3.940000   | 4.170000         | 23.000000    |
+| horsepower |   peakrpm   |   citympg   | highwaympg | price            |              |
+|    count   |  205.000000 |  205.000000 | 205.000000 | 205.000000       | 205.000000   |
+|    mean    |  104.117073 | 5125.121951 | 25.219512  | 30.751220        | 13276.710571 |
+|     std    |  39.544167  |  476.985643 | 6.542142   | 6.886443         | 7988.852332  |
+|     min    |  48.000000  | 4150.000000 | 13.000000  | 16.000000        | 5118.000000  |
+|     25%    |  70.000000  | 4800.000000 | 19.000000  | 25.000000        | 7788.000000  |
+|     50%    |  95.000000  | 5200.000000 | 24.000000  | 30.000000        | 10295.000000 |
+|     75%    |  116.000000 | 5500.000000 | 30.000000  | 34.000000        | 16503.000000 |
+| max        | 288.000000  | 6600.000000 | 49.000000  | 54.000000        | 45400.000000 |
 
 #### Code
 ~~~
