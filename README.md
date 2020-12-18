@@ -190,36 +190,6 @@ Zo is er aangeraden om de kolom "CarName" op te splitsen in merknamen i.p.v. typ
 Voor de opdracht van logistic regression is er een dataset toegepast over de kans op een hartaanval; https://www.kaggle.com/nareshbhat/health-care-data-set-on-heart-attack-possibility.
 Deze dataset is gevonden op de website van kaggle, dit leek betrouwbaar aangezien het studieboek, Data Science Design Manual, deze bron vaker gebruikt om theorieën toe te lichten.
 
-#### Beschrijving
-Deze dataset bevat van ongeveer 300 patienten, 13 attributen die kunnen inschatten of een patient een mindere- of hogere kans heeft op een hartaanval. Deze dataset is passend omdat de kans op een hartaanval binair wordt gepresenteerd met een 1 of 0.
-
-| Attribuut     | Toelichting                                                                     |
-| ------------- |:-------------------------------------------------------------------------------:|
-| age           | Leeftijd van patiënt                                                            |
-| sex           | Geslacht van patiënt                                                            |
-| cp            | Borstkast pijn (0 - 3)                                                          |
-| trest bps     | Bloeddruk bij rust                                                              |
-| chol          | serumcholestoraal in mg / dl                                                    |
-| fbs           | Bloedsuiker nuchter > 120 mg / dl                                               |
-| restecg       | Elektrocardiografische resultaten bij rust (0 - 2)                              |
-| thalach       | Maximale hartslag bereikt                                                       |
-| exang         | Oefening geïnduceerde angina                                                    |
-| oldpeak       | Oldpeak = ST-depressie veroorzaakt door inspanning ten opzichte van rust        |    
-| slope         | De helling van het ST-segment met piekoefening                                  |
-| ca            | Aantal grote bloed vaten (0 - 3) gekleurd door flourosopie                      |
-| thal          | Thalassemia: 0 = normaal; 1 = vast; 2 = omkeerbaar defect                       |
-| target        | Target: 0 = minder kans op een hartaanval; 1 = meer kans op een hartaanval      |
-
-#### Data opzet
-| patient | age | sex | cp | trestbps | chol | fbs | restecg | thalach | exang | oldpeak | slope | ca | thal | target |
-|---------|-----|-----|----|----------|------|-----|---------|---------|-------|---------|-------|----|------|--------|
-| 1       | 63  | 1   | 3  | 145      | 233  | 1   | 0       | 150     | 0     | 23      | 0     | 0  | 1    | 1      |
-| 2       | 37  | 1   | 2  | 130      | 250  | 0   | 1       | 187     | 0     | 35      | 0     | 0  | 2    | 1      |
-| 3       | 41  | 0   | 1  | 130      | 204  | 0   | 0       | 172     | 0     | 14      | 2     | 0  | 2    | 1      |
-| 4       | 56  | 1   | 1  | 120      | 236  | 0   | 1       | 178     | 0     | 8       | 2     | 0  | 2    | 1      |
-| 5       | 57  | 0   | 0  | 120      | 354  | 0   | 1       | 163     | 1     | 6       | 2     | 0  | 2    | 1      |
-|..       |..   |..   |..  |..        |..    |..   |..       |..       |..     |..       |..     |..  |..    |..      |
-
 #### Code
 ~~~~
 # -*- coding: utf-8 -*-
@@ -232,51 +202,69 @@ Created on Sat Dec  5 14:16:21 2020
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import r2_score
+import math
 import matplotlib.pyplot as plt
 import seaborn as sns
+from scipy.special import expit
 
-df = pd.read_csv('Dataset Heart.csv')
+df = pd.read_csv('Dataset Carprices.csv')
 df.head()
+df = df.drop(['car_ID', 'highwaympg', 'citympg'], 1)
 
-LogReg = LogisticRegression()
+targetkolom = 'nissan'
 
-y = df['target']
-x = df[['age','sex','cp','trestbps','chol','fbs','restecg','thalach','exang','oldpeak','slope','ca','thal']]
+#Heatmap
+#sns.set(rc={'figure.figsize':(11.7,8.27)})
+#sns.heatmap(df.corr().round(2),square=True,cmap="RdYlGn",annot=True)
 
-LogReg.fit(x, y)
-
-y_pred = LogReg.predict(x)
-
-score = LogReg.score(x, y)
-
-i = 0
-while i < len(y_pred):
-    print('Person ', i, ': ', y_pred[i])
+#Preperatie op CarName
+i =0
+while i < len(df.CarName):
+    df.CarName[i] = df.CarName[i].split()[0]
     i += 1
 
-print('ROC score: ', score)
+pd.set_option('display.max_columns', 200)
+print(df.describe())
 
-sns.pairplot(df)
+#Dataset standaardiseren
+df = pd.get_dummies(df, columns=['CarName','fueltype','aspiration','doornumber','carbody',
+                                 'drivewheel','enginelocation','enginetype','cylindernumber',
+                                 'fuelsystem'], prefix="", prefix_sep="")
+
+print(df.info())
+
+#Normalisatie (n.v.t.)
+#df = (df-df.min())/(df.max()-df.min())
+
+y = df[targetkolom]
+x = df.drop(targetkolom, 1)
+
+x_train, x_test, y_train, y_test = train_test_split(x,y,test_size=0.3,random_state=7)
+
+lg = LogisticRegression(max_iter=662)
+
+lg.fit(x_train, y_train)
+
+y_pred = lg.predict(x_test)
+
+mse = mean_squared_error(y_test, y_pred)
+rtwo = r2_score(y_test, y_pred)
+print('\nrmse: ',math.sqrt(mse), '\nr2: ', rtwo)
 ~~~~
 
 
 #### Output
-##### Code  output
-~~~~
-Person  0 :  1
-Person  1 :  1
-Person  2 :  1
-Person  3 :  1
-Person  4 :  1
-Person  5 :  1
-..
-ROC score:  0.8514851485148515
-~~~~
-##### Visualisatie output pairplot
+- Random_state: 7
+- Data test set: 30 procent
+- Data train set: 70 procent
 
+- rmse:  0.254000254000381 
+- r2:  0.12982456140350862
 
 #### Conclusie
-Op basis van de 13 attributen uit de dataset heeft dit model met een ROC score van ongeveer 85 procent betrouwbaarheid een voorspelling kunnen maken op de kans van een hartaanval.
 
 #### Feedback
 
