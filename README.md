@@ -8,7 +8,7 @@ Voor de minor Data Science pi7 zijn 6 opdrachten gemaakt verdeelt in 3 fases.
 3. Fase 3: Support vector machines en Bayesian networks
 
 ### Dataset Beschrijving attributen en target
-
+Voor de verschillende opdrachten in de drie fases, is gekozon om onderstaande dataset toe te passen. De dataset, "Dataset Carprices", is een set aan data die bestaat uit 26 attributen die iets zeggen over 205 type auto's.
 
 
 |  1 |           Car_ID          |                                                 Unique id of each   observation (Interger)                                                |
@@ -84,7 +84,7 @@ Voordat begonnen is aan normalisatie en standaardisatie is gekeken of dit daadwe
 Als tweede stap is gekeken naar standaardisatie, zijn er kolommen die aangepast moeten worden om tot een beter resultaat te komen? Alle kolommen die geen nummerieke waarden bevatten zijn omgezet naar tabellen die wel nummerieke waarde bevatten, doormiddel van de "get_dummies()" functie van Pandas. Echter is een kolom, "CarName", niet efficiënt om op deze manier te standaardiseren. De kolom "CarName" heeft 205 waardes die bestaan uit unieke auto merken en types. Als deze kolom gestandaardiseerd word, resulteert dit in 205 nieuwe kolommen met 204 nullen en één 1. Dit leidde in de versie 1, tot een lage r2 score en een hoge rmse bij een test set van 30 procent. Om de kolom "CarName" te verbeteren is er gekozen om alle merken te categoriseren, zodoende werden alle type auto's van hetzelfde merk onder één naam gezet.
 
 ##### Normalisatie
-Als derde stap is gekeken of normalisatie nodig zou zijn. In eerste instantie waren er geen kolommen die uitschietende waardes hadden. Alleen de target kolom had hoge waardes omdat er prijzen gehanteerd worden, maar aangezien dit de target kolom was zou deze sowieso niet meegenomen worden in de normalisatie. Om toch te kijken of normalisatie een positief effect zou hebben, is deze toegepast. Echter waren de waardes na normalisatie zo abnormaal dat normalisatie niet is toegepast.
+Als derde stap is gekeken of normalisatie nodig zou zijn. In eerste instantie waren er geen kolommen die uitschietende waardes hadden. Alleen de target kolom had hoge waardes omdat er prijzen gehanteerd worden, maar aangezien dit de target kolom was zou zijn bij multiple linear regression zou deze sowieso niet meegenomen worden in de normalisatie. Om toch te kijken of normalisatie een positief effect zou hebben, in het geval dat er een andere target kolom gehanteerd zou worden, is deze toegepast. Echter waren de waardes na normalisatie zo abnormaal dat normalisatie niet is toegepast.
 
 | Na Normalisatie bij multiple linear regression |                         |
 |------------------------------------------------|-------------------------|
@@ -93,6 +93,8 @@ Als derde stap is gekeken of normalisatie nodig zou zijn. In eerste instantie wa
 
 ## Fase 1
 ### Multiple linear regression
+Bij deze opdracht is de te voorspellen waarde "price". Dit is de prijs van een type auto.
+
 #### Code
 ~~~
 # -*- coding: utf-8 -*-
@@ -168,12 +170,12 @@ plt.show()
 ~~~
 
 #### Output
-Random_state: 7
-Data test set: 30 procent
-Data train set: 70 procent
+- Random_state: 7
+- Data test set: 30 procent
+- Data train set: 70 procent
 
-rmse:  3031.144264619707 
-r2:  0.8320279333635224
+- rmse:  3031.144264619707 
+- r2:  0.8320279333635224
 
 ![](LinearverbandPredyTesty.png)
 
