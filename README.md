@@ -340,9 +340,10 @@ print("Accuracy score:\n",accuracy_score(y_test, y_pred))
 
 #### Output
 Confusion matrix:
-| 56 | 0 |
-|----|---|
-| 3  | 3 |
+|              | Predicted True | Predicted False |
+|--------------|----------------|-----------------|
+| Actual True  |       56       |        0        |
+| Actual False |        3       |        3        |
 
 Classification Report:
 |              | precision | recall | f1-score | support |
