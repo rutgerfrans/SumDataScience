@@ -343,6 +343,7 @@ Confusion matrix:
 | 56 | 0 |
 |----|---|
 | 3  | 3 |
+
 Classification Report:
 |              | precision | recall | f1-score | support |
 |--------------|-----------|--------|----------|---------|
