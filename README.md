@@ -358,8 +358,11 @@ Accuracy score:
 0.9516129032258065
 
 #### Conclusie
+Het uiteindelijke resultaat laat zien dat er een accuracy is van ongeveer 95 procent bij een randomforest van 30 bomen. Dit houdt in dat het model op basis van de dataset de type auto Volkswagen met een zekerheid van 95 procent kan voorspellen. 
 
 #### Feedback
+- Wat voor visuals zijn hierbij van toepassing?
+- Is een regressor of een classifier hierbij van toepassing?
 
 ### Neurale netwerken 
 Toeliching
