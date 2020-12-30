@@ -264,19 +264,13 @@ print('\nrmse: ',math.sqrt(mse), '\nr2: ', rtwo)
 - r2:  0.12982456140350862
 
 #### Conclusie
+Het uiteindelijke resultaat laat zien dat er een rmse is van ongeveer 0.25 met r2 score van ongeveer 13 procent. Dit laat zien dat er geen goed verband is tussen alle attributen en dat er een niet echt een goede voorspelling gedaan worden over de kans dat op basis van de data het ype auto een Nissan is.
 
 #### Feedback
+volgensmij was er feedback gegeven over de visualisatie. helaas ben ik dit vergeten. bij het volgende moment even vragen.
 
 ## Fase 2
-### Random forests
-Toeliching
-#### Code
-
-#### Output
-
-#### Conclusie
-
-### Neurale netwerken 
+### Random forests 
 Toelichting met keuze voor target als volkswagen
 
 toelichting waarom is gekozen voor 30 bomen ipv een ander aantal.
@@ -363,6 +357,15 @@ Accuracy score:
 
 #### Conclusie
 
+#### Feedback
+
+### Neurale netwerken 
+Toeliching
+#### Code
+
+#### Output
+
+#### Conclusie
 
 #### Feedback
 
