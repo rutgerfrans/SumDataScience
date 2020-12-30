@@ -187,8 +187,7 @@ In de feedback momenten, werd er vooral aangekaart dat we meer aandacht moesten 
 Zo is er aangeraden om de kolom "CarName" op te splitsen in merknamen i.p.v. type auto's. Ook werd als tip gegeven om aan de hand van de heatmap te kijken welke attributen een goede correlatie hadden en dus een biassed uitkomst konden leveren.
 
 ### Logistic regression
-Voor de opdracht van logistic regression is er een dataset toegepast over de kans op een hartaanval; https://www.kaggle.com/nareshbhat/health-care-data-set-on-heart-attack-possibility.
-Deze dataset is gevonden op de website van kaggle, dit leek betrouwbaar aangezien het studieboek, Data Science Design Manual, deze bron vaker gebruikt om theorieën toe te lichten.
+Hier moet nog een toelichting komen
 
 #### Code
 ~~~~
@@ -270,8 +269,102 @@ print('\nrmse: ',math.sqrt(mse), '\nr2: ', rtwo)
 
 ## Fase 2
 ### Random forests
+Toeliching
+#### Code
+
+#### Output
+
+#### Conclusie
 
 ### Neurale netwerken 
+Toelichting met keuze voor target als volkswagen
+
+toelichting waarom is gekozen voor 30 bomen ipv een ander aantal.
+20 trees:  0.9354838709677419
+30 trees:  0.9516129032258065
+50 trees:  0.9354838709677419
+75 trees:  0.9354838709677419
+100 trees:  0.9354838709677419
+
+#### Code
+~~~~
+Created on Tue Dec 29 16:38:30 2020
+
+@author: rdegr
+"""
+
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error, mean_absolute_error,r2_score, classification_report, confusion_matrix, accuracy_score
+import matplotlib.pyplot as plt
+from sklearn.ensemble import RandomForestClassifier
+
+df = pd.read_csv('Dataset Carprices.csv')
+df.head()
+df = df.drop(['car_ID', 'highwaympg', 'citympg'], 1)
+
+targetkolom = 'volkswagen'
+
+
+#Preperatie op CarName
+i =0
+while i < len(df.CarName):
+    df.CarName[i] = df.CarName[i].split()[0]
+    i += 1
+    
+pd.set_option('display.max_columns', 200)
+print(df.describe())
+
+#Dataset standaardiseren
+df = pd.get_dummies(df, columns=['CarName','fueltype','aspiration','doornumber','carbody',
+                                 'drivewheel','enginelocation','enginetype','cylindernumber',
+                                 'fuelsystem'], prefix="", prefix_sep="")
+
+print(df.info())
+
+#Normalisatie (n.v.t.)
+#f = (df-df.min())/(df.max()-df.min())
+      
+y = df[targetkolom]
+x = df.drop(targetkolom, 1)
+
+x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.3 ,random_state=7)
+
+model = RandomForestClassifier(n_estimators=30, random_state=1)
+
+
+model.fit(x_train, y_train)
+
+y_pred = model.predict(x_test)
+
+
+print("Confusion matrix:\n", confusion_matrix(y_test,y_pred))
+print("Classification Report:\n",classification_report(y_test,y_pred))
+print("Accuracy score:\n",accuracy_score(y_test, y_pred))
+~~~~
+
+#### Output
+Confusion matrix:
+| 56 | 0 |
+|----|---|
+| 3  | 3 |
+Classification Report:
+|              | precision | recall | f1-score | support |
+|--------------|-----------|--------|----------|---------|
+| 0            | 0.95      | 1.00   | 0.97     | 56      |
+| 1            | 1.00      | 0.50   | 0.67     | 6       |
+| accuracy     |           |        | 0.95     | 62      |
+| macro avg    | 0.97      | 0.75   | 0.82     | 62      |
+| weighted avg | 0.95      | 0.95   | 0.94     | 62      |
+
+Accuracy score:
+0.9516129032258065
+
+#### Conclusie
+
+
+#### Feedback
 
 ## Fase 3
 ### Support vector machines
