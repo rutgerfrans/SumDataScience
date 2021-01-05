@@ -373,11 +373,6 @@ Het uiteindelijke resultaat laat zien dat er een accuracy is van ongeveer 93 pro
 
 #### Feedback
 - Wat voor visuals zijn hierbij van toepassing?
-- Is een regressor of een classifier hierbij van toepassing?
-    Momenteel wordt namelijk een classifier gebruikt op deze dataset.
-    Echter is misschien de regressor beter van pas aangezien veel attributen uit deze data set niet alleen bestaan uit catogorien.
-    Dit kan ook de 1.00 verklaren bij de precision en de recall bij de output van de random forest classifier.
-    - toch even navragen voor de zekerheid.
 
 ### Neurale netwerken 
 Toeliching
