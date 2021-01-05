@@ -274,14 +274,15 @@ volgensmij was er feedback gegeven over de visualisatie. helaas ben ik dit verge
 Toelichting met keuze voor target als volkswagen
 
 toelichting waarom is gekozen voor 30 bomen ipv een ander aantal.
-20 trees:  0.9354838709677419
-30 trees:  0.9516129032258065
-50 trees:  0.9354838709677419
-75 trees:  0.9354838709677419
-100 trees:  0.9354838709677419
+- 20 trees:  0.9354838709677419
+- 30 trees:  0.9354838709677419
+- 50 trees:  0.9193548387096774
+- 100 trees:  0.9193548387096774
+- 1000 trees:  0.9193548387096774
 
 #### Code
 ~~~~
+"""
 Created on Tue Dec 29 16:38:30 2020
 
 @author: rdegr
@@ -290,7 +291,7 @@ Created on Tue Dec 29 16:38:30 2020
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, mean_absolute_error,r2_score, classification_report, confusion_matrix, accuracy_score
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestClassifier
 
@@ -308,14 +309,24 @@ while i < len(df.CarName):
     i += 1
     
 pd.set_option('display.max_columns', 200)
-print(df.describe())
+#print(df.describe())
 
 #Dataset standaardiseren
 df = pd.get_dummies(df, columns=['CarName','fueltype','aspiration','doornumber','carbody',
                                  'drivewheel','enginelocation','enginetype','cylindernumber',
                                  'fuelsystem'], prefix="", prefix_sep="")
 
-print(df.info())
+ToBinairize = ['wheelbase','carlength','carwidth','carheight','curbweight',
+               'enginesize','boreratio','stroke','compressionratio','horsepower','peakrpm','price']
+
+q =0
+while q < len(ToBinairize):
+    bins = (int(min(df[ToBinairize[q]])-1), int(np.mean(df[ToBinairize[q]])), int(max(df[ToBinairize[q]])+1))
+    group_names = [0, 1]
+    df[ToBinairize[q]] = pd.cut(df[ToBinairize[q]], bins = bins, labels=group_names)
+    q+=1
+
+#print(df.info())
 
 #Normalisatie (n.v.t.)
 #f = (df-df.min())/(df.max()-df.min())
@@ -342,23 +353,23 @@ print("Accuracy score:\n",accuracy_score(y_test, y_pred))
 Confusion matrix:
 |              | Predicted True | Predicted False |
 |--------------|----------------|-----------------|
-| Actual True  |       56       |        0        |
+| Actual True  |       55       |        1        |
 | Actual False |        3       |        3        |
 
 Classification Report:
 |              | precision | recall | f1-score | support |
 |--------------|-----------|--------|----------|---------|
-| 0            | 0.95      | 1.00   | 0.97     | 56      |
-| 1            | 1.00      | 0.50   | 0.67     | 6       |
-| accuracy     |           |        | 0.95     | 62      |
-| macro avg    | 0.97      | 0.75   | 0.82     | 62      |
-| weighted avg | 0.95      | 0.95   | 0.94     | 62      |
+| 0            | 0.95      | 0.98   | 0.96     | 56      |
+| 1            | 0.75      | 0.50   | 0.60     | 6       |
+| accuracy     |           |        | 0.94     | 62      |
+| macro avg    | 0.85      | 0.74   | 0.78     | 62      |
+| weighted avg | 0.93      | 0.94   | 0.93     | 62      |
 
 Accuracy score:
-0.9516129032258065
+0.9354838709677419
 
 #### Conclusie
-Het uiteindelijke resultaat laat zien dat er een accuracy is van ongeveer 95 procent bij een randomforest van 30 bomen. Dit houdt in dat het model op basis van de dataset de type auto Volkswagen met een zekerheid van 95 procent kan voorspellen. 
+Het uiteindelijke resultaat laat zien dat er een accuracy is van ongeveer 93 procent bij een randomforest van 30 bomen. Dit houdt in dat het model op basis van de dataset de type auto Volkswagen met een zekerheid van 95 procent kan voorspellen. 
 
 #### Feedback
 - Wat voor visuals zijn hierbij van toepassing?
