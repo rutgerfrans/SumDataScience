@@ -451,7 +451,7 @@ Accuracy score:
 
 ROC curve:
 
-![](ROC randomforestclassifier.png)
+![](ROCrandomforestclassifier.png)
 
 #### Conclusie
 Het uiteindelijke resultaat laat zien dat er een accuracy is van ongeveer 93 procent bij een randomforest van 30 bomen. Dit houdt in dat het model op basis van de dataset de type auto Volkswagen met een zekerheid van 95 procent kan voorspellen. 
