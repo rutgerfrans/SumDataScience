@@ -308,7 +308,7 @@ Accuracy score:
  
 ROC curve:
 
-![](ROClogisticregression.png)
+![](ROC logisticregression.png)
 
 
 #### Conclusie
@@ -450,6 +450,7 @@ Accuracy score:
 0.8709677419354839
 
 ROC curve:
+
 ![](ROC randomforestclassifier.png)
 
 #### Conclusie
