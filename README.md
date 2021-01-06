@@ -193,96 +193,6 @@ Hier moet nog een toelichting komen
 ~~~~
 # -*- coding: utf-8 -*-
 """
-Created on Sat Dec  5 14:16:21 2020
-
-@author: Rutger
-"""
-
-import pandas as pd
-import numpy as np
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error
-from sklearn.metrics import r2_score
-import math
-import matplotlib.pyplot as plt
-import seaborn as sns
-from scipy.special import expit
-
-df = pd.read_csv('Dataset Carprices.csv')
-df.head()
-df = df.drop(['car_ID', 'highwaympg', 'citympg'], 1)
-
-targetkolom = 'nissan'
-
-#Heatmap
-#sns.set(rc={'figure.figsize':(11.7,8.27)})
-#sns.heatmap(df.corr().round(2),square=True,cmap="RdYlGn",annot=True)
-
-#Preperatie op CarName
-i =0
-while i < len(df.CarName):
-    df.CarName[i] = df.CarName[i].split()[0]
-    i += 1
-
-pd.set_option('display.max_columns', 200)
-print(df.describe())
-
-#Dataset standaardiseren
-df = pd.get_dummies(df, columns=['CarName','fueltype','aspiration','doornumber','carbody',
-                                 'drivewheel','enginelocation','enginetype','cylindernumber',
-                                 'fuelsystem'], prefix="", prefix_sep="")
-
-print(df.info())
-
-#Normalisatie (n.v.t.)
-#df = (df-df.min())/(df.max()-df.min())
-
-y = df[targetkolom]
-x = df.drop(targetkolom, 1)
-
-x_train, x_test, y_train, y_test = train_test_split(x,y,test_size=0.3,random_state=7)
-
-lg = LogisticRegression(max_iter=662)
-
-lg.fit(x_train, y_train)
-
-y_pred = lg.predict(x_test)
-
-mse = mean_squared_error(y_test, y_pred)
-rtwo = r2_score(y_test, y_pred)
-print('\nrmse: ',math.sqrt(mse), '\nr2: ', rtwo)
-~~~~
-
-
-#### Output
-- Random_state: 7
-- Data test set: 30 procent
-- Data train set: 70 procent
-
-- rmse:  0.254000254000381 
-- r2:  0.12982456140350862
-
-#### Conclusie
-Het uiteindelijke resultaat laat zien dat er een rmse is van ongeveer 0.25 met r2 score van ongeveer 13 procent. Dit laat zien dat er geen goed verband is tussen alle attributen en dat er een niet echt een goede voorspelling gedaan worden over de kans dat op basis van de data het ype auto een Nissan is.
-
-#### Feedback
-volgensmij was er feedback gegeven over de visualisatie. helaas ben ik dit vergeten. bij het volgende moment even vragen.
-
-## Fase 2
-### Random forests 
-Toelichting met keuze voor target als volkswagen
-
-toelichting waarom is gekozen voor 30 bomen ipv een ander aantal.
-- 20 trees:  0.9354838709677419
-- 30 trees:  0.9354838709677419
-- 50 trees:  0.9193548387096774
-- 100 trees:  0.9193548387096774
-- 1000 trees:  0.9193548387096774
-
-#### Code
-~~~~
-"""
 Created on Tue Dec 29 16:38:30 2020
 
 @author: rdegr
@@ -290,16 +200,27 @@ Created on Tue Dec 29 16:38:30 2020
 
 import pandas as pd
 import numpy as np
+from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 import matplotlib.pyplot as plt
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import roc_curve
+from sklearn.metrics import roc_auc_score
+
+def plot_roc_curve(fpr, tpr):
+    plt.plot(fpr, tpr, color='orange', label='ROC')
+    plt.plot([0, 1], [0, 1], color='darkblue', linestyle='--')
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Receiver Operating Characteristic (ROC) Curve')
+    plt.legend()
+    plt.show()
 
 df = pd.read_csv('Dataset Carprices.csv')
 df.head()
 df = df.drop(['car_ID', 'highwaympg', 'citympg'], 1)
 
-targetkolom = 'volkswagen'
+targetkolom = 'price'
 
 
 #Preperatie op CarName
@@ -316,8 +237,7 @@ df = pd.get_dummies(df, columns=['CarName','fueltype','aspiration','doornumber',
                                  'drivewheel','enginelocation','enginetype','cylindernumber',
                                  'fuelsystem'], prefix="", prefix_sep="")
 
-ToBinairize = ['wheelbase','carlength','carwidth','carheight','curbweight',
-               'enginesize','boreratio','stroke','compressionratio','horsepower','peakrpm','price']
+ToBinairize = ['price']# alleen target binairizen
 
 q =0
 while q < len(ToBinairize):
@@ -327,21 +247,178 @@ while q < len(ToBinairize):
     q+=1
 
 #print(df.info())
-
-#Normalisatie (n.v.t.)
-#f = (df-df.min())/(df.max()-df.min())
       
 y = df[targetkolom]
 x = df.drop(targetkolom, 1)
 
+#Normalisatie (n.v.t.)
+x = (x-x.min())/(x.max()-x.min())
+
 x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.3 ,random_state=7)
 
-model = RandomForestClassifier(n_estimators=30, random_state=1)
+model = LogisticRegression(max_iter=662)
+
+model.fit(x_train, y_train)
+
+y_pred = model.predict(x_test)
+
+probs = model.predict_proba(x_test)
+
+probs = probs[:, 1]
+
+auc = roc_auc_score(y_test, probs)
+
+print('AUC: %.2f' % auc)
+
+fpr, tpr, thresholds = roc_curve(y_test, probs)
+
+plot_roc_curve(fpr, tpr)
+
+print("Confusion matrix:\n", confusion_matrix(y_test,y_pred))
+print("Classification Report:\n",classification_report(y_test,y_pred))
+print("Accuracy score:\n",accuracy_score(y_test, y_pred))
+~~~~
+
+
+#### Output
+- Random_state: 7
+- Data test set: 30 procent
+- Data train set: 70 procent
+
+AUC score: 
+0.95
+
+Confusion matrix:
+|              | Predicted True | Predicted False |
+|--------------|----------------|-----------------|
+| Actual True  |       41       |        3        |
+| Actual False |        4       |        14       |
+
+Classification Report:
+|              | precision | recall | f1-score | support |
+|--------------|-----------|--------|----------|---------|
+| 0            |    0.91   |  0.93  | 0.92     | 44      |
+| 1            |    0.82   |  0.78  | 0.80     | 18      |
+| accuracy     |           |        | 0.89     | 62      |
+| macro avg    | 0.87      | 0.85   | 0.86     | 62      |
+| weighted avg | 0.89      | 0.89   | 0.89     | 62      |
+
+Accuracy score:
+0.8870967741935484
+ 
+ROC curve:
+![](ROC logisticregression.png)
+
+
+#### Conclusie
+Het uiteindelijke resultaat laat zien dat er een rmse is van ongeveer 0.25 met r2 score van ongeveer 13 procent. Dit laat zien dat er geen goed verband is tussen alle attributen en dat er een niet echt een goede voorspelling gedaan worden over de kans dat op basis van de data het ype auto een Nissan is.
+- AANPASSEN
+
+#### Feedback
+volgensmij was er feedback gegeven over de visualisatie. helaas ben ik dit vergeten. bij het volgende moment even vragen.
+- roc curve miste
+
+## Fase 2
+### Random forests 
+Toelichting met keuze voor target als volkswagen
+
+toelichting waarom is gekozen voor 30 bomen ipv een ander aantal.
+Zoals te zien hier onder, is geanalyseerd welke hoeveelheid aan desicion trees benodigd zou zijn voor de beste score. 1000 en 10000 decision trees hebben uiteindelijk de beste score. 1000 trees zal worden gehanteerd binnen de code omdat daarvan de compile tijd korter zal zijn. Interessant om te zien is dat bij een random forest van 100000 trees de score weer lager wordt, dit heeft waarschijnlijk te maken met overfitting.
+
+- 20 trees:   0.8548387096774194
+- 30 trees:   0.8548387096774194
+- 50 trees:   0.8548387096774194
+- 100 trees:   0.8548387096774194
+- 1000 trees:   0.8709677419354839
+- 10000 trees:  0.8709677419354839
+- 100000 trees:  0.8548387096774194
+
+#### Code
+~~~~
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Dec 29 16:38:30 2020
+
+@author: rdegr
+"""
+
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+import matplotlib.pyplot as plt
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import roc_curve
+from sklearn.metrics import roc_auc_score
+
+def plot_roc_curve(fpr, tpr):
+    plt.plot(fpr, tpr, color='orange', label='ROC')
+    plt.plot([0, 1], [0, 1], color='darkblue', linestyle='--')
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Receiver Operating Characteristic (ROC) Curve')
+    plt.legend()
+    plt.show()
+
+
+df = pd.read_csv('Dataset Carprices.csv')
+df.head()
+df = df.drop(['car_ID', 'highwaympg', 'citympg'], 1)
+
+targetkolom = 'price'
+
+
+#Preperatie op CarName
+i =0
+while i < len(df.CarName):
+    df.CarName[i] = df.CarName[i].split()[0]
+    i += 1
+    
+pd.set_option('display.max_columns', 200)
+#print(df.describe())
+
+#Dataset standaardiseren
+df = pd.get_dummies(df, columns=['CarName','fueltype','aspiration','doornumber','carbody',
+                                 'drivewheel','enginelocation','enginetype','cylindernumber',
+                                 'fuelsystem'], prefix="", prefix_sep="")
+
+ToBinairize = ['price']
+
+q =0
+while q < len(ToBinairize):
+    bins = (int(min(df[ToBinairize[q]])-1), int(np.mean(df[ToBinairize[q]])), int(max(df[ToBinairize[q]])+1))
+    group_names = [0, 1]
+    df[ToBinairize[q]] = pd.cut(df[ToBinairize[q]], bins = bins, labels=group_names)
+    q+=1
+
+#print(df.info())
+      
+y = df[targetkolom]
+x = df.drop(targetkolom, 1)
+
+#Normalisatie (n.v.t.)
+x = (x-x.min())/(x.max()-x.min())
+
+x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.3 ,random_state=7)
+
+model = RandomForestClassifier(n_estimators=1000, random_state=1)
 
 
 model.fit(x_train, y_train)
 
 y_pred = model.predict(x_test)
+
+probs = model.predict_proba(x_test)
+
+probs = probs[:, 1]
+
+auc = roc_auc_score(y_test, probs)
+
+print('AUC: %.2f' % auc)
+
+fpr, tpr, thresholds = roc_curve(y_test, probs)
+
+plot_roc_curve(fpr, tpr)
 
 
 print("Confusion matrix:\n", confusion_matrix(y_test,y_pred))
@@ -350,29 +427,37 @@ print("Accuracy score:\n",accuracy_score(y_test, y_pred))
 ~~~~
 
 #### Output
+AUC score:
+0.93
+
 Confusion matrix:
 |              | Predicted True | Predicted False |
 |--------------|----------------|-----------------|
-| Actual True  |       55       |        1        |
-| Actual False |        3       |        3        |
+| Actual True  |       40       |        4        |
+| Actual False |        4       |        14       |
 
 Classification Report:
 |              | precision | recall | f1-score | support |
 |--------------|-----------|--------|----------|---------|
-| 0            | 0.95      | 0.98   | 0.96     | 56      |
-| 1            | 0.75      | 0.50   | 0.60     | 6       |
-| accuracy     |           |        | 0.94     | 62      |
-| macro avg    | 0.85      | 0.74   | 0.78     | 62      |
-| weighted avg | 0.93      | 0.94   | 0.93     | 62      |
+| 0            | 0.91      | 0.91   | 0.91     | 44      |
+| 1            | 0.78      | 0.78   | 0.78     | 18       |
+| accuracy     |           |        | 0.87     | 62      |
+| macro avg    | 0.84      | 0.84   | 0.84     | 62      |
+| weighted avg | 0.87      | 0.87   | 0.87     | 62      |
 
 Accuracy score:
-0.9354838709677419
+0.8709677419354839
+
+ROC curve:
+![](ROC randomforestclassifier.png)
 
 #### Conclusie
 Het uiteindelijke resultaat laat zien dat er een accuracy is van ongeveer 93 procent bij een randomforest van 30 bomen. Dit houdt in dat het model op basis van de dataset de type auto Volkswagen met een zekerheid van 95 procent kan voorspellen. 
 
 #### Feedback
 - Wat voor visuals zijn hierbij van toepassing?
+- alleen x normalizeren niet target en de non binairize exl dummiies en target
+- alleen target binairizen
 
 ### Neurale netwerken 
 Toeliching
