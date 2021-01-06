@@ -308,7 +308,7 @@ Accuracy score:
  
 ROC curve:
 
-![](ROC logisticregression.png)
+![](ROClogisticregression.png)
 
 
 #### Conclusie
