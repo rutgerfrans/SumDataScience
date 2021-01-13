@@ -581,7 +581,7 @@ Accuracy score:
 
 ROC curve:
 
-![](ROCrandomforestclassifier.png)
+![](ROCneuralnetworkclassifier.png)
 
 #### Conclusie
 
