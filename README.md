@@ -586,10 +586,13 @@ ROC curve:
 #### Conclusie
 
 #### Feedback
+-er is sprake van overfitting door te veel nodes en hiddenlayers 8,8,8
+-hierdoor heeft model een hoge variance met een lage bias
+
 
 ## Fase 3
 ### Support vector machines
-
+-c, gamma en aantal iter aanpassen, zijn de parameters waar je mee kunt spelen
 ### Bayesian networks
 
 ## Auteurs
