@@ -688,29 +688,29 @@ print("Accuracy score:\n",accuracy_score(y_test, y_pred))
 
 #### Output
 AUC score:
-0.93
+0.96
 
 Confusion matrix:
 |              | Predicted True | Predicted False |
 |--------------|----------------|-----------------|
-| Actual True  |       41       |        3        |
-| Actual False |        5       |        13       |
+| Actual True  |       40       |        4        |
+| Actual False |        2       |        16       |
 
 Classification Report:
 |              | precision | recall | f1-score | support |
 |--------------|-----------|--------|----------|---------|
-| 0            | 0.89      | 0.93   | 0.91     | 44      |
-| 1            | 0.81      | 0.72   | 0.76     | 18      |
-| accuracy     |           |        | 0.87     | 62      |
-| macro avg    | 0.85      | 0.83   | 0.84     | 62      |
-| weighted avg | 0.87      | 0.87   | 0.87     | 62      |
+| 0            | 0.95      | 0.91   | 0.93     | 44      |
+| 1            | 0.80      | 0.89   | 0.84     | 18      |
+| accuracy     |           |        | 0.90     | 62      |
+| macro avg    | 0.88      | 0.90   | 0.89     | 62      |
+| weighted avg | 0.91      | 0.90   | 0.90     | 62      |
 
 Accuracy score:
-0.8709677419354839
+0.9032258064516129
 
 ROC curve:
 
-![](ROCneuralnetworkclassifier.png)
+![](ROCsvm.png)
 
 #### Conclusie
 
