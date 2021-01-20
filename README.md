@@ -91,9 +91,11 @@ Als derde stap is gekeken of normalisatie nodig zou zijn. In eerste instantie wa
 | rmse:                                          | 30267727458.953026      |
 | r2:                                            | -2.7177251408947733e+22 |
 
+Hier toelichten dat dit per model anders is!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 ## Fase 1
 ### Multiple linear regression
-Bij deze opdracht is de te voorspellen waarde "price". Dit is de prijs van een type auto.
+Toelichting parameters model
 
 #### Code
 ~~~
@@ -187,7 +189,7 @@ In de feedback momenten, werd er vooral aangekaart dat we meer aandacht moesten 
 Zo is er aangeraden om de kolom "CarName" op te splitsen in merknamen i.p.v. type auto's. Ook werd als tip gegeven om aan de hand van de heatmap te kijken welke attributen een goede correlatie hadden en dus een biassed uitkomst konden leveren.
 
 ### Logistic regression
-Hier moet nog een toelichting komen
+Toelichting parameters model
 
 #### Code
 ~~~~
@@ -321,7 +323,7 @@ volgensmij was er feedback gegeven over de visualisatie. helaas ben ik dit verge
 
 ## Fase 2
 ### Random forests 
-Toelichting met keuze voor target als volkswagen
+Toelichting parameters model
 
 toelichting waarom is gekozen voor 30 bomen ipv een ander aantal.
 Zoals te zien hier onder, is geanalyseerd welke hoeveelheid aan desicion trees benodigd zou zijn voor de beste score. 1000 en 10000 decision trees hebben uiteindelijk de beste score. 1000 trees zal worden gehanteerd binnen de code omdat daarvan de compile tijd korter zal zijn. Interessant om te zien is dat bij een random forest van 100000 trees de score weer lager wordt, dit heeft waarschijnlijk te maken met overfitting.
@@ -462,7 +464,7 @@ Het uiteindelijke resultaat laat zien dat er een accuracy is van ongeveer 93 pro
 - alleen target binairizen
 
 ### Neurale netwerken 
-Toelichting
+Toelichting parameters model
 
 #### Code
 ~~~~
@@ -713,6 +715,7 @@ ROC curve:
 ![](ROCsvm.png)
 
 #### Conclusie
+Bij iedere conclusie is het belangrijk te evalueren waarom er een goed of geen goed verband is in de dataset, wat de uitkomst is en wat de relatie is met de parameters. Onderbouw dit met het classificatie model.
 
 #### Feedback
 -c, gamma en aantal iter aanpassen, zijn de parameters waar je mee kunt spelen
