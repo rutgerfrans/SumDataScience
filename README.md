@@ -593,6 +593,10 @@ ROC curve:
 ## Fase 3
 ### Support vector machines
 -c, gamma en aantal iter aanpassen, zijn de parameters waar je mee kunt spelen
+bij scale wordt er meer gerbruik gemaakt van de variantie, variantie is meer aanwezig bij continue variabelen 
+c = hoe fout tollerant, in welke mate misclaccificatie
+gamma = grote in margin
+roc curve in elkaar zetten voor verschillen van model
 ### Bayesian networks
 
 ## Auteurs
