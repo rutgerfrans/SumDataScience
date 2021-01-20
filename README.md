@@ -592,6 +592,129 @@ ROC curve:
 
 ## Fase 3
 ### Support vector machines
+Toelichting
+ligt keuze van parameters toe 
+
+#### Code
+~~~~
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Dec 29 16:38:30 2020
+
+@author: rdegr
+"""
+
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+from sklearn import svm
+from sklearn.metrics import roc_curve
+from sklearn.metrics import roc_auc_score
+import matplotlib.pyplot as plt
+
+def plot_roc_curve(fpr, tpr):
+    plt.plot(fpr, tpr, color='orange', label='ROC')
+    plt.plot([0, 1], [0, 1], color='darkblue', linestyle='--')
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Receiver Operating Characteristic (ROC) Curve')
+    plt.legend()
+    plt.show()
+
+
+df = pd.read_csv('Dataset Carprices.csv')
+df.head()
+df = df.drop(['car_ID', 'highwaympg', 'citympg'], 1)
+
+targetkolom = 'price'
+
+
+#Preperatie op CarName
+i =0
+while i < len(df.CarName):
+    df.CarName[i] = df.CarName[i].split()[0]
+    i += 1
+    
+pd.set_option('display.max_columns', 200)
+print(df.describe().transpose())
+
+#Dataset standaardiseren
+df = pd.get_dummies(df, columns=['CarName','fueltype','aspiration','doornumber','carbody',
+                                 'drivewheel','enginelocation','enginetype','cylindernumber',
+                                 'fuelsystem'], prefix="", prefix_sep="")
+
+ToBinairize = ['price']
+
+q =0
+while q < len(ToBinairize):
+    bins = (int(min(df[ToBinairize[q]])-1), int(np.mean(df[ToBinairize[q]])), int(max(df[ToBinairize[q]])+1))
+    group_names = [0, 1]
+    df[ToBinairize[q]] = pd.cut(df[ToBinairize[q]], bins = bins, labels=group_names)
+    q+=1
+
+#print(df.info())
+      
+y = df[targetkolom]
+x = df.drop(targetkolom, 1)
+
+#Normalisatie (n.v.t.)
+x = (x-x.min())/(x.max()-x.min())
+
+x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.3 ,random_state=7)
+
+model = svm.SVC(C=2.0, gamma='auto', max_iter=-1, kernel='sigmoid', probability=True)
+
+model.fit(x_train, y_train)
+
+y_pred = model.predict(x_test)
+
+probs = model.predict_proba(x_test)
+
+probs = probs[:, 1]
+
+auc = roc_auc_score(y_test, probs)
+
+print('AUC: %.2f' % auc)
+
+fpr, tpr, thresholds = roc_curve(y_test, probs)
+
+plot_roc_curve(fpr, tpr)
+
+print("Confusion matrix:\n", confusion_matrix(y_test,y_pred))
+print("Classification Report:\n",classification_report(y_test,y_pred))
+print("Accuracy score:\n",accuracy_score(y_test, y_pred))
+~~~~
+
+#### Output
+AUC score:
+0.93
+
+Confusion matrix:
+|              | Predicted True | Predicted False |
+|--------------|----------------|-----------------|
+| Actual True  |       41       |        3        |
+| Actual False |        5       |        13       |
+
+Classification Report:
+|              | precision | recall | f1-score | support |
+|--------------|-----------|--------|----------|---------|
+| 0            | 0.89      | 0.93   | 0.91     | 44      |
+| 1            | 0.81      | 0.72   | 0.76     | 18      |
+| accuracy     |           |        | 0.87     | 62      |
+| macro avg    | 0.85      | 0.83   | 0.84     | 62      |
+| weighted avg | 0.87      | 0.87   | 0.87     | 62      |
+
+Accuracy score:
+0.8709677419354839
+
+ROC curve:
+
+![](ROCneuralnetworkclassifier.png)
+
+#### Conclusie
+
+#### Feedback
 -c, gamma en aantal iter aanpassen, zijn de parameters waar je mee kunt spelen
 bij scale wordt er meer gerbruik gemaakt van de variantie, variantie is meer aanwezig bij continue variabelen 
 c = hoe fout tollerant, in welke mate misclaccificatie
