@@ -723,7 +723,19 @@ bij scale wordt er meer gerbruik gemaakt van de variantie, variantie is meer aan
 c = hoe fout tollerant, in welke mate misclaccificatie
 gamma = grote in margin
 roc curve in elkaar zetten voor verschillen van model
+
 ### Bayesian networks
+Toelichting
+
+#### Voorbeeld 1.0
+![](bayesiannetworkvoorbeeld1.png)
+##### Uitwerking
+
+#### Voorbeeld 2.0
+![](bayesiannetworkvoorbeeld2.png)
+##### Uitwerking
+
+#### Feedback
 
 ## Auteurs
 - Rutger de Groen https://rutgerfrans.com/
