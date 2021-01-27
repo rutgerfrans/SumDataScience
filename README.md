@@ -730,9 +730,15 @@ Toelichting
 #### Voorbeeld 1.0
 ![](bayesiannetworkvoorbeeld1.png)
 ##### Uitwerking
-p(m0) = p(m0 | i0 n e0) * p(i0 n e0) + p(m0 | i0 n e1) * p(i0 n e1) + p(m0 | i1 n e0) * p(i1 n e0) + p(m0 | i1 n el) p(i1 n e1)
+p(m0) = p(m0 | i0 n e0) * p(i0 n e0) +<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(m0 | i0 n e1) * p(i0 n e1) +<br/> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(m0 | i1 n e0) * p(i1 n e0) +<br/> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(m0 | i1 n el) * p(i1 n e1)<br/>
 
-p(m0) = 0.6 * 0.56 + 0.9 * 0.24 + 0.5 * 0.14+ 0.8 • 0.06
+p(m0) = 0.6 * 0.56 +<br/> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.9 * 0.24 +<br/> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.5 * 0.14 +<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0.8 * 0.06<br/>
 
 p(m0) = 0.336 + 0.214 + 0.07 + 0.048
 
@@ -752,22 +758,31 @@ p(al) = 0.3004
 ![](bayesiannetworkvoorbeeld2.png)
 ##### Uitwerking
 p(m0) = p(m0 | e0, q0, i0) P(e0 n q0 n i0) +<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(mO | e0, q1, i0) * p(e0 n q1 n iO) +<br/>
-        p(m0 | e0, 0o, i1) * P(e0 n g0 n i1) +<br/>
-        p(m0 | e0, q1, i1) * P(e0 n q1 n i1) +<br/>
-        p(m0 | e1, g0, i0) * p(e1 n q0 n i0) +<br/>
-        p(m0 | e1, q1, i0) * p(e1 n q1 n i0) +<br/>
-        p(m0 | e1, g0, i1) * p(e1 n g0 n i1) +<br/>
-        p(m0 | e1, q1, i1) * p(e1 n q1 n i1)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(mO | e0, q1, i0) * p(e0 n q1 n i0) +<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(m0 | e0, qo, i1) * P(e0 n q0 n i1) +<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(m0 | e0, q1, i1) * P(e0 n q1 n i1) +<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(m0 | e1, q0, i0) * p(e1 n q0 n i0) +<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(m0 | e1, q1, i0) * p(e1 n q1 n i0) +<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(m0 | e1, q0, i1) * p(e1 n q0 n i1) +<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(m0 | e1, q1, i1) * p(e1 n q1 n i1)<br/>
 
-p(m0) = 0,7 * (0,7 * 0,2 * 0,8) + 0,7 * (0,7 * 0,8 * 0,8) + 0,7 * (0,7 * 0,2 * 0,2) + 0,7 * (0,7 * 0,8 * 0,2) + 0,3 * (0,3 * 0,2 * 0,8) + 0,3 * (0,3 * 0,8 * 0,8) + 0,3 * (0,3 * 0,2 * 0,2) + 0,3 * (0,3 * 0,8 * 0,2)
+p(m0) = 0,7 * (0,7 * 0,2 * 0,8) +<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0,7 * (0,7 * 0,8 * 0,8) +<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0,7 * (0,7 * 0,2 * 0,2) +<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0,7 * (0,7 * 0,8 * 0,2) +<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0,3 * (0,3 * 0,2 * 0,8) +<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0,3 * (0,3 * 0,8 * 0,8) +<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0,3 * (0,3 * 0,2 * 0,2) +<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0,3 * (0,3 * 0,8 * 0,2)<br/>
 
 p(m0) = 0,0784 + 0,3136 + 0,0196 + 0,0784 + 0,0144 + 0.0576 + 0,0036 + 0,0144
 
 p(m0) = 0 58
 p(ml) = 0.42
+<br/>
 
-p(a0) = p(a0 | m0) * m0 + p(a0 | m1) m1
+p(a0) = p(a0 | m0) * m0 + <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(a0 | m1) * m1
 
 p(a0) = 0.6 * 0.58 + 0.9 * 0.42
 
