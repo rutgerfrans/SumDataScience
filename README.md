@@ -751,7 +751,14 @@ p(al) = 0.3004
 #### Voorbeeld 2.0
 ![](bayesiannetworkvoorbeeld2.png)
 ##### Uitwerking
-p(m0) = p(m0 | e0, q0, i0) P(e0 n q0 n i0) + \n p(mO | e0, q1, i0) * p(e0 n q1 n iO) + p(m0 | e0, 0o, i1) * P(e0 n g0 n i1) + p(m0 | e0, q1, i1) P(e0 n q1 n i1) + p(m0 | e1, g0, i0) * p(e1 n q0 n i0) + p(m0 | e1, q1, i0) p(e1 n q1 n i0) + p(m0 | e1, g0, i1) * p(e1 n g0 n i1) + p(m0 | e1, q1, i1) * p(e1 n q1 n i1)
+p(m0) = p(m0 | e0, q0, i0) P(e0 n q0 n i0) +<br/>
+        p(mO | e0, q1, i0) * p(e0 n q1 n iO) +<br/>
+        p(m0 | e0, 0o, i1) * P(e0 n g0 n i1) +<br/>
+        p(m0 | e0, q1, i1) * P(e0 n q1 n i1) +<br/>
+        p(m0 | e1, g0, i0) * p(e1 n q0 n i0) +<br/>
+        p(m0 | e1, q1, i0) * p(e1 n q1 n i0) +<br/>
+        p(m0 | e1, g0, i1) * p(e1 n g0 n i1) +<br/>
+        p(m0 | e1, q1, i1) * p(e1 n q1 n i1)<br/>
 
 p(m0) = 0,7 * (0,7 * 0,2 * 0,8) + 0,7 * (0,7 * 0,8 * 0,8) + 0,7 * (0,7 * 0,2 * 0,2) + 0,7 * (0,7 * 0,8 * 0,2) + 0,3 * (0,3 * 0,2 * 0,8) + 0,3 * (0,3 * 0,8 * 0,8) + 0,3 * (0,3 * 0,2 * 0,2) + 0,3 * (0,3 * 0,8 * 0,2)
 
