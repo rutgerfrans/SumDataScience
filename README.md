@@ -1,18 +1,18 @@
 # Onderzoeksrapport PI7 Data Science
 
 - [Inleiding](#Inleiding)
-- [Data beschrijving](#Dataset beschrijving)
-- [Data preperatie](#Data preperatie)
-- [Fase 1](#Fase 1)
+- [Data beschrijving](#Datasetbeschrijving)
+- [Data preperatie](#Datapreperatie)
+- [Fase 1](#Fase1)
 - [Multiple Linear Regression](#mlr)
 - [Logistic Regression](#lr)
-- [Fase 2](#Fase 2)
+- [Fase 2](#Fase2)
 - [Random Forests](#rf)
 - [Neural Networks](#nn)
-- [Fase 3](#Fase 3)
+- [Fase 3](#Fase3)
 - [Support Vector Machines](#svm)
 - [Bayesian Networks](#bn)
-- [Conclusie](#Algehele Conclusie)
+- [Conclusie](#AlgeheleConclusie)
 - [Auteurs](#Auteurs)
 
 
@@ -24,7 +24,7 @@ Voor de minor Data Science pi7 zijn 6 opdrachten gemaakt verdeelt in 3 fases.
 2. Fase 2: Random Forests en Neurale netwerken 
 3. Fase 3: Support vector machines en Bayesian networks
 
-### <a name="Dataset beschrijving"></a> Dataset Beschrijving attributen en target
+### <a name="Datasetbeschrijving"></a> Dataset Beschrijving attributen en target
 Voor de verschillende opdrachten in de drie fases, is gekozen om onderstaande dataset toe te passen. De dataset, "Dataset Carprices", is een set aan data die bestaat uit 26 attributen die iets zeggen over 205 type auto's.
 
 
@@ -91,7 +91,7 @@ Voor de verschillende opdrachten in de drie fases, is gekozen om onderstaande da
 |     75%    |  116.000000 | 5500.000000 | 30.000000  | 34.000000        | 16503.000000 |
 | max        | 288.000000  | 6600.000000 | 49.000000  | 54.000000        | 45400.000000 |
 
-#### <a name="Data preperatie"></a> Data preperatie
+#### <a name="Datapreperatie"></a> Data preperatie
 ##### Heatmap analyse
 Voordat begonnen is aan normalisatie en standaardisatie is gekeken of dit daadwerkelijk nodig was. Er is begonnen door eerst een heatmap te genereren om te kijken of er waardes zijn met een hoge correlatie, zodat deze eruit gefilterd kunnen worden om een bias te voorkomen. Zie de heatmap. Te zien is hoe "highwaympg" en "citympg" een correlatie hebben van 0.97. In het model laten we deze dan ook weg.
 
@@ -110,7 +110,7 @@ Als derde stap is gekeken of normalisatie nodig zou zijn. In eerste instantie wa
 
 Hier toelichten dat dit per model anders is!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-## <a name="Fase 1"></a> Fase 1
+## <a name="Fase1"></a> Fase 1
 ### <a name="mlr"></a> Multiple linear regression
 Toelichting parameters model
 
@@ -338,7 +338,7 @@ Het uiteindelijke resultaat laat zien dat er een rmse is van ongeveer 0.25 met r
 volgensmij was er feedback gegeven over de visualisatie. helaas ben ik dit vergeten. bij het volgende moment even vragen.
 - roc curve miste
 
-## <a name="Fase 2"></a> Fase 2
+## <a name="Fase2"></a> Fase 2
 ### <a name="rf"></a> Random forests 
 Toelichting parameters model
 
@@ -609,7 +609,7 @@ ROC curve:
 -hierdoor heeft model een hoge variance met een lage bias
 
 
-## <a name="Fase 3"></a> Fase 3
+## <a name="Fase3"></a> Fase 3
 ### <a name="svm"></a> Support vector machines
 Toelichting
 ligt keuze van parameters toe 
@@ -832,7 +832,7 @@ Te zien in voorbeeld1.0 is dat de kans om toegelaten te worden op basis van 3 fa
 
 #### Feedback
 
-### <a name="Algehele Conclusie"></a> Algehele Conclusie
+### <a name="AlgeheleConclusie"></a> Algehele Conclusie
 
 ## <a name="Auteurs"></a> Auteurs
 - Rutger de Groen https://rutgerfrans.com/
