@@ -1,6 +1,20 @@
 # Onderzoeksrapport PI7 Data Science
 
-Take me to [Inleiding](#Inleiding)
+[Inleiding](#Inleiding)
+[Data beschrijving](#Data beschrijving)
+[Data preperatie](#Data preperatie)
+[Fase 1](#Fase 1)
+[Multiple Linear Regression](#mlr)
+[Logistic Regression](#lr)
+[Fase 2](#Fase 2)
+[Random Forests](#rf)
+[Neural Networks](#nn)
+[Fase 3](#Fase 3)
+[Support Vector Machines](#svm)
+[Bayesian Networks](#bn)
+[Conclusie](#Algehele Conclusie)
+[Auteurs](#Auteurs)
+
 
 
 
