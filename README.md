@@ -752,7 +752,7 @@ p(al) = 0.3004
 ![](bayesiannetworkvoorbeeld2.png)
 ##### Uitwerking
 p(m0) = p(m0 | e0, q0, i0) P(e0 n q0 n i0) +<br/>
-\t p(mO | e0, q1, i0) * p(e0 n q1 n iO) +<br/>
+\t\ p(mO | e0, q1, i0) * p(e0 n q1 n iO) +<br/>
         p(m0 | e0, 0o, i1) * P(e0 n g0 n i1) +<br/>
         p(m0 | e0, q1, i1) * P(e0 n q1 n i1) +<br/>
         p(m0 | e1, g0, i0) * p(e1 n q0 n i0) +<br/>
