@@ -728,8 +728,19 @@ roc curve in elkaar zetten voor verschillen van model
 Toelichting
 
 #### Voorbeeld 1.0
+Dit voorbeeld laat zien wat de kansen zijn rondom de toelating van een denkbeeldige studie. Hierbij zijn vier nodes tezien: Examlevel, IQlevel, Marks en Admission.
+
+- Examlevel: e0 = moeilijk, e1 = makkelijk
+- IQlevel: i0 = hoog, i1 = laag
+- Marks: m0 = voldoende, m1 = onvoldoende
+- Admission: a0 = toegelaten, a1 = niet toegelaten
+
+Hierbij is Admission de child node van Marks, wat inhoud dat Admission afhankelijk is van Marks. Tevens is Marks de child node van Examlevel en IQlevel, wat indiceert dat Marks afhankelijk is van Examlevel en IQlevel. Examlevel en IQlevel zijn onafhankelijk van elkaar omdat er geen directe link tussen deze twee nodes bestaat.
+
 ![](bayesiannetworkvoorbeeld1.png)
 ##### Uitwerking
+###### Kans op voldoende en onvoldoende
+
 p(m0) = p(m0 | i0 n e0) * p(i0 n e0) +<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(m0 | i0 n e1) * p(i0 n e1) +<br/> 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(m0 | i1 n e0) * p(i1 n e0) +<br/> 
@@ -745,6 +756,8 @@ p(m0) = 0.336 + 0.214 + 0.07 + 0.048
 p(m0) = 0.668
 p(ml) = 0.332
 
+###### Kans op toelating en geen toelating
+
 p(a0) = p(a0 | m0) * p(m0) + p(a0 | m1) * p(m1) 
 
 p(a0) = 0.6 * 0.668 + 0.9 * 0.332
@@ -755,8 +768,13 @@ p(a0) = 0.6996
 p(al) = 0.3004
 
 #### Voorbeeld 2.0
+Dit voorbeeld is hetzelfde als voorbeeld1.0 echter uitgebreid. Te zien in de uitwerking van voorbeeld1.0 is de kans op toelating ongeveer 70 procent, wat vrij hoog is. Te zien aan de nodes is de kans op een voldoende afhankelijk van maar twee factoren, namelijk: Examlevel en IQlevel. Hierbij wordt alleen gekeken naar de moeilijkheidsgraad van het examen en het niveau van intilligentie van de student. Als toevoeging hierop is Studylevel toegevoegd, omdat hiermee verwacht wordt dat de kans op toelating kleiner en iets realistischer wordt. 
+
+- Studylevel: q0 = goed gestudeerd, q1 = slecht geleerd
+
 ![](bayesiannetworkvoorbeeld2.png)
 ##### Uitwerking
+###### Kans op voldoende en onvoldoende
 p(m0) = p(m0 | e0, q0, i0) P(e0 n q0 n i0) +<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(mO | e0, q1, i0) * p(e0 n q1 n i0) +<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(m0 | e0, qo, i1) * P(e0 n q0 n i1) +<br/>
@@ -779,7 +797,8 @@ p(m0) = 0,0784 + 0,3136 + 0,0196 + 0,0784 + 0,0144 + 0.0576 + 0,0036 + 0,0144
 
 p(m0) = 0 58
 p(ml) = 0.42
-<br/>
+
+###### Kans op toelating en geen toelating
 
 p(a0) = p(a0 | m0) * m0 + <br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(a0 | m1) * m1
@@ -790,6 +809,9 @@ p(a0) = 0.348 + 0.378
 
 p(a0) = 0.726
 p(al) = 0.274
+
+#### Conclusie
+Te zien in voorbeeld1.0 is dat de kans om toegelaten te worden op basis van 3 factoren is ongeveer 70%. Dit leek in eerste instantie vrij hoog als toelating voor een studie. Daarom is een tweede voorbeeld uitgewerkt waarbij een extra factor, Studylevel, is toegevoegd. Dit om te onderzoeken of het niveau van studiewerk impact zou hebben op de toelatings kans van de denkbeeldige studie. Wat interessant is om te zien, is dat met de toegevoegde factor, in voorbeeld2.0, de kans op toelating met 2% stijgt.
 
 #### Feedback
 
