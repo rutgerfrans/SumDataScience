@@ -1,14 +1,17 @@
 # Onderzoeksrapport PI7 Data Science
 
+Take me to [Inleiding](#Inleiding)
 
-## Inleiding
+
+
+## <a name="Inleiding"></a> Inleiding
 Voor de minor Data Science pi7 zijn 6 opdrachten gemaakt verdeelt in 3 fases. 
 1. Fase 1: Multiple regression en Logistic regression
 2. Fase 2: Random Forests en Neurale netwerken 
 3. Fase 3: Support vector machines en Bayesian networks
 
-### Dataset Beschrijving attributen en target
-Voor de verschillende opdrachten in de drie fases, is gekozon om onderstaande dataset toe te passen. De dataset, "Dataset Carprices", is een set aan data die bestaat uit 26 attributen die iets zeggen over 205 type auto's.
+### <a name="Dataset beschrijving"></a> Dataset Beschrijving attributen en target
+Voor de verschillende opdrachten in de drie fases, is gekozen om onderstaande dataset toe te passen. De dataset, "Dataset Carprices", is een set aan data die bestaat uit 26 attributen die iets zeggen over 205 type auto's.
 
 
 |  1 |           Car_ID          |                                                 Unique id of each   observation (Interger)                                                |
@@ -74,7 +77,7 @@ Voor de verschillende opdrachten in de drie fases, is gekozon om onderstaande da
 |     75%    |  116.000000 | 5500.000000 | 30.000000  | 34.000000        | 16503.000000 |
 | max        | 288.000000  | 6600.000000 | 49.000000  | 54.000000        | 45400.000000 |
 
-#### Data preperatie
+#### <a name="Data preperatie"></a> Data preperatie
 ##### Heatmap analyse
 Voordat begonnen is aan normalisatie en standaardisatie is gekeken of dit daadwerkelijk nodig was. Er is begonnen door eerst een heatmap te genereren om te kijken of er waardes zijn met een hoge correlatie, zodat deze eruit gefilterd kunnen worden om een bias te voorkomen. Zie de heatmap. Te zien is hoe "highwaympg" en "citympg" een correlatie hebben van 0.97. In het model laten we deze dan ook weg.
 
@@ -93,8 +96,8 @@ Als derde stap is gekeken of normalisatie nodig zou zijn. In eerste instantie wa
 
 Hier toelichten dat dit per model anders is!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-## Fase 1
-### Multiple linear regression
+## <a name="Fase 1"></a> Fase 1
+### <a name="mlr"></a> Multiple linear regression
 Toelichting parameters model
 
 #### Code
@@ -188,7 +191,7 @@ Het uiteindelijke resultaat laat zien dat er een rmse is van ongeveer 3000 euro 
 In de feedback momenten, werd er vooral aangekaart dat we meer aandacht moesten bieden aan het voorbereiden van de data. De geschreven code was prima, maar er moest meer gefocussed worden op het analyseren van de verbanden in de dataset om te kijken hoe de uitkomst het beste zou worden.
 Zo is er aangeraden om de kolom "CarName" op te splitsen in merknamen i.p.v. type auto's. Ook werd als tip gegeven om aan de hand van de heatmap te kijken welke attributen een goede correlatie hadden en dus een biassed uitkomst konden leveren.
 
-### Logistic regression
+### <a name="lr"></a> Logistic regression
 Toelichting parameters model
 
 #### Code
@@ -321,8 +324,8 @@ Het uiteindelijke resultaat laat zien dat er een rmse is van ongeveer 0.25 met r
 volgensmij was er feedback gegeven over de visualisatie. helaas ben ik dit vergeten. bij het volgende moment even vragen.
 - roc curve miste
 
-## Fase 2
-### Random forests 
+## <a name="Fase 2"></a> Fase 2
+### <a name="rf"></a> Random forests 
 Toelichting parameters model
 
 toelichting waarom is gekozen voor 30 bomen ipv een ander aantal.
@@ -463,7 +466,7 @@ Het uiteindelijke resultaat laat zien dat er een accuracy is van ongeveer 93 pro
 - alleen x normalizeren niet target en de non binairize exl dummiies en target
 - alleen target binairizen
 
-### Neurale netwerken 
+### <a name="nn"></a> Neurale netwerken 
 Toelichting parameters model
 
 #### Code
@@ -592,8 +595,8 @@ ROC curve:
 -hierdoor heeft model een hoge variance met een lage bias
 
 
-## Fase 3
-### Support vector machines
+## <a name="Fase 3"></a> Fase 3
+### <a name="svm"></a> Support vector machines
 Toelichting
 ligt keuze van parameters toe 
 
@@ -724,7 +727,7 @@ c = hoe fout tollerant, in welke mate misclaccificatie
 gamma = grote in margin
 roc curve in elkaar zetten voor verschillen van model
 
-### Bayesian networks
+### <a name="bn"></a> Bayesian networks
 Toelichting
 
 #### Voorbeeld 1.0
@@ -815,7 +818,9 @@ Te zien in voorbeeld1.0 is dat de kans om toegelaten te worden op basis van 3 fa
 
 #### Feedback
 
-## Auteurs
+### <a name="Algehele Conclusie"></a> Algehele Conclusie
+
+## <a name="Auteurs"></a> Auteurs
 - Rutger de Groen https://rutgerfrans.com/
 - Maroche Delnoy https://www.linkedin.com/in/maroche-delnoy-788ab9195/
 
