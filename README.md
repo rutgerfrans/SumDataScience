@@ -1,7 +1,7 @@
 # Onderzoeksrapport PI7 Data Science
 
 - [Inleiding](#Inleiding)
-- [Data beschrijving](#Data beschrijving)
+- [Data beschrijving](#Dataset beschrijving)
 - [Data preperatie](#Data preperatie)
 - [Fase 1](#Fase 1)
 - [Multiple Linear Regression](#mlr)
