@@ -794,9 +794,9 @@ Dit voorbeeld is hetzelfde als voorbeeld1.0 echter uitgebreid. Te zien in de uit
 ![](bayesiannetworkvoorbeeld2.png)
 ##### Uitwerking
 ###### Kans op voldoende en onvoldoende
-p(m0) = p(m0 | e0, q0, i0) P(e0 n q0 n i0) +<br/>
+p(m0) = p(m0 | e0, q0, i0) * P(e0 n q0 n i0) +<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(mO | e0, q1, i0) * p(e0 n q1 n i0) +<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(m0 | e0, qo, i1) * P(e0 n q0 n i1) +<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(m0 | e0, q0, i1) * P(e0 n q0 n i1) +<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(m0 | e0, q1, i1) * P(e0 n q1 n i1) +<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(m0 | e1, q0, i0) * p(e1 n q0 n i0) +<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; p(m0 | e1, q1, i0) * p(e1 n q1 n i0) +<br/>
@@ -816,7 +816,7 @@ p(m0) = 0,0784 + 0,3136 + 0,0196 + 0,0784 + 0,0144 + 0.0576 + 0,0036 + 0,0144
 
 p(m0) = 0 58
 
-p(ml) = 0.42
+p(m1) = 0.42
 
 ###### Kans op toelating en geen toelating
 
@@ -829,12 +829,14 @@ p(a0) = 0.348 + 0.378
 
 p(a0) = 0.726
 
-p(al) = 0.274
+p(a1) = 0.274
 
 #### Conclusie
 Te zien in voorbeeld1.0 is dat de kans om toegelaten te worden op basis van 3 factoren is ongeveer 70%. Dit leek in eerste instantie vrij hoog als toelating voor een studie. Daarom is een tweede voorbeeld uitgewerkt waarbij een extra factor, Studylevel, is toegevoegd. Dit om te onderzoeken of het niveau van studiewerk impact zou hebben op de toelatings kans van de denkbeeldige studie. Wat interessant is om te zien, is dat met de toegevoegde factor, in voorbeeld2.0, de kans op toelating met 2% stijgt.
 
 #### Feedback
+- bron vermelding
+- r2 wordt groter als je nieuwe features toevoegd
 
 ### <a name="AlgeheleConclusie"></a> Algehele Conclusie
 
