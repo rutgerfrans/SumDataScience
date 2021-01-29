@@ -441,12 +441,10 @@ ROC curve:
 ![](ROCrandomforestclassifier.png)
 
 #### Conclusie
-Het uiteindelijke resultaat laat zien dat er een accuracy is van ongeveer 87 procent bij een randomforest van 1000 bomen. Net als voorgaande modellen laat dit model zien dat er een goed verband is tussen de target feature en de andere features. Echter geeft het logistic regression model een beter resultaat met een verschil van 1%. 
+Het uiteindelijke resultaat laat zien dat er een accuracy is van ongeveer 87 procent bij een randomforest van 1000 bomen. Net als voorgaande modellen laat dit model zien dat er een goed verband is tussen de target feature en de andere features. Net als bij de logistic regression is hier een goede ROC curve te zien, waarbij de lijn vrij snel stijgt en een AUC score aanwezig is van 0.93. Echter geeft het logistic regression model een accurater model neer met een verschil van 1 procent. Tevens is de AUC score ook hoger met een verschil van 3 procent.
 
 #### Feedback
-- Wat voor visuals zijn hierbij van toepassing?
-- alleen x normalizeren niet target en de non binairize exl dummiies en target
-- alleen target binairizen
+Bij het feedbackmoment zijn er een paar vragen gestelt m.b.t. de visualisatie van het resultaat. Wij waren er nog niet mee bekend dat we de confusion matrix en de ROC curve bij alle classificatie modellen konden gebruiken voor de visualisatie. Na het feedback moment zijn deze toegevoegd voor verduidelijking van het resultaat.
 
 ### <a name="nn"></a> Neurale netwerken 
 Toelichting parameters model
