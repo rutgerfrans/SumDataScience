@@ -140,14 +140,12 @@ df = pd.get_dummies(df, columns=['CarName','fueltype','aspiration','doornumber',
                                  'fuelsystem'], prefix="", prefix_sep="")
 
 print(df.info())
-
-#Normalisatie (n.v.t.)
-#df = (df-df.min())/(df.max()-df.min())
       
 y = df.price
 x = df.drop('price', 1)
 
-
+#Normalisatie (n.v.t.)
+#x = (x-x.min())/(x.max()-x.min())
 
 x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.3 ,random_state=7)
 
@@ -177,7 +175,7 @@ plt.show()
 ![](LinearverbandPredyTesty.png)
 
 #### Conclusie
-Het uiteindelijke resultaat laat zien dat er een rmse is van ongeveer 3000 euro met r2 score van ongeveer 83 procent. Dit laat zien dat er een vrij goed lineair verband is tussen "Carprice" en alle andere features. Er kan dus met ongeveer 83 procent zekerheid worden voorspeld wat de prijs van een auto zal zijn op basis van deze dataset. De rmse ziet er ook vrij normaal uit aangezien de gemiddelde prijs van een auto rond de 13000 euro ligt. Een rmse van 3000 euro ziet er daarom niet gek uit.
+Het uiteindelijke resultaat laat zien dat er een rmse is van ongeveer 3000 euro met r2 score van ongeveer 83 procent. Dit laat zien dat er een vrij goed lineair verband is tussen "Carprice" en alle andere features. Er kan dus met ongeveer 83 procent zekerheid worden voorspeld wat de prijs van een auto zal zijn op basis van deze dataset. De rmse ziet er ook vrij normaal uit aangezien de gemiddelde prijs van een auto rond de 13000 euro ligt. Een rmse van 3000 euro ziet er daarom niet gek uit. Tevens is er ook een logisch verband te zien in de plot waarbij de voorspeelde target tegenover de daadwerkelijk target is gezet.
 
 #### Feedback
 In de feedback momenten, werd er vooral aangekaart dat we meer aandacht moesten bieden aan het voorbereiden van de data. De geschreven code was prima, maar er moest meer gefocust worden op het analyseren van de verbanden in de dataset om te kijken hoe de resultaat het beste zou worden.
