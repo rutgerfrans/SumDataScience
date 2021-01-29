@@ -57,39 +57,21 @@ Voor de verschillende opdrachten in de drie fases, is gekozen om onderstaande da
 | 26 | price(Target variable)    |                                                           Price of car (Numeric)                                                          |
 
 
-|  symboling |  wheelbase  |  carlength  | carwidth   | carheight        | \            |
-|:----------:|:-----------:|:-----------:|------------|------------------|--------------|
-|    count   |  205.000000 |  205.000000 | 205.000000 | 205.000000       | 205.000000   |
-|    mean    |   0.834146  |  98.756585  | 174.049268 | 65.907805        | 53.724878    |
-|     std    |   1.245307  |   6.021776  | 12.337289  | 2.145204         | 2.443522     |
-|     min    |  -2.000000  |  86.600000  | 141.100000 | 60.300000        | 47.800000    |
-|     25%    |   0.000000  |  94.500000  | 166.300000 | 64.100000        | 52.000000    |
-|     50%    |   1.000000  |  97.000000  | 173.200000 | 65.500000        | 54.100000    |
-|     75%    |   2.000000  |  102.400000 | 183.100000 | 66.900000        | 55.500000    |
-|     max    |   3.000000  |  120.900000 | 208.100000 | 72.300000        | 59.800000    |
-| curbweight |  enginesize |  boreratio  | stroke     | compressionratio | \            |
-
-| curbweight | enginesize  | boreratio   | stroke     | compressionratio | \            |
-|------------|-------------|-------------|------------|------------------|--------------|
-|    count   |  205.000000 |  205.000000 | 205.000000 | 205.000000       | 205.000000   |
-|    mean    | 2555.565854 |  126.907317 | 3.329756   | 3.255415         | 10.142537    |
-|     std    |  520.680204 |  41.642693  | 0.270844   | 0.313597         | 3.972040     |
-|     min    | 1488.000000 |  61.000000  | 2.540000   | 2.070000         | 7.000000     |
-|     25%    | 2145.000000 |  97.000000  | 3.150000   | 3.110000         | 8.600000     |
-|     50%    | 2414.000000 |  120.000000 | 3.310000   | 3.290000         | 9.000000     |
-|     75%    | 2935.000000 |  141.000000 | 3.580000   | 3.410000         | 9.400000     |
-|     max    | 4066.000000 |  326.000000 | 3.940000   | 4.170000         | 23.000000    |
-
-| horsepower |   peakrpm   |   citympg   | highwaympg | price            |              |
-|:----------:|:-----------:|:-----------:|------------|------------------|--------------|
-|    count   |  205.000000 |  205.000000 | 205.000000 | 205.000000       | 205.000000   |
-|    mean    |  104.117073 | 5125.121951 | 25.219512  | 30.751220        | 13276.710571 |
-|     std    |  39.544167  |  476.985643 | 6.542142   | 6.886443         | 7988.852332  |
-|     min    |  48.000000  | 4150.000000 | 13.000000  | 16.000000        | 5118.000000  |
-|     25%    |  70.000000  | 4800.000000 | 19.000000  | 25.000000        | 7788.000000  |
-|     50%    |  95.000000  | 5200.000000 | 24.000000  | 30.000000        | 10295.000000 |
-|     75%    |  116.000000 | 5500.000000 | 30.000000  | 34.000000        | 16503.000000 |
-| max        | 288.000000  | 6600.000000 | 49.000000  | 54.000000        | 45400.000000 |
+| feature          | count    | mean         | std         | min     | 25%     | 50%      | 75%          | max         |
+|------------------|----------|--------------|-------------|---------|---------|----------|--------------|-------------|
+| symboling        | 205.0    | 0.834146     | 1.245307    | -2.00   | 0.00    | 1.00     | 2.00         | 3.00        |
+| wheelbase        | 205.0    | 98.756585    | 6.021776    | 86.60   | 94.50   | 97.00    | 102.40       | 120.90      |
+| carlength        | 205.0    | 174.049268   | 12.337289   | 141.10  | 166.30  | 173.20   | 183.10       | 208.10      |
+| carwidth         | 205.0    | 65.907805    | 2.145204    | 60.30   | 64.10   | 65.50    | 66.90        | 72.30       |
+| carheight        | 205.0    | 53.724878    | 2.443522    | 47.80   | 52.00   | 54.10    | 55.50        | 59.80       |
+| curbweight       | 205.0    | 2555.565854  | 520.680204  | 1488.00 | 2145.00 | 2414.00  | 2935.00      | 4066.00     |
+| enginesize       | 205.0    | 126.907317   | 41.642693   | 61.00   | 97.00   | 120.00   | 141.00       | 326.00      |
+| boreratio        | 205.0    | 3.329756     | 0.270844    | 2.54    | 3.15    | 3.31     | 3.58         | 3.94        |
+| stroke           | 205.0    | 3.255415     | 0.313597    | 2.07    | 3.11    | 3.29     | 3.41         | 4.17        |
+| compressionratio | 205.0    | 10.142537    | 3.972040    | 7.00    | 8.60    | 9.00     | 9.40         | 23.00       |
+| horsepower       | 205.0    | 104.117073   | 39.544167   | 48.00   | 70.00   | 95.00    | 116.00       | 288.00      |
+| peakrpm          | 205.0    | 5125.121951  | 476.985643  | 4150.00 | 4800.00 | 5200.00  | 5500.00      | 6600.00     |
+| price            | 205.0    | 13276.710571 | 7988.852332 | 5118.00 | 7788.00 | 10295.00 | 16503.00     | 45400.00    |
 
 #### <a name="Datapreperatie"></a> Data preperatie
 ##### Heatmap analyse
@@ -97,10 +79,10 @@ Voordat begonnen is aan normalisatie en standaardisatie is gekeken of dit daadwe
 
 ![](HeatmapmlrCarPrices.png)
 
-##### Data cleaning
+##### Standaardiseren
 Als tweede stap is gekeken naar standaardisatie, zijn er kolommen die aangepast moeten worden om tot een beter resultaat te komen? Alle kolommen die geen nummerieke waarden bevatten zijn omgezet naar tabellen die wel nummerieke waarde bevatten, doormiddel van de "get_dummies()" functie van Pandas. Echter is een kolom, "CarName", niet efficiënt om op deze manier te standaardiseren. De kolom "CarName" heeft 205 waardes die bestaan uit unieke auto merken en types. Als deze kolom gestandaardiseerd word, resulteert dit in 205 nieuwe kolommen met 204 nullen en één 1. Dit leidde in de versie 1, tot een lage r2 score en een hoge rmse bij een test set van 30 procent. Om de kolom "CarName" te verbeteren is er gekozen om alle merken te categoriseren, zodoende werden alle type auto's van hetzelfde merk onder één naam gezet.
 
-##### Normalisatie of standaardisatie
+##### Normalisatie
 Als derde stap is gekeken of normalisatie nodig zou zijn. In eerste instantie waren er geen kolommen die uitschietende waardes hadden. Alleen de target kolom had hoge waardes omdat er prijzen gehanteerd worden, maar aangezien dit de target kolom was zou zijn bij multiple linear regression zou deze sowieso niet meegenomen worden in de normalisatie. Om toch te kijken of normalisatie een positief effect zou hebben, in het geval dat er een andere target kolom gehanteerd zou worden, is deze toegepast. Echter waren de waardes na normalisatie zo abnormaal dat normalisatie niet is toegepast.
 
 | Na Normalisatie bij multiple linear regression |                         |
@@ -112,7 +94,7 @@ Hier toelichten dat dit per model anders is!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ## <a name="Fase1"></a> Fase 1
 ### <a name="mlr"></a> Multiple linear regression
-Toelichting parameters model
+Multiple linear regression is een machine learning model die binnen supervised learning wordt toegepast. Dit model zoekt zoekt een relatie tussen afhankelijke en een of meer onafhankelijke variabelen door de best passende rechte lijn te plaatsen. In deze toepassing zoekt het model in de dataset "Carprices" een lineair verband tussen de afhankelijke variabele, carprice, en de overige features die zijn over gebleven na de data preperatie.
 
 #### Code
 ~~~
@@ -189,20 +171,16 @@ plt.show()
 ~~~
 
 #### Output
-- Random_state: 7
-- Data test set: 30 procent
-- Data train set: 70 procent
-
 - rmse:  3041.884027168188 
 - r2:  0.8308355282333387
 
 ![](LinearverbandPredyTesty.png)
 
 #### Conclusie
-Het uiteindelijke resultaat laat zien dat er een rmse is van ongeveer 3000 euro met r2 score van ongeveer 83 procent. Dit laat zien dat er een goed verband is tussen alle attributen en dat er een vrij goede voorspelling gedaan kan worden over de dataset.
+Het uiteindelijke resultaat laat zien dat er een rmse is van ongeveer 3000 euro met r2 score van ongeveer 83 procent. Dit laat zien dat er een vrij goed lineair verband is tussen "Carprice" en alle andere features. Er kan dus met ongeveer 83 procent zekerheid worden voorspeld wat de prijs van een auto zal zijn op basis van deze dataset. De rmse ziet er ook vrij normaal uit aangezien de gemiddelde prijs van een auto rond de 13000 euro ligt. Een rmse van 3000 euro ziet er daarom niet gek uit.
 
 #### Feedback
-In de feedback momenten, werd er vooral aangekaart dat we meer aandacht moesten bieden aan het voorbereiden van de data. De geschreven code was prima, maar er moest meer gefocussed worden op het analyseren van de verbanden in de dataset om te kijken hoe de uitkomst het beste zou worden.
+In de feedback momenten, werd er vooral aangekaart dat we meer aandacht moesten bieden aan het voorbereiden van de data. De geschreven code was prima, maar er moest meer gefocust worden op het analyseren van de verbanden in de dataset om te kijken hoe de resultaat het beste zou worden.
 Zo is er aangeraden om de kolom "CarName" op te splitsen in merknamen i.p.v. type auto's. Ook werd als tip gegeven om aan de hand van de heatmap te kijken welke attributen een goede correlatie hadden en dus een biassed uitkomst konden leveren.
 
 ### <a name="lr"></a> Logistic regression
