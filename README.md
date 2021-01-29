@@ -182,7 +182,7 @@ In de feedback momenten, werd er vooral aangekaart dat we meer aandacht moesten 
 Zo is er aangeraden om de kolom "CarName" op te splitsen in merknamen i.p.v. type auto's. Ook werd als tip gegeven om aan de hand van de heatmap te kijken welke attributen een goede correlatie hadden en dus een biassed uitkomst konden leveren.
 
 ### <a name="lr"></a> Logistic regression
-Toelichting parameters model
+Logistic regression is een machine learning model die binnen supervised learning wordt toegepast voor classificatie. In de statistiek wordt logistische regressie gebruikt om een geclassificeerde uitkomstvariabele te relateren aan een of meer variabelen. Hierbij is de geclassificeerde uitkomstvariabele dichotoom. In dit model wordt wederom de prijs van de auto als target variabele gebruikt. In dit geval is het belangrijk dat deze variabele omgezet wordt naar een binaire vorm, zo zijn de prijzen opgedeeld in hoog of laag. Afhankelijk van het gemiddelde is bepaald of de prijs van een auto laag of hoog is.
 
 #### Code
 ~~~~
@@ -276,10 +276,6 @@ print("Accuracy score:\n",accuracy_score(y_test, y_pred))
 
 
 #### Output
-- Random_state: 7
-- Data test set: 30 procent
-- Data train set: 70 procent
-
 AUC score: 
 0.95
 
@@ -307,19 +303,15 @@ ROC curve:
 
 
 #### Conclusie
-Het uiteindelijke resultaat laat zien dat er een rmse is van ongeveer 0.25 met r2 score van ongeveer 13 procent. Dit laat zien dat er geen goed verband is tussen alle attributen en dat er een niet echt een goede voorspelling gedaan worden over de kans dat op basis van de data het ype auto een Nissan is.
-- AANPASSEN
+Het uiteindelijke resultaat laat zien dat er een accuracy score is van ongeveer 88 procent. Dit laat zien dat er geen goed verband is tussen de geclassificeerde output variabele en de andere features. Tevens geeft de ROC score een mooie lijn aan die snel stijgt en een AUC score heeft van 0.95. Wat wel interessant is om te zien is dat dit model een klein beetje beter presteert dan bij multiple linear regression. Hier is de output score ongeveer 5 procent hoger. Blijkbaar is er een beter logistisch verband tussen de target value en de een lineair verband.
 
 #### Feedback
-volgensmij was er feedback gegeven over de visualisatie. helaas ben ik dit vergeten. bij het volgende moment even vragen.
-- roc curve miste
+Tijdens het feedbackmoment werd er aangekaart dat de evaluatie technieken werden toegepast over het getrainde model. Bij logistic regression hoort een confusion matrix en ROC curve toegepast te worden om te evalueren hoe goed het model presteert.
 
 ## <a name="Fase2"></a> Fase 2
 ### <a name="rf"></a> Random forests 
-Toelichting parameters model
-
-toelichting waarom is gekozen voor 30 bomen ipv een ander aantal.
-Zoals te zien hier onder, is geanalyseerd welke hoeveelheid aan desicion trees benodigd zou zijn voor de beste score. 1000 en 10000 decision trees hebben uiteindelijk de beste score. 1000 trees zal worden gehanteerd binnen de code omdat daarvan de compile tijd korter zal zijn. Interessant om te zien is dat bij een random forest van 100000 trees de score weer lager wordt, dit heeft waarschijnlijk te maken met overfitting.
+Random forests zijn een ensemble-leermethode voor classificatie, die werken door een veelvoud aan beslissingsbomen te construeren tijdens de training. Op basis van de het gemiddelde of de modus van alle uitkomsten wordt de outputvalue geclassificeerd. In dit model wordt
+Een belangrijke parameter bij Random forests zijn het aantal decision trees die van toepassing zijn in het model om de beste score te krijgen. Zoals te zien hier onder, is geanalyseerd welke hoeveelheid aan desicion trees benodigd zou zijn voor de beste score. 1000 en 10000 decision trees hebben uiteindelijk de beste score. 1000 trees zal worden gehanteerd binnen de code omdat daarvan de compile tijd korter zal zijn. Interessant om te zien is dat bij een random forest van 100000 trees de score weer lager wordt, dit heeft waarschijnlijk te maken met overfitting.
 
 - 20 trees:   0.8548387096774194
 - 30 trees:   0.8548387096774194
@@ -449,7 +441,7 @@ ROC curve:
 ![](ROCrandomforestclassifier.png)
 
 #### Conclusie
-Het uiteindelijke resultaat laat zien dat er een accuracy is van ongeveer 93 procent bij een randomforest van 30 bomen. Dit houdt in dat het model op basis van de dataset de type auto Volkswagen met een zekerheid van 95 procent kan voorspellen. 
+Het uiteindelijke resultaat laat zien dat er een accuracy is van ongeveer 87 procent bij een randomforest van 1000 bomen. Net als voorgaande modellen laat dit model zien dat er een goed verband is tussen de target feature en de andere features. Echter geeft het logistic regression model een beter resultaat met een verschil van 1%. 
 
 #### Feedback
 - Wat voor visuals zijn hierbij van toepassing?
