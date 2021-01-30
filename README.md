@@ -105,12 +105,6 @@ Multiple linear regression is een machine learning model die binnen supervised l
 
 #### Code
 ~~~
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Dec 15 17:02:10 2020
-
-@author: Rutger
-"""
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -194,13 +188,6 @@ Logistic regression is een machine learning model die binnen supervised learning
 
 #### Code
 ~~~~
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Dec 29 16:38:30 2020
-
-@author: rdegr
-"""
-
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LogisticRegression
@@ -321,7 +308,22 @@ Tijdens het feedbackmoment werd er aangekaart dat de evaluatie technieken werden
 #### Beschrijving
 Randomforests is een voorbeeld van ensemble-leermethodes voor classificatie en regressie, die werken door een veelvoud aan beslissingsbomen te construeren tijdens het trainen van een model. Deze beslissingsbomen worden opgebouwd op basis van een bootstrapped dataset, iedere beslissingsboom heeft zijn eigen bootstrapped dataset. Deze bootstrapped datasets bestaan uit dezelfde records als de originele dataset, alleen worden de records willekeurig uitgekozen en kunnen ze vaker dan een keer voor komen in de bootstrapped dataset. De beslissingsbomen krijgen vervolgens een willekeurige root feature toegewezen om de beslissingboom mee te laten beginnen. Deze stap wordt herhaald tot dat alle features zijn gebruikt. Om nu een uitkomstvariable te verspellen word elk record door iedere beslissingsboom gelopen. Alle uitkomsten van ieder record worden naast elkaar gelegd om vervolgens op basis van het gemiddelde of de modus hiervan de uitkomstvariabele te voorspellen. Om nu te controleren of deze voorspelling accuraat is kunnen de out-of-bag records door de beslessingsbomen lopen. Deze out-of-bag records zijn de records die niet in de bootstrap datasets zijn meegenomen. Alle out-of-bag records vormen samen een out-of-bag dataset die gebruikt kan worden om de accuraatheid van de random forest te meten. Inprincipe wordt de voorspelde uitkomstvariabele naast de daadwerkelijke variabale van de out-of-bag record gelegd om te kijken of de voorspelling accuraat was. Het aantal fout voorspelde resultaten wordt ook wel "out-of-bag-error" genoemd.
 
-Een belangrijke parameter bij randomforests zijn het aantal decisiontrees die van toepassing zijn in het model om de beste score te krijgen. Zoals te zien hier onder, is geanalyseerd welke hoeveelheid aan desicion trees benodigd zou zijn voor de beste score. 1000 en 10000 decision trees hebben uiteindelijk de beste score. 1000 trees zal worden gehanteerd binnen de code omdat daarvan de compile tijd korter zal zijn. Interessant om te zien is dat bij een random forest van 100000 trees de score weer lager wordt, dit heeft waarschijnlijk te maken met overfitting.
+Een belangrijke parameter bij randomforests zijn het aantal decisiontrees die van toepassing zijn in het model om de beste score te krijgen. Zoals te zien hier onder, is geanalyseerd welke hoeveelheid aan desicion trees benodigd zou zijn voor de beste score bij een regressor-, en classifiermodel. 
+
+Aantal bomen regressor model:
+
+| Trees  | R2-score           |
+|--------|--------------------|
+| 20     | 0.8776208936835751 |
+| 30     | 0.8839495624935526 |
+| 50     | 0.8853196824674148 |
+| 100    | 0.8818481683280802 |
+| 1000   | 0.8859202099069733 |
+| 10000  | 0.8874014607427503 |
+| 100000 | 0.8875302857180773 |
+
+Aantal bomen classifier model:
+1000 en 10000 decision trees hebben uiteindelijk de beste score. 1000 trees zal worden gehanteerd binnen de code omdat daarvan de compile tijd korter zal zijn. Interessant om te zien is dat bij een random forest van 100000 trees de score weer lager wordt, dit heeft waarschijnlijk te maken met overfitting.
 
 | Trees  | Accuracy score     |
 |--------|--------------------|
@@ -334,16 +336,58 @@ Een belangrijke parameter bij randomforests zijn het aantal decisiontrees die va
 | 100000 | 0.8548387096774194 |
 
 #### Code Regressor
+~~~~
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error, r2_score
+import matplotlib.pyplot as plt
+from sklearn.ensemble import RandomForestRegressor
+
+df = pd.read_csv('Dataset Carprices.csv')
+df.head()
+df = df.drop(['car_ID', 'highwaympg', 'citympg'], 1)
+
+targetkolom = 'price'
+
+
+#Preperatie op CarName
+i =0
+while i < len(df.CarName):
+    df.CarName[i] = df.CarName[i].split()[0]
+    i += 1
+    
+pd.set_option('display.max_columns', 200)
+#(df.describe())
+
+#Dataset standaardiseren
+df = pd.get_dummies(df, columns=['CarName','fueltype','aspiration','doornumber','carbody',
+                                 'drivewheel','enginelocation','enginetype','cylindernumber',
+                                 'fuelsystem'], prefix="", prefix_sep="")
+
+#print(df.info())
+     
+y = df[targetkolom]
+x = df.drop(targetkolom, 1)
+
+#Normalisatie (n.v.t.)
+x = (x-x.min())/(x.max()-x.min())
+
+x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.3 ,random_state=7)
+
+model = RandomForestRegressor(n_estimators=1000000, random_state=1)
+
+
+model.fit(x_train, y_train)
+
+y_pred = model.predict(x_test)
+
+print('Root Mean Squared Error:', np.sqrt(mean_squared_error(y_test, y_pred)))
+print('R2 score:', r2_score(y_test,y_pred))
+~~~~
 
 #### Code Classifier
 ~~~~
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Dec 29 16:38:30 2020
-
-@author: rdegr
-"""
-
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -428,6 +472,8 @@ print("Classification Report:\n",classification_report(y_test,y_pred))
 print("Accuracy score:\n",accuracy_score(y_test, y_pred))
 ~~~~
 #### Output Regressor
+- RMSE:  3041.884027168188 
+- R2:  0.8308355282333387
 
 #### Output Classifier
 AUC score:
@@ -466,7 +512,9 @@ Bij het feedbackmoment zijn er een paar vragen gestelt m.b.t. de visualisatie va
 Een neuraal netwerk is een techniek die binnen de machinelearning wordt toegepast om op basis van complexen datasets voorspellingen te maken. Neurale netwerken bestaan uit meerdere lagen die nodes kunnen bevatten. Zo zijn er inputlayers, hiddenlayers en outputlayers. In deze layers bestaan nodes die inputvariable omzetten naar outputvariabelen op basis van het gewicht/bias en de activatie functie. Dit is een iteratief proces waarbij na ieder proces het gewicht/bias wordt bijgewerkt om een beter resultaat te krijgen. Dit doet het neurale netwerk aan de hand van "backpropagation", dit is een techniek die de richtingscoëfficient van de errorfunctie bepaald.
 
 Om neurale netwerken in de praktijk toe te passen zijn er een aantal parameters die belangrijk zijn. In dit model definiëren we het aantal hiddenlayers, het aantal nodes binnen de hiddenlayers, de activatiefunctie en de optimizer functie. Per parameter is er gekeken wat het beste resultaat leverde, beginnend bij de hiddenlayers en eindigend bij de optimizer functie. Hierbij is in het begin gebruik gemaakt van de default options tot dat alle parameters onderzocht waren. 
+##### Regressor parameters
 
+##### Classifier parameters:
 We hebben gekozen voor 1 hiddenlayer om dat er niet meer nodig waren aangezien ons probleem niet zo complex is. op het moment dat 2 of meer hiddenlayers worden toegepast in dit model, krijgen we te maken met overfitting. 
 
 | HL   | Accuracy score | b/v tradeoff |
@@ -505,7 +553,9 @@ Uiteindelijke parameters:
 - Activation rule: 'relu'
 - Solver: 'adam'
 
-#### Code
+#### Regressor Code
+
+#### Classifier Code
 ~~~~
 # -*- coding: utf-8 -*-
 """
@@ -596,9 +646,11 @@ print("Confusion matrix:\n", confusion_matrix(y_test,y_pred))
 print("Classification Report:\n",classification_report(y_test,y_pred))
 print("Accuracy score:\n",accuracy_score(y_test, y_pred))
 ~~~~
+#### Regressor ouput
+- RMSE:  3041.884027168188 
+- R2:  0.8308355282333387
 
-
-#### Output
+#### Classifier output
 AUC score:
 0.93
 
@@ -639,6 +691,9 @@ Supportvector machines kunnen in meerdere dimensies worden toegepast. Dit kan in
 
 Net als bij neurale netwerken, zijn hier ook parameters van belang die de accuraatheid van de resultaten beïnvloeden. Bij supportvector machines zijn dat: 'c', 'gamma' en 'kernel'. C staat voor de mate aan misclassifacitie binnen de margin, gamma is de grote in margin en kernel geeft de functie aan die toegepast wordt om de beste resultaten te vinden in de verschillende dimensies. 
 
+##### Regressor parameters
+
+##### Classifier parameters
 Bij de mate van classificatie is naar aanleiding van onderstaande tabel gekozen voor een C van 1.0. De range van 1.0 tot 5.0 gaven allemaal dezelfde score van ongeveer 90 procent weer. Besloten is om 1.0 toe te passen aangezien niet hoger nodig is voor het model en om te veel misclassificatie te voorkomen. Na 5.0 is interessant om te zien dat de accuraatheid weer daalt dit komt waarschijnlijk door overfitting.
 
 | C         | Accuracy score | b/v tradeoff |
@@ -667,7 +722,10 @@ Uiteindelijke parameters:
 - Kernel: 'poly'
 - degree: (1.0)
 
-#### Code
+#### Regressor Code
+
+
+#### Classifier Code
 ~~~~
 # -*- coding: utf-8 -*-
 """
@@ -758,7 +816,9 @@ print("Classification Report:\n",classification_report(y_test,y_pred))
 print("Accuracy score:\n",accuracy_score(y_test, y_pred))
 ~~~~
 
-#### Output
+#### Regressor output
+
+#### Classifier output
 AUC score:
 0.96
 
