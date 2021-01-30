@@ -319,9 +319,10 @@ Tijdens het feedbackmoment werd er aangekaart dat de evaluatie technieken werden
 ## <a name="Fase2"></a> Fase 2
 ### <a name="rf"></a> Random forests 
 #### Beschrijving
-Randomforests is een voorbeeld van ensemble-leermethodes voor classificatie, die werken door een veelvoud aan beslissingsbomen te construeren tijdens het trainen van een model. Deze beslissingsbomen worden opgebouwd op basis van een bootstrapped dataset, iedere beslissingsboom heeft zijn eigen bootstrapped dataset. Deze bootstrapped datasets bestaan uit dezelfde records als de originele dataset, alleen worden de records willekeurig uitgekozen en kunnen ze vaker dan een keer voor komen in de bootstrapped dataset. De beslissingsbomen krijgen vervolgens een willekeurige root feature toegewezen om de beslissingboom mee te laten beginnen. Deze stap wordt herhaald tot dat alle features zijn gebruikt. Om nu een uitkomstvariable te verspellen word elk record door iedere beslissingsboom gelopen. Alle uitkomsten van ieder record worden naast elkaar gelegd om vervolgens op basis van het gemiddelde of de modus hiervan de uitkomstvariabele te voorspellen. Om nu te controleren of deze voorspelling accuraat is kunnen de out-of-bag records door de beslessingsbomen lopen. Deze out-of-bag records zijn de records die niet in de bootstrap datasets zijn meegenomen. Alle out-of-bag records vormen samen een out-of-bag dataset die gebruikt kan worden om de accuraatheid van de random forest te meten. Inprincipe wordt de voorspelde uitkomstvariabele naast de daadwerkelijke variabale van de out-of-bag record gelegd om te kijken of de voorspelling accuraat was. Het aantal fout voorspelde resultaten wordt ook wel "out-of-bag-error" genoemd.
+Randomforests is een voorbeeld van ensemble-leermethodes voor classificatie en regressie, die werken door een veelvoud aan beslissingsbomen te construeren tijdens het trainen van een model. Deze beslissingsbomen worden opgebouwd op basis van een bootstrapped dataset, iedere beslissingsboom heeft zijn eigen bootstrapped dataset. Deze bootstrapped datasets bestaan uit dezelfde records als de originele dataset, alleen worden de records willekeurig uitgekozen en kunnen ze vaker dan een keer voor komen in de bootstrapped dataset. De beslissingsbomen krijgen vervolgens een willekeurige root feature toegewezen om de beslissingboom mee te laten beginnen. Deze stap wordt herhaald tot dat alle features zijn gebruikt. Om nu een uitkomstvariable te verspellen word elk record door iedere beslissingsboom gelopen. Alle uitkomsten van ieder record worden naast elkaar gelegd om vervolgens op basis van het gemiddelde of de modus hiervan de uitkomstvariabele te voorspellen. Om nu te controleren of deze voorspelling accuraat is kunnen de out-of-bag records door de beslessingsbomen lopen. Deze out-of-bag records zijn de records die niet in de bootstrap datasets zijn meegenomen. Alle out-of-bag records vormen samen een out-of-bag dataset die gebruikt kan worden om de accuraatheid van de random forest te meten. Inprincipe wordt de voorspelde uitkomstvariabele naast de daadwerkelijke variabale van de out-of-bag record gelegd om te kijken of de voorspelling accuraat was. Het aantal fout voorspelde resultaten wordt ook wel "out-of-bag-error" genoemd.
 
 Een belangrijke parameter bij randomforests zijn het aantal decisiontrees die van toepassing zijn in het model om de beste score te krijgen. Zoals te zien hier onder, is geanalyseerd welke hoeveelheid aan desicion trees benodigd zou zijn voor de beste score. 1000 en 10000 decision trees hebben uiteindelijk de beste score. 1000 trees zal worden gehanteerd binnen de code omdat daarvan de compile tijd korter zal zijn. Interessant om te zien is dat bij een random forest van 100000 trees de score weer lager wordt, dit heeft waarschijnlijk te maken met overfitting.
+
 | Trees  | Accuracy score     |
 |--------|--------------------|
 | 20     | 0.8548387096774194 |
@@ -332,7 +333,9 @@ Een belangrijke parameter bij randomforests zijn het aantal decisiontrees die va
 | 10000  | 0.8709677419354839 |
 | 100000 | 0.8548387096774194 |
 
-#### Code
+#### Code Regressor
+
+#### Code Classifier
 ~~~~
 # -*- coding: utf-8 -*-
 """
@@ -424,8 +427,9 @@ print("Confusion matrix:\n", confusion_matrix(y_test,y_pred))
 print("Classification Report:\n",classification_report(y_test,y_pred))
 print("Accuracy score:\n",accuracy_score(y_test, y_pred))
 ~~~~
+#### Output Regressor
 
-#### Output
+#### Output Classifier
 AUC score:
 0.93
 
@@ -888,7 +892,24 @@ Te zien in voorbeeld1.0 is dat de kans om toegelaten te worden op basis van 3 fa
 - bron vermelding
 - r2 wordt groter als je nieuwe features toevoegd
 
-### <a name="AlgeheleConclusie"></a> Algehele Conclusie
+## <a name="AlgeheleConclusie"></a> Algehele Conclusie
+### Conclusie regressor models
+Te zien in onderstaande 
+
+|                | Linear regression   |Random forests  | Neural network | Support vector machine |
+|----------------|---------------------|----------------|----------------|------------------------|
+| RSME           |                     |
+| R2             |                     | 
+
+
+### Conclusie classification models
+Als we alle accuracy en AUC scores naast elkaar leggen is duidelijk te zien dat het supportvector machine model het beste heeft gepresteerd.
+
+|                | Logistic regression | Random forests | Neural network | Support vector machine |
+|----------------|---------------------|----------------|----------------|------------------------|
+| Accuracy score | 0.887               | 0.871          | 0.871          | 0.919                  |
+| AUC score      | 0.95                | 0.93           | 0.93           | 0.96                   |
+
 
 ## <a name="Auteurs"></a> Auteurs
 - Rutger de Groen https://rutgerfrans.com/
