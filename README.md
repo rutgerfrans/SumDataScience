@@ -593,16 +593,6 @@ from sklearn.metrics import r2_score
 from sklearn.metrics import mean_squared_error
 import math
 
-def plot_roc_curve(fpr, tpr):
-    plt.plot(fpr, tpr, color='orange', label='ROC')
-    plt.plot([0, 1], [0, 1], color='darkblue', linestyle='--')
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    plt.title('Receiver Operating Characteristic (ROC) Curve')
-    plt.legend()
-    plt.show()
-
-
 df = pd.read_csv('Dataset Carprices.csv')
 df.head()
 df = df.drop(['car_ID', 'highwaympg', 'citympg'], 1)
@@ -792,7 +782,7 @@ Beginnend bij de kernel functie valt al direct op dat alle resultaten vrij slech
 | sigmoid     | -0.037         |
 | precomputed | n.v.t          |
 
-Bij de mate van misclassificatie is bij onderstaande resultaten voor een waarde van 10000 gekozen. Dit is een erg hoge waarde maar dit geeft wel een goed resultaat weer. Echter is dit waarschijnlijk geen goede voorspelling aangezien heel veel misclassificaties zal worden toegelaten.
+Bij de mate van misclassificatie is bij onderstaande resultaten voor een waarde van 10000 gekozen. Dit is een erg hoge waarde, wat inhoudt dat misclassificatie enorm vermeden wordt maar dit geeft wel een goed resultaat weer. bij een misclassificatie waarde van 20000 wordt de margin waarde waarschijnlijk zo klein dat er een overfitting plaatsvindt waardoor de R2-score weer daalt.
 
 | C         | R2-score       | b/v tradeoff |
 |-----------|----------------|--------------|
@@ -805,7 +795,7 @@ Bij de mate van misclassificatie is bij onderstaande resultaten voor een waarde 
 | 20000     | 0.880          | Overfitting  |
 
 ##### Classifier parameters
-Bij de mate van classificatie is naar aanleiding van onderstaande tabel gekozen voor een C van 1.0. De range van 1.0 tot 5.0 gaven allemaal dezelfde score van ongeveer 90 procent weer. Besloten is om 1.0 toe te passen aangezien niet hoger nodig is voor het model en om te veel misclassificatie te voorkomen. Na 5.0 is interessant om te zien dat de accuraatheid weer daalt dit komt waarschijnlijk door overfitting.
+Bij de mate van misclassificatie is naar aanleiding van onderstaande tabel gekozen voor een C van 1.0. De range van 1.0 tot 5.0 gaven allemaal dezelfde score van ongeveer 90 procent weer. Besloten is om 1.0 toe te passen aangezien niet hoger nodig is voor het model en om te veel misclassificatie te voorkomen. Na 5.0 is interessant om te zien dat de accuraatheid weer daalt dit komt waarschijnlijk door overfitting.
 
 | C         | Accuracy score | b/v tradeoff |
 |-----------|----------------|--------------|
@@ -1012,6 +1002,10 @@ ROC curve:
 ![](ROCsvm.png)
 
 #### Evaluatie
+##### Regressor
+Bij het regressor model is te zien dat er een vrij sterk verband is tussen de target value en de onafhankelijke features. Ondanks het feit dat er een extreem hoge mate nodig was om misclassification te voorkomen waren de resultaten vrij goed: RMSE van 2437 en een R2-score van ongeveer 89 procent. Dit houdt in dat dit model ongeveer even goed presteert als de randomforest regressor.
+
+##### Classifier
 Bij dit model valt te concluderen dat er een erg goed verband is tussen de target value en de onafhankelijke features. Met een accuracy score van ongeveer 91 procent en een AUC score van 96 procent is dit de best toegepaste techniek tot nu toe. Ook is het sterke verband aan de snelle stijging van ROC curve te zien.
 
 #### Feedback
@@ -1121,12 +1115,12 @@ Te zien in voorbeeld1.0 is dat de kans om toegelaten te worden op basis van 3 fa
 
 ## <a name="AlgeheleConclusie"></a> Algehele Conclusie
 ### Conclusie regressor models
-Te zien in onderstaande 
+Te zien in onderstaande tabel, uit alle RMSE- en R2-scores van de regressie modellen, dat de Support vector machine het beste scored. Echter kom het model van de randomforest erg dichtbij alleen is de RMSE daarvan een stuk hoger. Het neural network model heeft ook een vrij hoge score, maar zoals eerder al geconcludeerd bij de evaluatie was deze zo wisselvallig dit model waarschijnlijk niet van toepassing is op deze dataset.
 
 |                | Linear regression   |Random forests  | Neural network | Support vector machine |
 |----------------|---------------------|----------------|----------------|------------------------|
-| RSME           |                     |
-| R2             |                     | 
+| RSME           | 3041.88             | 2481.73        | 2826.08        | **2437.45**            |
+| R2             | 0.831               | 0.887          | 0.854          | **0.891**              |
 
 
 ### Conclusie classification models
@@ -1134,15 +1128,10 @@ Als we alle accuracy en AUC scores naast elkaar leggen is duidelijk te zien dat 
 
 |                | Logistic regression | Random forests | Neural network | Support vector machine |
 |----------------|---------------------|----------------|----------------|------------------------|
-| Accuracy score | 0.887               | 0.871          | 0.871          | 0.919                  |
-| AUC score      | 0.95                | 0.93           | 0.93           | 0.96                   |
+| Accuracy score | 0.887               | 0.871          | 0.871          | **0.919**              |
+| AUC score      | 0.95                | 0.93           | 0.93           | **0.96**               |
 
 
 ## <a name="Auteurs"></a> Auteurs
 - Rutger de Groen https://rutgerfrans.com/
 - Maroche Delnoy https://www.linkedin.com/in/maroche-delnoy-788ab9195/
-
-
- 
-
-
