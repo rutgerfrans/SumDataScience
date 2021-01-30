@@ -849,7 +849,7 @@ p(a0) = 0.726
 p(a1) = 0.274
 
 #### Evaluatie
-Te zien in voorbeeld1.0 is dat de kans om toegelaten te worden op basis van 3 factoren is ongeveer 70%. Dit leek in eerste instantie vrij hoog als toelating voor een studie. Daarom is een tweede voorbeeld uitgewerkt waarbij een extra factor, Studylevel, is toegevoegd. Dit om te onderzoeken of het niveau van studiewerk impact zou hebben op de toelatings kans van de denkbeeldige studie. Wat interessant is om te zien, is dat met de toegevoegde factor, in voorbeeld2.0, de kans op toelating met 2% stijgt.
+Te zien in voorbeeld1.0 is dat de kans om toegelaten te worden op basis van 3 factoren ongeveer 70% is. Dit leek in eerste instantie vrij hoog als toelating voor een studie. Daarom is een tweede voorbeeld uitgewerkt waarbij een extra factor, Studylevel, is toegevoegd. Dit om te onderzoeken of het niveau van studiewerk impact zou hebben op de toelatingskans van de denkbeeldige studie. Wat interessant is om te zien, is dat met de toegevoegde factor, in voorbeeld2.0, de kans op toelating met 2% stijgt. Dit kan bijvoorbeeld komen door het fenomeen dat wanneer er features worden toegevoegd de resulaten altijd een beetje hoger worden.
 
 #### Feedback
 - bron vermelding
