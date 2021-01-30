@@ -517,16 +517,37 @@ Bij het feedbackmoment zijn er een paar vragen gestelt m.b.t. de visualisatie va
 Een neuraal netwerk is een techniek die binnen de machinelearning wordt toegepast om op basis van complexen datasets voorspellingen te maken. Neurale netwerken bestaan uit meerdere lagen die nodes kunnen bevatten. Zo zijn er inputlayers, hiddenlayers en outputlayers. In deze layers bestaan nodes die inputvariable omzetten naar outputvariabelen op basis van het gewicht/bias en de activatie functie. Dit is een iteratief proces waarbij na ieder proces het gewicht/bias wordt bijgewerkt om een beter resultaat te krijgen. Dit doet het neurale netwerk aan de hand van "backpropagation", dit is een techniek die de richtingscoëfficient van de errorfunctie bepaald.
 
 Om neurale netwerken in de praktijk toe te passen zijn er een aantal parameters die belangrijk zijn. In dit model definiëren we het aantal hiddenlayers, het aantal nodes binnen de hiddenlayers, de activatiefunctie en de optimizer functie. Per parameter is er gekeken wat het beste resultaat leverde, beginnend bij de hiddenlayers en eindigend bij de optimizer functie. Hierbij is in het begin gebruik gemaakt van de default options tot dat alle parameters onderzocht waren. 
+
 ##### Regressor parameters
+Bij het selecteren van de parameters werd al vrij snel duidelijk dat weinig activatie- en solver functies goed werken op deze dataset. Er was maar één solver functie die logsiche resultaten weergaf en dat was 'lbfgs'. Op basis van deze functie is besloten de andere parameters te bepalen.
+
+Voor de activatie functie is er gekozen voor relu aangezien deze de meest logische scores weergaf.
+
+|          | RMSE    |  R2-score    |
+|----------|---------|--------------|
+| Relu     | 3619    | 0.761        |
+| Tanh     | 7508    | -0.0306      |
+| Logistic | 7548    | -0.0417      |
+
+Voor het aantal hiddenlayers is voor 1 gekozen aangezien het probleem niet complex genoeg is voor meerdere layers. Als meer layers worden toegepast leid dit tot overfitting. Wat wel van belang is bij dit model zijn het aantal nodes in de hiddenlayer. Gekozen is voor 5 nodes aangezien dit het minste verschil gaf en het beste resultaat. 1-3 nodes geven dusdanige resultaten dat het om underfitting gaat, en na 6 nodes worden de resultaten zo wisselvallig dat het om overfitting gaat.
+
+| Nodes   | R2-score       | b/v tradeoff |
+|---------|----------------|--------------|
+| 1 -2    | -0.031         | Underfitting |
+| 3       | 74% - 85%      | Underfitting |
+| 4       | 78% - 86%      | Underfitting |
+| 5       | 82% - 90%      |              |
+| 6       | 78% - 90%      | Overfitting  |
+| 7       | 73% - 68%      | Overfitting  |
+
+Uiteindelijke parameters:
+- Hiddenlayers (hl): (1)
+- Nodes binnen hl: (5)
+- Activation rule: 'relu'
+- Solver: 'lbfgs'
 
 ##### Classifier parameters:
 We hebben gekozen voor 1 hiddenlayer om dat er niet meer nodig waren aangezien ons probleem niet zo complex is. op het moment dat 2 of meer hiddenlayers worden toegepast in dit model, krijgen we te maken met overfitting. 
-
-| HL   | Accuracy score | b/v tradeoff |
-|----- |----------------|--------------|
-| 1    | 85% - 90%      |              |
-| 2 >  | < 85%          | Overfitting  |
-
 
 Dit zelfde geldt ook voor het aantal nodes binnen de hiddenlayers. Aan onderstaande resultaten is te zien dat het model het beste resultaat geeft met 3 tot 10 nodes binnen de hiddenlayers. 7 nodes gaven in dit model het beste resulaat.
 
@@ -559,16 +580,73 @@ Uiteindelijke parameters:
 - Solver: 'adam'
 
 #### Regressor Code
+~~~~
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+import matplotlib.pyplot as plt
+from sklearn.neural_network import MLPClassifier, MLPRegressor
+from sklearn.metrics import roc_curve
+from sklearn.metrics import roc_auc_score
+from sklearn.metrics import r2_score
+from sklearn.metrics import mean_squared_error
+import math
+
+def plot_roc_curve(fpr, tpr):
+    plt.plot(fpr, tpr, color='orange', label='ROC')
+    plt.plot([0, 1], [0, 1], color='darkblue', linestyle='--')
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Receiver Operating Characteristic (ROC) Curve')
+    plt.legend()
+    plt.show()
+
+
+df = pd.read_csv('Dataset Carprices.csv')
+df.head()
+df = df.drop(['car_ID', 'highwaympg', 'citympg'], 1)
+
+targetkolom = 'price'
+
+
+#Preperatie op CarName
+i =0
+while i < len(df.CarName):
+    df.CarName[i] = df.CarName[i].split()[0]
+    i += 1
+    
+pd.set_option('display.max_columns', 200)
+#print(df.describe().transpose())
+
+#Dataset standaardiseren
+df = pd.get_dummies(df, columns=['CarName','fueltype','aspiration','doornumber','carbody',
+                                 'drivewheel','enginelocation','enginetype','cylindernumber',
+                                 'fuelsystem'], prefix="", prefix_sep="")
+
+#print(df.info())
+      
+y = df[targetkolom]
+x = df.drop(targetkolom, 1)
+
+#Normalisatie (n.v.t.)
+x = (x-x.min())/(x.max()-x.min())
+
+x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.3 ,random_state=7)
+
+model = MLPRegressor(hidden_layer_sizes=(5), activation='relu', solver='lbfgs', max_iter=500)
+
+model.fit(x_train, y_train)
+
+y_pred = model.predict(x_test)
+
+mse = mean_squared_error(y_test, y_pred)
+rtwo = r2_score(y_test, y_pred)
+print('\nrmse: ', math.sqrt(mse), '\nr2: ', rtwo)
+~~~~
 
 #### Classifier Code
 ~~~~
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Dec 29 16:38:30 2020
-
-@author: rdegr
-"""
-
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -651,9 +729,10 @@ print("Confusion matrix:\n", confusion_matrix(y_test,y_pred))
 print("Classification Report:\n",classification_report(y_test,y_pred))
 print("Accuracy score:\n",accuracy_score(y_test, y_pred))
 ~~~~
+
 #### Regressor ouput
-- RMSE:  3041.884027168188 
-- R2:  0.8308355282333387
+- RMSE: 2826.0780483729486
+- R2: 0.8539867877302934 
 
 #### Classifier output
 AUC score:
@@ -682,6 +761,10 @@ ROC curve:
 ![](ROCneuralnetworkclassifier.png)
 
 #### Evaluatie
+##### Regressor
+Het resultaat geeft weer dat er een vrij goed verband is tussen de target value en de onafhankelijke features. Met een RMSE van 2826 en een R2-score van ongeveer 85% presteert dit model slechter dan de randomforest regressor maar beter dan de multiple linear regressor. Echter zijn de resultaten zo wisselvallig dat het multiple linear regressor wel consistenter presteert. Er kan dus geconcludeerd worden dat de neuralnetwork regressor niet de beste machinelearning methode is om toe te passen op deze dataset.
+
+##### Classifier
 Uiteindelijk kan geconstateerd worden dat ook in dit model een goed verband is tussen de target value en de onafhankelijke features. Bovenstestaande score is het gemiddelde van de variatie in scores die naar voren kwamen. Met een accuraatheid van ongeveer 87 procent en een AUC score van 93 procent komen de scores overeen met die van de randomforest, wat inhoudt dat het logistische model beter presteert. 
 
 #### Feedback
