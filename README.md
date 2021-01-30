@@ -458,7 +458,32 @@ Bij het feedbackmoment zijn er een paar vragen gestelt m.b.t. de visualisatie va
 
 ### <a name="nn"></a> Neurale netwerken
 #### Beschrijving
-Toelichting parameters model
+Een neuraal netwerk is een techniek die binnen de machinelearning wordt toegepast om op basis van complexen datasets voorspellingen te maken. Neurale netwerken bestaan uit meerdere lagen die nodes kunnen bevatten. Zo zijn er inputlayers, hiddenlayers en outputlayers. In deze layers bestaan nodes die inputvariable omzetten naar outputvariabelen op basis van het gewicht/bias en de activatie functie. Dit is een iteratief proces waarbij na ieder proces het gewicht/bias wordt bijgewerkt om een beter resultaat te krijgen. Dit doet het neurale netwerk aan de hand van "backpropagation", dit is een techniek die de richtingscoëfficient van de errorfunctie bepaald.
+
+Om neurale netwerken in de praktijk toe te passen zijn er een aantal parameters die belangrijk zijn. In dit model definiëren we het aantal hiddenlayers, het aantal nodes binnen de hiddenlayers, de activatiefunctie, de solver functie en de maximale iteraties. 
+
+We hebben gekozen voor 1 hiddenlayer om dat er niet meer nodig waren aangezien ons probleem niet zo complex is. op het moment dat 2 of meer hiddenlayers worden toegepast in dit model, krijgen we te maken met overfitting. 
+
+| HL   | Accuracy score | b/v tradeoff |
+|----- |----------------|--------------|
+| 1    | 85% - 90%      |              |
+| 2 >  | < 85%          | Overfitting  |
+
+
+Dit zelfde geldt ook voor het aantal nodes binnen in deze hiddenlayers. Aan onderstaande resultaten is te zien dat het model het beste resultaat geeft met 3 tot 10 nodes binnen de hiddenlayers. 7 nodes gaven in dit model het beste resulaat.
+
+| Nodes   | Accuracy score | b/v tradeoff |
+|---------|----------------|--------------|
+| 1 - 2   | 30% - 90%      | Underfitting |
+| 3 - 10  | 85% - 91%      |              |
+| 10 >    | < 85%          | Overfitting  |
+
+Uiteindelijke parameters:
+- Hiddenlayers (hl): (1)
+- Nodes binnen hl: (7)
+- Activation rule: 'relu'
+- Solver: 'adam'
+- Max_iter: (500)
 
 #### Code
 ~~~~
