@@ -26,7 +26,7 @@ In dit document is de selectie en de preperatie voor de dataset omschreven, verd
 
 ### <a name="Dataselectie"></a> Data selectie
 #### Onderbouwing
-Onderstaande dataset is afkomstig van de website kaggle.com. Deze website is bekend bij school en wordt voor meerdere minoren als bron gebruikt voor toelichting van theorie. Vandaar dat wij dit is kwaliteitvolle bron beschouwen voor de selectie van de data. Op kaggle kwamen een dataset tegen over de prijzen van auto's, dit leek ons een geschikt dataset omdat er veel factoren zijn die de prijs van auto's kunnen beïnvloeden. De meeste data in deze dataset was direct bruikbaar voor toepassing, echter waren er wel een aantal aanpassingen nodig om de dataset optimaal te kunnen gebruiken. Zo zijn er een aantal categorische waardes die omgezet moeten worden naar waardes die wel toepasbaar zijn voor toe te passen machinelearning models. 
+Onderstaande dataset is afkomstig van de website kaggle.com. Deze website is bekend bij school en wordt voor meerdere minoren als bron gebruikt voor toelichting van theorie. Vandaar dat wij dit is kwaliteitvolle bron beschouwen voor de selectie van de data. Op kaggle kwamen we een dataset tegen over de prijzen van auto's, dit leek ons een geschikt dataset omdat er veel factoren zijn die de prijs van auto's kunnen beïnvloeden. De meeste data in deze dataset was direct bruikbaar voor toepassing, echter waren er wel een aantal aanpassingen nodig om de dataset optimaal te kunnen gebruiken. Zo zijn er een aantal categorische waardes die omgezet moeten worden naar waardes die wel toepasbaar zijn voor toe te passen machinelearning models. 
 
 - Bron: https://www.kaggle.com/c/data-mining-fall-2018/overview
 
