@@ -101,7 +101,7 @@ Hier toelichten dat dit per model anders is!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ## <a name="Fase1"></a> Fase 1
 ### <a name="mlr"></a> Multiple linear regression
 #### Beschrijving
-Multiple linear regression is een machine learning model die binnen supervised learning wordt toegepast. Dit model zoekt zoekt een relatie tussen afhankelijke en een of meer onafhankelijke variabelen door de best passende rechte lijn te plaatsen. In deze toepassing zoekt het model in de dataset "Carprices" een lineair verband tussen de afhankelijke variabele, carprice, en de overige features die zijn over gebleven na de data preperatie.
+Multiple linear regression is een machine learning model die binnen supervised learning wordt toegepast. Dit model zoekt zoekt een relatie tussen afhankelijke en een of meer onafhankelijke variabelen door de best passende rechte lijn te plaatsen, ookwel de regressielijn. Aan de hand van deze regressielijn kan het model voorspellingen maken op basis van nieuwe data. Hoe minder variantie deze regressielijn heeft, hoe beter de voorspelling. In deze toepassing zoekt het model in de dataset "Carprices" een lineair verband tussen de afhankelijke variabele, carprice, en de overige features die zijn over gebleven na de data preperatie.
 
 #### Code
 ~~~
