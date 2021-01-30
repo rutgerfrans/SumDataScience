@@ -89,14 +89,27 @@ Voordat begonnen is aan normalisatie en standaardisatie is gekeken of dit daadwe
 Als tweede stap is gekeken naar standaardisatie, zijn er kolommen die aangepast moeten worden om tot een beter resultaat te komen? Alle kolommen die geen nummerieke waarden bevatten zijn omgezet naar tabellen die wel nummerieke waarde bevatten, doormiddel van de "get_dummies()" functie van Pandas. Echter is een kolom, "CarName", niet efficiënt om op deze manier te standaardiseren. De kolom "CarName" heeft 205 waardes die bestaan uit unieke auto merken en types. Als deze kolom gestandaardiseerd word, resulteert dit in 205 nieuwe kolommen met 204 nullen en één 1. Dit leidde in de versie 1, tot een lage r2 score en een hoge rmse bij een test set van 30 procent. Om de kolom "CarName" te verbeteren is er gekozen om alle merken te categoriseren, zodoende werden alle type auto's van hetzelfde merk onder één naam gezet.
 
 ##### Normalisatie
-Als derde stap is gekeken of normalisatie nodig zou zijn. In eerste instantie waren er geen kolommen die uitschietende waardes hadden. Alleen de target kolom had hoge waardes omdat er prijzen gehanteerd worden, maar aangezien dit de target kolom was zou zijn bij multiple linear regression zou deze sowieso niet meegenomen worden in de normalisatie. Om toch te kijken of normalisatie een positief effect zou hebben, in het geval dat er een andere target kolom gehanteerd zou worden, is deze toegepast. Echter waren de waardes na normalisatie zo abnormaal dat normalisatie niet is toegepast.
+Als derde stap is gekeken of normalisatie nodig zou zijn. In eerste instantie waren er geen kolommen die uitschietende waardes hadden. Alleen de target kolom had hoge waardes omdat er prijzen gehanteerd worden, deze liggen relatief hoger dan de andere waardes. Om toch per model te kijken of er betere resultaten naar voren komen bij het toepassen van normalisatie is hier onder te zien wat de verschillen zijn in uitkomsten bij de regressie en classificatie modellen. Als de resultaten beter zijn dan wordt normalisatie wel toegepast en als de resultaten slechter zijn dan worden ze niet toegepast.
 
-| Na Normalisatie bij multiple linear regression |                         |
-|------------------------------------------------|-------------------------|
-| rmse:                                          | 30267727458.953026      |
-| r2:                                            | -2.7177251408947733e+22 |
+###### Regressie modellen
+|        | Normalisatie              |Geen normalisatie           | Resultaat  |
+|--------|---------------------------|----------------------------|------------| 
+|        | Rmse:        | R2-Score:  | Rmse:      | R2-Score:     |            |
+| MLR    | 2.95\*10^15  | -1.588     | 3041.88    | 0.831         | Nier Norm. |
+| RFR    | 2481.73      | 0.887      | 2480.93    | 0.887         | Wel  Norm. |
+| NNR    | 2826.09      | 0.854      | 3804.39    | 0.735         | Wel  Norm. |
+| SVR    | 2437.45      | 0.891      | 101782.57  | -188.40       | Wel  Norm. |
 
-Hier toelichten dat dit per model anders is!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+###### Classificatie modellen
+|        | multiple linear regression | 
+|--------|----------------------------|
+|        | Normalisatie               |
+|--------|----------------------------|
+| rmse:  | 30267727458.953026         |
+| r2:    | -2.7177251408947733e+22    |
+|        | Geen normalisatie          |
+| rmse:  | 30267727458.953026         |
+| r2:    | -2.7177251408947733e+22    |
 
 ## <a name="Fase1"></a> Fase 1
 ### <a name="mlr"></a> Multiple linear regression
