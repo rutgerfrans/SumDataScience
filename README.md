@@ -569,7 +569,7 @@ x = (x-x.min())/(x.max()-x.min())
 
 x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.3 ,random_state=7)
 
-model = MLPClassifier(hidden_layer_sizes=(4), activation='relu', solver='adam', max_iter=500)
+model = MLPClassifier(hidden_layer_sizes=(7), activation='relu', solver='sgd', max_iter=600)
 
 model.fit(x_train, y_train)
 
