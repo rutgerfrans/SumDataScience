@@ -461,7 +461,7 @@ Bij het feedbackmoment zijn er een paar vragen gestelt m.b.t. de visualisatie va
 #### Beschrijving
 Een neuraal netwerk is een techniek die binnen de machinelearning wordt toegepast om op basis van complexen datasets voorspellingen te maken. Neurale netwerken bestaan uit meerdere lagen die nodes kunnen bevatten. Zo zijn er inputlayers, hiddenlayers en outputlayers. In deze layers bestaan nodes die inputvariable omzetten naar outputvariabelen op basis van het gewicht/bias en de activatie functie. Dit is een iteratief proces waarbij na ieder proces het gewicht/bias wordt bijgewerkt om een beter resultaat te krijgen. Dit doet het neurale netwerk aan de hand van "backpropagation", dit is een techniek die de richtingscoëfficient van de errorfunctie bepaald.
 
-Om neurale netwerken in de praktijk toe te passen zijn er een aantal parameters die belangrijk zijn. In dit model definiëren we het aantal hiddenlayers, het aantal nodes binnen de hiddenlayers, de activatiefunctie en de optimizer functie. Per parameter is er gekeken wat het beste resultaat leverde, beginnend bij de hiddenlayers en eindigend bij de optimizer funcite. Hierbij is in het begin gebruik gemaakt van de default options tot dat alle parameters onderzocht waren. 
+Om neurale netwerken in de praktijk toe te passen zijn er een aantal parameters die belangrijk zijn. In dit model definiëren we het aantal hiddenlayers, het aantal nodes binnen de hiddenlayers, de activatiefunctie en de optimizer functie. Per parameter is er gekeken wat het beste resultaat leverde, beginnend bij de hiddenlayers en eindigend bij de optimizer functie. Hierbij is in het begin gebruik gemaakt van de default options tot dat alle parameters onderzocht waren. 
 
 We hebben gekozen voor 1 hiddenlayer om dat er niet meer nodig waren aangezien ons probleem niet zo complex is. op het moment dat 2 of meer hiddenlayers worden toegepast in dit model, krijgen we te maken met overfitting. 
 
@@ -471,7 +471,7 @@ We hebben gekozen voor 1 hiddenlayer om dat er niet meer nodig waren aangezien o
 | 2 >  | < 85%          | Overfitting  |
 
 
-Dit zelfde geldt ook voor het aantal nodes binnen in deze hiddenlayers. Aan onderstaande resultaten is te zien dat het model het beste resultaat geeft met 3 tot 10 nodes binnen de hiddenlayers. 7 nodes gaven in dit model het beste resulaat (bij andere default parameters).
+Dit zelfde geldt ook voor het aantal nodes binnen de hiddenlayers. Aan onderstaande resultaten is te zien dat het model het beste resultaat geeft met 3 tot 10 nodes binnen de hiddenlayers. 7 nodes gaven in dit model het beste resulaat.
 
 | Nodes   | Accuracy score | b/v tradeoff |
 |---------|----------------|--------------|
@@ -487,19 +487,19 @@ Bij het bepalen van de juiste activatie functies hebben we gekeken welke het bes
 | Logistic    | 85% - 90%      |
 | Tanh        | < 83%          |
 
-Ten slotte de optimizer functie, hierbij zijn 3 mogelijkheden: 'adam', 'lbfgs' en 'sgd'. Hierbij zijn we tot de conclusie gekomen dat de stochastische gradient-descent methode het beste resultaat leverde.
+Ten slotte de optimizer functie, hierbij zijn 3 mogelijkheden: 'adam', 'lbfgs' en 'sgd'. Hierbij zijn we tot de conclusie gekomen dat de adam solver de minste variatie heeft in resultaten. Ondanks dat de stochastische gradient-descent methode het hoogste resultaat leverde, varieerde deze meer in resultaat dan adam en lbfgs. Wij denken dat dit komt door overfitting.
 
 | Sol. Functie | Accuracy score |
 |--------------|----------------|
 | Adam         | 85% - 90%      |
 | Lbfgs        | 79% - 85%      |
-| Sgd          | 87% - 94%      |
+| Sgd          | 85% - 94%      |
 
 Uiteindelijke parameters:
 - Hiddenlayers (hl): (1)
 - Nodes binnen hl: (7)
 - Activation rule: 'relu'
-- Solver: 'sgd'
+- Solver: 'adam'
 
 #### Code
 ~~~~
@@ -569,7 +569,7 @@ x = (x-x.min())/(x.max()-x.min())
 
 x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.3 ,random_state=7)
 
-model = MLPClassifier(hidden_layer_sizes=(7), activation='relu', solver='sgd', max_iter=600)
+model = MLPClassifier(hidden_layer_sizes=(7), activation='relu', solver='adam', max_iter=600)
 
 model.fit(x_train, y_train)
 
@@ -621,11 +621,10 @@ ROC curve:
 ![](ROCneuralnetworkclassifier.png)
 
 #### Evaluatie
+Uiteindelijk kan geconstateerd worden dat ook in dit model een goed verband is tussen de target value en de onafhankelijke features. Bovenstestaande score is het gemiddelde van de variatie in scores die naar voren kwamen. Met een accuraatheid van ongeveer 87 procent en een AUC score van 93 procent komen de scores overeen met die van de randomforest, wat inhoudt dat het logistische model beter presteert. 
 
 #### Feedback
--er is sprake van overfitting door te veel nodes en hiddenlayers 8,8,8
--hierdoor heeft model een hoge variance met een lage bias
-
+In het feedback moment is geconcludeerd dat 3 hiddenlayers te veel zijn en dat deze zorgen voor overfitting, omdat er sprake was van een hoge variance en een lage bias. In de toelichting van het model is de onderbouwing van het aantal hiddenlayers geupdate. Op basis van deze gedachtegang hebben we ook de andere parameters benaderd en onderbouwd.
 
 ## <a name="Fase3"></a> Fase 3
 ### <a name="svm"></a> Support vector machines
