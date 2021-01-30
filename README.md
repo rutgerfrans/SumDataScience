@@ -1110,10 +1110,9 @@ p(a1) = 0.274
 Te zien in voorbeeld1.0 is dat de kans om toegelaten te worden op basis van 3 factoren ongeveer 70% is. Dit leek in eerste instantie vrij hoog als toelating voor een studie. Daarom is een tweede voorbeeld uitgewerkt waarbij een extra factor, Studylevel, is toegevoegd. Dit om te onderzoeken of het niveau van studiewerk impact zou hebben op de toelatingskans van de denkbeeldige studie. Wat interessant is om te zien, is dat met de toegevoegde factor, in voorbeeld2.0, de kans op toelating met 2% stijgt. Dit kan bijvoorbeeld komen door het fenomeen dat wanneer er features worden toegevoegd de resulaten altijd een beetje hoger worden.
 
 #### Feedback
-- bron vermelding
-- r2 wordt groter als je nieuwe features toevoegd
+In het feedback moment is de uitleg over bayesian networks toegelicht en kregen we als feedback om onze bronnen bij de uitleg te vermelden. Ook hadden we een vraagteken rondom het verschil in resultaat van voorbeeld1.0 en voorbeeld2.0 waarbij aangegeven werd dat de R2-score hoger wordt als er nieuwe features worden toegevoegd.
 
-## <a name="AlgeheleConclusie"></a> Algehele Conclusie
+## <a name="AlgeheleConclusie"></a> Conclusie
 ### Conclusie regressor models
 Te zien in onderstaande tabel, uit alle RMSE- en R2-scores van de regressie modellen, dat de Support vector machine het beste scored. Echter kom het model van de randomforest erg dichtbij alleen is de RMSE daarvan een stuk hoger. Het neural network model heeft ook een vrij hoge score, maar zoals eerder al geconcludeerd bij de evaluatie was deze zo wisselvallig dit model waarschijnlijk niet van toepassing is op deze dataset.
 
