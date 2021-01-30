@@ -777,9 +777,32 @@ Support vector machines is een machinelearning methode die wordt toegepast om, n
 
 Supportvector machines kunnen in meerdere dimensies worden toegepast. Dit kan in 1 dimensie, waarbij er één lijn is waar de datapunten zich op bevinden en deze gescheiden worden door een hyperplane in de vorm van punten op de lijn. Maar ook in 2 dimensies kunnen support vector machines worden toegepast. Hierbij is er een x en y geplot waarin de datapunten zijn verdeeld en gescheiden worden door een hyperplane die bestaat uit drie lijnen. De middelste representeerd de scheiding/classificatie en de buitenste lijnen zijn de parallel lopende support vector lijnen die de margin bepalen, ook wel een 1 dimensionale hyperplane. Bij 3 dimensies zijn de datapunten verdeeld over drie assen waarbij deze gescheiden worden door een 2 dimensionale hyperplane. Dit zijn drie vlakken waarvan het middelste vlak de classifier is en de twee buitenste vlakken de supportvectorvlakken vormen die de margin weergeven. Om te ontdekken welke dimensie van toepassing is of in welke dimensie de beste resultaten naar voren komen wordt daar kernel functies voor toegepast.
 
-Net als bij neurale netwerken, zijn hier ook parameters van belang die de accuraatheid van de resultaten beïnvloeden. Bij supportvector machines zijn dat: 'c', 'gamma' en 'kernel'. C staat voor de mate aan misclassifacitie binnen de margin, gamma is de grote in margin en kernel geeft de functie aan die toegepast wordt om de beste resultaten te vinden in de verschillende dimensies. 
+Net als bij neurale netwerken, zijn hier ook parameters van belang die de accuraatheid van de resultaten beïnvloeden. Bij supportvector machines zijn dat: 'c', 'gamma' en 'kernel'. C staat voor de mate aan misclassifacitie binnen de margin, gamma is de grote in margin en kernel geeft de functie aan die toegepast wordt om de beste resultaten te vinden in de verschillende dimensies. Voor de grote in margin is gekozen om de gamma op 'auto' te zetten aangezien deze functie de optimale margin voor ons berekend bij beide modellen.
 
 ##### Regressor parameters
+Beginnend bij de kernel functie valt al direct op dat alle resultaten vrij slecht zijn, dit indiceert al dat suportvector machine regressor niet een perfect model zal zijn om voorspellingen mee te maken op deze dataset. Maar om het model toch een kans te geven hebben we gekeken of er betere resultaten uitkwamen bij het gebruik van de lineare kernel functie, aangezien deze de minst slechte score had.
+
+| Kernel      | R2-score       |
+|-------------|----------------|
+| linear      | -0.019         |
+| poly (d=1)  | -0.037         |
+| poly (d=2)  | -0.037         |
+| poly (d=3)  | -0.037         |
+| rbf         | -0.037         | 
+| sigmoid     | -0.037         |
+| precomputed | n.v.t          |
+
+Bij de mate van misclassificatie is bij onderstaande resultaten voor een waarde van 10000 gekozen. Dit is een erg hoge waarde maar dit geeft wel een goed resultaat weer. Echter is dit waarschijnlijk geen goede voorspelling aangezien heel veel misclassificaties zal worden toegelaten.
+
+| C         | R2-score       | b/v tradeoff |
+|-----------|----------------|--------------|
+| 1         | -0.019         | Underfitting |
+| 5         | 0.060          | Underfitting |
+| 10        | 0.144          | Underfitting |
+| 100       | 0.559          | Underfitting |
+| 1000      | 0.820          | Underfitting |
+| 10000     | 0.891          |              |
+| 20000     | 0.880          | Overfitting  |
 
 ##### Classifier parameters
 Bij de mate van classificatie is naar aanleiding van onderstaande tabel gekozen voor een C van 1.0. De range van 1.0 tot 5.0 gaven allemaal dezelfde score van ongeveer 90 procent weer. Besloten is om 1.0 toe te passen aangezien niet hoger nodig is voor het model en om te veel misclassificatie te voorkomen. Na 5.0 is interessant om te zien dat de accuraatheid weer daalt dit komt waarschijnlijk door overfitting.
@@ -791,7 +814,7 @@ Bij de mate van classificatie is naar aanleiding van onderstaande tabel gekozen 
 | 1.0 - 5.0 | 0.90           |              |
 | 5.1 >     | < 0.87         | Overfitting  |
 
-Voor de grote in margin is gekozen om de gamma op 'auto' te zetten aangezien deze functie de optimale margin voor ons berekend. Op basis van onderstaande tabel is de kernel functie bepaald. Het resultaat geeft weer dat de polynominale functie met een degree van 1 de beste resultaten uit het model haalt.
+Op basis van onderstaande tabel is de kernel functie bepaald. Het resultaat geeft weer dat de polynominale functie met een degree van 1 de beste resultaten uit het model haalt.
 
 | Kernel      | Accuracy score |
 |-------------|----------------|
@@ -811,17 +834,71 @@ Uiteindelijke parameters:
 - degree: (1.0)
 
 #### Regressor Code
+~~~~
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn import svm
+import matplotlib.pyplot as plt
+from sklearn.metrics import r2_score
+from sklearn.metrics import mean_squared_error
+import math
 
+def plot_roc_curve(fpr, tpr):
+    plt.plot(fpr, tpr, color='orange', label='ROC')
+    plt.plot([0, 1], [0, 1], color='darkblue', linestyle='--')
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Receiver Operating Characteristic (ROC) Curve')
+    plt.legend()
+    plt.show()
+
+
+df = pd.read_csv('Dataset Carprices.csv')
+df.head()
+df = df.drop(['car_ID', 'highwaympg', 'citympg'], 1)
+
+targetkolom = 'price'
+
+
+#Preperatie op CarName
+i =0
+while i < len(df.CarName):
+    df.CarName[i] = df.CarName[i].split()[0]
+    i += 1
+    
+pd.set_option('display.max_columns', 200)
+#print(df.describe().transpose())
+
+#Dataset standaardiseren
+df = pd.get_dummies(df, columns=['CarName','fueltype','aspiration','doornumber','carbody',
+                                 'drivewheel','enginelocation','enginetype','cylindernumber',
+                                 'fuelsystem'], prefix="", prefix_sep="")
+
+#print(df.info())
+      
+y = df[targetkolom]
+x = df.drop(targetkolom, 1)
+
+#Normalisatie (n.v.t.)
+x = (x-x.min())/(x.max()-x.min())
+
+x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.3 ,random_state=7)
+
+model = svm.SVR(C=10000.0, gamma='auto', max_iter=-1, kernel='linear')
+
+
+model.fit(x_train, y_train)
+
+y_pred = model.predict(x_test)
+
+mse = mean_squared_error(y_test, y_pred)
+rtwo = r2_score(y_test, y_pred)
+print('\nrmse: ', math.sqrt(mse), '\nr2: ', rtwo)
+~~~~
 
 #### Classifier Code
 ~~~~
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Dec 29 16:38:30 2020
-
-@author: rdegr
-"""
-
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
@@ -905,6 +982,8 @@ print("Accuracy score:\n",accuracy_score(y_test, y_pred))
 ~~~~
 
 #### Regressor output
+- RMSE: 2437.4477553297274 
+- R2: 0.8913838302854323 
 
 #### Classifier output
 AUC score:
