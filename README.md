@@ -92,13 +92,13 @@ Als tweede stap is gekeken naar standaardisatie, zijn er kolommen die aangepast 
 Als derde stap is gekeken of normalisatie nodig zou zijn. In eerste instantie waren er geen kolommen die uitschietende waardes hadden. Alleen de target kolom had hoge waardes omdat er prijzen gehanteerd worden, deze liggen relatief hoger dan de andere waardes. Om toch per model te kijken of er betere resultaten naar voren komen bij het toepassen van normalisatie is hier onder te zien wat de verschillen zijn in uitkomsten bij de regressie en classificatie modellen. Als de resultaten beter zijn dan wordt normalisatie wel toegepast en als de resultaten slechter zijn dan worden ze niet toegepast.
 
 ###### Regressie modellen
-|        | Normalisatie              |Geen normalisatie           | Resultaat  |
-|--------|---------------------------|----------------------------|------------| 
-|        | Rmse:          R2-Score:  | Rmse:        R2-Score:     |            |
-| MLR    | 2.95\*10^15    -1.588     | 3041.88      0.831         | Nier Norm. |
-| RFR    | 2481.73        0.887      | 2480.93      0.887         | Wel  Norm. |
-| NNR    | 2826.09        0.854      | 3804.39      0.735         | Wel  Norm. |
-| SVR    | 2437.45        0.891      | 101782.57    -188.40       | Wel  Norm. |
+|        | Normalisatie|              |Geen normalisatie|           | Resultaat  |
+|--------|-------------|--------------|-----------------|-----------|------------| 
+|        | Rmse:       |   R2-Score:  | Rmse:           | R2-Score: |            |
+| MLR    | 2.95\*10^15 |   -1.588     | 3041.88         | 0.831     | Niet Norm. |
+| RFR    | 2481.73     |   0.887      | 2480.93         | 0.887     | Wel  Norm. |
+| NNR    | 2826.09     |   0.854      | 3804.39         | 0.735     | Wel  Norm. |
+| SVR    | 2437.45     |   0.891      | 101782.57       | -188.40   | Wel  Norm. |
 
 ###### Classificatie modellen
 |        | multiple linear regression | 
