@@ -648,11 +648,13 @@ Voor de grote in margin is gekozen om de gamma op 'auto' te zetten aangezien dez
 
 | Kernel      | Accuracy score |
 |-------------|----------------|
-| linear      | 0.70           |
-| poly        | 0.85           |
-| rbf         | 0.90           | 
-| sigmoid     | < 0.87         |
-| precomputed | < 0.87         |
+| linear      | 0.80           |
+| poly (d=1)  | 0.88           |
+| poly (d=2)  | 0.91           |
+| poly (d=3)  | 0.70           |
+| rbf         | 0.87           | 
+| sigmoid     | 0.90           |
+| precomputed | n.v.t          |
 
 
 Uiteindelijke parameters:
