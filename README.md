@@ -89,27 +89,27 @@ Voordat begonnen is aan normalisatie en standaardisatie is gekeken of dit daadwe
 Als tweede stap is gekeken naar standaardisatie, zijn er kolommen die aangepast moeten worden om tot een beter resultaat te komen? Alle kolommen die geen nummerieke waarden bevatten zijn omgezet naar tabellen die wel nummerieke waarde bevatten, doormiddel van de "get_dummies()" functie van Pandas. Echter is een kolom, "CarName", niet efficiënt om op deze manier te standaardiseren. De kolom "CarName" heeft 205 waardes die bestaan uit unieke auto merken en types. Als deze kolom gestandaardiseerd word, resulteert dit in 205 nieuwe kolommen met 204 nullen en één 1. Dit leidde in de versie 1, tot een lage r2 score en een hoge rmse bij een test set van 30 procent. Om de kolom "CarName" te verbeteren is er gekozen om alle merken te categoriseren, zodoende werden alle type auto's van hetzelfde merk onder één naam gezet.
 
 ##### Normalisatie
-Als derde stap is gekeken of normalisatie nodig zou zijn. In eerste instantie waren er geen kolommen die uitschietende waardes hadden. Alleen de target kolom had hoge waardes omdat er prijzen gehanteerd worden, deze liggen relatief hoger dan de andere waardes. Om toch per model te kijken of er betere resultaten naar voren komen bij het toepassen van normalisatie is hier onder te zien wat de verschillen zijn in uitkomsten bij de regressie en classificatie modellen. Als de resultaten beter zijn dan wordt normalisatie wel toegepast en als de resultaten slechter zijn dan worden ze niet toegepast.
+Als derde stap is gekeken of normalisatie nodig zou zijn. In eerste instantie waren er geen kolommen die uitschietende waardes hadden. Alleen de target kolom had hoge waardes omdat er prijzen gehanteerd worden, deze liggen relatief hoger dan de andere waardes. Om toch per model te kijken of er betere resultaten naar voren komen bij het toepassen van normalisatie is tijdens het ontwikkelen van ieder model gekeken naar de verschillen in resultaten. Hier onder is te zien wat de verschillen zijn in uitkomsten, als de resultaten beter zijn dan wordt normalisatie wel toegepast en als de resultaten slechter zijn dan worden ze niet toegepast. 
 
 ###### Regressie modellen
 |        | Normalisatie|              |Geen normalisatie|           | Resultaat  |
 |--------|-------------|--------------|-----------------|-----------|------------| 
 |        | Rmse:       |   R2-Score:  | Rmse:           | R2-Score: |            |
 | MLR    | 2.95\*10^15 |   -1.588     | 3041.88         | 0.831     | Niet Norm. |
-| RFR    | 2481.73     |   0.887      | 2480.93         | 0.887     | Wel  Norm. |
-| NNR    | 2826.09     |   0.854      | 3804.39         | 0.735     | Wel  Norm. |
-| SVR    | 2437.45     |   0.891      | 101782.57       | -188.40   | Wel  Norm. |
+| RFR    | 2481.73     |   0.887      | 2480.93         | 0.887     | Wel Norm.  |
+| NNR    | 2826.09     |   0.854      | 3804.39         | 0.735     | Wel Norm.  |
+| SVR    | 2437.45     |   0.891      | 101782.57       | -188.40   | Wel Norm.  |
 
 ###### Classificatie modellen
-|        | multiple linear regression | 
-|--------|----------------------------|
-|        | Normalisatie               |
-|--------|----------------------------|
-| rmse:  | 30267727458.953026         |
-| r2:    | -2.7177251408947733e+22    |
-|        | Geen normalisatie          |
-| rmse:  | 30267727458.953026         |
-| r2:    | -2.7177251408947733e+22    |
+Omdat er geen verschillen in de resultaten zijn bij logistic regression en randomforest regression is gekozen om geen normalisatie toe te passen. Als het niet nodig is, is dit alleen maar ten goede van de bereken tijd.
+
+|        | Normalisatie|              |Geen normalisatie|           | Resultaat  |
+|--------|-------------|--------------|-----------------|-----------|------------| 
+|        | Accuracy:   | AUC:         | Accuracy:       | AUC:      |            |
+| LRC    | 0.887       | 0.95         | 0.887           | 0.95      | Niet Norm. |
+| RFC    | 0.871       | 0.93         | 0.870           | 0.93      | Niet Norm. |
+| NNC    | 0.871       | 0.93         | 0.290           | 0.92      | Wel Norm.  |
+| SVC    | 0.919       | 0.96         | 0.806           | 0.50      | Wel Norm.  |
 
 ## <a name="Fase1"></a> Fase 1
 ### <a name="mlr"></a> Multiple linear regression
@@ -255,7 +255,7 @@ y = df[targetkolom]
 x = df.drop(targetkolom, 1)
 
 #Normalisatie (n.v.t.)
-x = (x-x.min())/(x.max()-x.min())
+#x = (x-x.min())/(x.max()-x.min())
 
 x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.3 ,random_state=7)
 
@@ -384,7 +384,7 @@ df = pd.get_dummies(df, columns=['CarName','fueltype','aspiration','doornumber',
 y = df[targetkolom]
 x = df.drop(targetkolom, 1)
 
-#Normalisatie (n.v.t.)
+#Normalisatie
 x = (x-x.min())/(x.max()-x.min())
 
 x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.3 ,random_state=7)
@@ -457,7 +457,7 @@ y = df[targetkolom]
 x = df.drop(targetkolom, 1)
 
 #Normalisatie (n.v.t.)
-x = (x-x.min())/(x.max()-x.min())
+#x = (x-x.min())/(x.max()-x.min())
 
 x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.3 ,random_state=7)
 
@@ -632,7 +632,7 @@ df = pd.get_dummies(df, columns=['CarName','fueltype','aspiration','doornumber',
 y = df[targetkolom]
 x = df.drop(targetkolom, 1)
 
-#Normalisatie (n.v.t.)
+#Normalisatie
 x = (x-x.min())/(x.max()-x.min())
 
 x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.3 ,random_state=7)
@@ -704,7 +704,7 @@ while q < len(ToBinairize):
 y = df[targetkolom]
 x = df.drop(targetkolom, 1)
 
-#Normalisatie (n.v.t.)
+#Normalisatie
 x = (x-x.min())/(x.max()-x.min())
 
 x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.3 ,random_state=7)
@@ -883,7 +883,7 @@ df = pd.get_dummies(df, columns=['CarName','fueltype','aspiration','doornumber',
 y = df[targetkolom]
 x = df.drop(targetkolom, 1)
 
-#Normalisatie (n.v.t.)
+#Normalisatie
 x = (x-x.min())/(x.max()-x.min())
 
 x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.3 ,random_state=7)
@@ -956,7 +956,7 @@ while q < len(ToBinairize):
 y = df[targetkolom]
 x = df.drop(targetkolom, 1)
 
-#Normalisatie (n.v.t.)
+#Normalisatie
 x = (x-x.min())/(x.max()-x.min())
 
 x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.3 ,random_state=7)
