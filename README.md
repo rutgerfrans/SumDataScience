@@ -635,7 +635,7 @@ Supportvector machines kunnen in meerdere dimensies worden toegepast. Dit kan in
 
 Net als bij neurale netwerken, zijn hier ook parameters van belang die de accuraatheid van de resultaten beïnvloeden. Bij supportvector machines zijn dat: 'c', 'gamma' en 'kernel'. C staat voor de mate aan misclassifacitie binnen de margin, gamma is de grote in margin en kernel geeft de functie aan die toegepast wordt om de beste resultaten te vinden in de verschillende dimensies. 
 
-Bij de mate van classificatie is naar aanleiding van onderstaande tabel gekozen voor een C van 1.0. De range van 1.0 tot 5.0 gaven allemaan dezelfde score van ongeveer 90 procent weer. Besloten is om 1.0 toe te passen aangezien niet hoger nodig is voor het model. Na 5.0 is interessant om te zien dat de accuraatheid weer daalt dit komt waarschijnlijk door overfitting.
+Bij de mate van classificatie is naar aanleiding van onderstaande tabel gekozen voor een C van 1.0. De range van 1.0 tot 5.0 gaven allemaal dezelfde score van ongeveer 90 procent weer. Besloten is om 1.0 toe te passen aangezien niet hoger nodig is voor het model en om te veel misclassificatie te voorkomen. Na 5.0 is interessant om te zien dat de accuraatheid weer daalt dit komt waarschijnlijk door overfitting.
 
 | C         | Accuracy score | b/v tradeoff |
 |-----------|----------------|--------------|
@@ -644,23 +644,24 @@ Bij de mate van classificatie is naar aanleiding van onderstaande tabel gekozen 
 | 1.0 - 5.0 | 0.90           |              |
 | 5.1 >     | < 0.87         | Overfitting  |
 
-Voor de grote in margin is gekozen om de gamma op 'auto' te zetten aangezien deze functie de optimale margin voor ons berekend. Op basis van onderstaande tabel is de kernel functie bepaald. 
+Voor de grote in margin is gekozen om de gamma op 'auto' te zetten aangezien deze functie de optimale margin voor ons berekend. Op basis van onderstaande tabel is de kernel functie bepaald. Het resultaat geeft weer dat de polynominale functie met een degree van 1 de beste resultaten uit het model haalt.
 
 | Kernel      | Accuracy score |
 |-------------|----------------|
-| linear      | 0.80           |
-| poly (d=1)  | 0.88           |
-| poly (d=2)  | 0.91           |
+| linear      | 0.89           |
+| poly (d=1)  | 0.91           |
+| poly (d=2)  | 0.70           |
 | poly (d=3)  | 0.70           |
-| rbf         | 0.87           | 
+| rbf         | 0.90           | 
 | sigmoid     | 0.90           |
 | precomputed | n.v.t          |
 
 
 Uiteindelijke parameters:
-- C: (2.0)
+- C: (1.0)
 - Gamma: 'auto'
-- Kernel: 'sigmoid'
+- Kernel: 'poly'
+- degree: (1.0)
 
 #### Code
 ~~~~
@@ -730,7 +731,7 @@ x = (x-x.min())/(x.max()-x.min())
 
 x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.3 ,random_state=7)
 
-model = svm.SVC(C=2.0, gamma='auto', max_iter=-1, kernel='sigmoid', probability=True)
+model = svm.SVC(C=1.0, gamma='auto', max_iter=-1, kernel='poly', degree=1, probability=True)
 
 model.fit(x_train, y_train)
 
@@ -766,14 +767,14 @@ Confusion matrix:
 Classification Report:
 |              | precision | recall | f1-score | support |
 |--------------|-----------|--------|----------|---------|
-| 0            | 0.95      | 0.91   | 0.93     | 44      |
-| 1            | 0.80      | 0.89   | 0.84     | 18      |
-| accuracy     |           |        | 0.90     | 62      |
-| macro avg    | 0.88      | 0.90   | 0.89     | 62      |
-| weighted avg | 0.91      | 0.90   | 0.90     | 62      |
+| 0            | 0.95      | 0.93   | 0.94     | 44      |
+| 1            | 0.84      | 0.89   | 0.86     | 18      |
+| accuracy     |           |        | 0.92     | 62      |
+| macro avg    | 0.90      | 0.91   | 0.90     | 62      |
+| weighted avg | 0.92      | 0.92   | 0.92     | 62      |
 
 Accuracy score:
-0.9032258064516129
+0.9193548387096774
 
 ROC curve:
 
