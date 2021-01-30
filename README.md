@@ -190,7 +190,7 @@ Zo is er aangeraden om de kolom "CarName" op te splitsen in merknamen i.p.v. typ
 
 ### <a name="lr"></a> Logistic regression
 #### Beschrijving
-Logistic regression is een machine learning model die binnen supervised learning wordt toegepast voor classificatie. In de statistiek wordt logistische regressie gebruikt om een geclassificeerde uitkomstvariabele te relateren aan een of meer variabelen. Hierbij is de geclassificeerde uitkomstvariabele dichotoom. In dit model wordt wederom de prijs van de auto als target variabele gebruikt. In dit geval is het belangrijk dat deze variabele omgezet wordt naar een binaire vorm, zo zijn de prijzen opgedeeld in hoog of laag. Afhankelijk van het gemiddelde is bepaald of de prijs van een auto laag of hoog is.
+Logistic regression is een machine learning model die binnen supervised learning wordt toegepast voor classificatie. In de statistiek wordt logistische regressie gebruikt om een geclassificeerde uitkomstvariabele te relateren aan een of meer variabelen. Hierbij is de geclassificeerde uitkomstvariabele dichotoom. Een logistisch model bepaalt dit door i.p.v. een lineaire regressie lijn, een s-vormige log-functie toe te passen. Hierbij kan een logistisch model de kans weergeven of de uitkomstvariabele het een of het ander is gebaseerd op de onafhankelijke inputvariabelen. In dit geval is het belangrijk dat deze uitkomstvariabele omgezet wordt naar een binaire vorm, zo zijn de prijzen opgedeeld in hoog of laag. Afhankelijk van het gemiddelde is bepaald of de prijs van een auto laag of hoog is.
 
 #### Code
 ~~~~
@@ -311,7 +311,7 @@ ROC curve:
 
 
 #### Evaluatie
-Het uiteindelijke resultaat laat zien dat er een accuracy score is van ongeveer 88 procent. Dit laat zien dat er geen goed verband is tussen de geclassificeerde output variabele en de andere features. Tevens geeft de ROC score een mooie lijn aan die snel stijgt en een AUC score heeft van 0.95. Wat wel interessant is om te zien is dat dit model een klein beetje beter presteert dan bij multiple linear regression. Hier is de output score ongeveer 5 procent hoger. Blijkbaar is er een beter logistisch verband tussen de target value en de een lineair verband.
+Het uiteindelijke resultaat laat zien dat er een accuracy score is van ongeveer 88 procent. Dit laat zien dat er geen goed verband is tussen de geclassificeerde output variabele en de andere features. Tevens geeft de ROC score een mooie lijn aan die snel stijgt en een AUC score heeft van 0.95. Wat wel interessant is om te zien is dat dit model een klein beetje beter presteert dan bij multiple linear regression. Hier is de output score ongeveer 5 procent hoger. Blijkbaar is er een beter logistisch verband tussen de target value dan een lineair verband.
 
 #### Feedback
 Tijdens het feedbackmoment werd er aangekaart dat de evaluatie technieken werden toegepast over het getrainde model. Bij logistic regression hoort een confusion matrix en ROC curve toegepast te worden om te evalueren hoe goed het model presteert.
