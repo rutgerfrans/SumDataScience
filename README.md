@@ -629,7 +629,36 @@ In het feedback moment is geconcludeerd dat 3 hiddenlayers te veel zijn en dat d
 ## <a name="Fase3"></a> Fase 3
 ### <a name="svm"></a> Support vector machines
 #### Beschrijving
-ligt keuze van parameters toe 
+Support vector machines is een machinelearning methode die wordt toegepast om, netzoals de logistische regressie, uitkomstvariabelen te classificeren. De uitkomstvariabelen is wederom dichotoom en bestaat dus uit een 1 of 0, hoog of laag, etc. De support vector machine maakt hierbij geen gebruik van kansen en ook niet van een s-curve om de classificatie te bepalen. Support vector machines maken gebruik van hyperplanes om datapunten te classificeren. Deze hyperplanes scheiden de datapunten aan de hand van een margin, dit is de maximale afstand van de support vectors aan beide kanten van de scheiding. Support vectors zijn de vectoren/datapunten die het dichstbij de scheiding liggen.
+
+Supportvector machines kunnen in meerdere dimensies worden toegepast. Dit kan in 1 dimensie, waarbij er één lijn is waar de datapunten zich op bevinden en deze gescheiden worden door een hyperplane in de vorm van punten op de lijn. Maar ook in 2 dimensies kunnen support vector machines worden toegepast. Hierbij is er een x en y geplot waarin de datapunten zijn verdeeld en gescheiden worden door een hyperplane die bestaat uit drie lijnen. De middelste representeerd de scheiding/classificatie en de buitenste lijnen zijn de parallel lopende support vector lijnen die de margin bepalen, ook wel een 1 dimensionale hyperplane. Bij 3 dimensies zijn de datapunten verdeeld over drie assen waarbij deze gescheiden worden door een 2 dimensionale hyperplane. Dit zijn drie vlakken waarvan het middelste vlak de classifier is en de twee buitenste vlakken de supportvectorvlakken vormen die de margin weergeven. Om te ontdekken welke dimensie van toepassing is of in welke dimensie de beste resultaten naar voren komen wordt daar kernel functies voor toegepast.
+
+Net als bij neurale netwerken, zijn hier ook parameters van belang die de accuraatheid van de resultaten beïnvloeden. Bij supportvector machines zijn dat: 'c', 'gamma' en 'kernel'. C staat voor de mate aan misclassifacitie binnen de margin, gamma is de grote in margin en kernel geeft de functie aan die toegepast wordt om de beste resultaten te vinden in de verschillende dimensies. 
+
+Bij de mate van classificatie is naar aanleiding van onderstaande tabel gekozen voor een C van 1.0. De range van 1.0 tot 5.0 gaven allemaan dezelfde score van ongeveer 90 procent weer. Besloten is om 1.0 toe te passen aangezien niet hoger nodig is voor het model. Na 5.0 is interessant om te zien dat de accuraatheid weer daalt dit komt waarschijnlijk door overfitting.
+
+| C         | Accuracy score | b/v tradeoff |
+|-----------|----------------|--------------|
+| 0.1       | 0.70           | Underfitting |
+| 0.5       | 0.85           | Underfitting |
+| 1.0 - 5.0 | 0.90           |              |
+| 5.1 >     | < 0.87         | Overfitting  |
+
+Voor de grote in margin is gekozen om de gamma op 'auto' te zetten aangezien deze functie de optimale margin voor ons berekend. Op basis van onderstaande tabel is de kernel functie bepaald. 
+
+| Kernel      | Accuracy score |
+|-------------|----------------|
+| linear      | 0.70           |
+| poly        | 0.85           |
+| rbf         | 0.90           | 
+| sigmoid     | < 0.87         |
+| precomputed | < 0.87         |
+
+
+Uiteindelijke parameters:
+- C: (2.0)
+- Gamma: 'auto'
+- Kernel: 'sigmoid'
 
 #### Code
 ~~~~
@@ -759,10 +788,7 @@ gamma = grote in margin
 roc curve in elkaar zetten voor verschillen van model
 
 ### <a name="bn"></a> Bayesian networks
-#### Beschrijving
-Support vector machines is een machinelearning methode die wordt toegepast om, netzoals de logistische regressie, uitkomstvariabelen te classificeren. De uitkomstvariabelen is wederom dichotoom en bestaat dus uit een 1 of 0, hoog of laag, etc. De support vector machine maakt hierbij geen gebruik van kansen en ook niet van een s-curve om de classificatie te bepalen. Support vector machines maken gebruik van hyperplanes om datapunten te classificeren. Deze hyperplanes scheiden de datapunten aan de hand van een margin, dit is de maximale afstand van de support vectors aan beide kanten van de scheiding. Support vectors zijn de vectoren/datapunten die het dichstbij de scheiding liggen.
-
-Supportvector machines kunnen in meerdere dimensies worden toegepast. Dit kan in 1 dimensie, waarbij er één lijn is waar de datapunten zich op bevinden en deze gescheiden worden door een hyperplane in de vorm van punten op de lijn. Maar ook in 2 dimensies kunnen support vector machines worden toegepast. Hierbij is er een x en y geplot waarin de datapunten zijn verdeeld en gescheiden worden door een hyperplane die bestaat uit drie lijnen. De middelste representeerd de scheiding/classificatie en de buitenste lijnen zijn de parallel lopende support vector lijnen die de margin bepalen, ook wel een 1 dimensionale hyperplane. Bij 3 dimensies zijn de datapunten verdeeld over drie assen waarbij deze gescheiden worden door een 2 dimensionale hyperplane. Dit zijn drie vlakken waarvan het middelste vlak de classifier is en de twee buitenste vlakken de supportvectorvlakken vormen die de margin weergeven. 
+#### Beschrijving 
 
 #### Voorbeeld 1.0
 Dit voorbeeld laat zien wat de kansen zijn rondom de toelating van een denkbeeldige studie. Hierbij zijn vier nodes tezien: Examlevel, IQlevel, Marks en Admission.
