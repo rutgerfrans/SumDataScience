@@ -5,14 +5,14 @@
     - [Data beschrijving](#Datasetbeschrijving)
     - [Data preperatie](#Datapreperatie)
 - [Fase 1](#Fase1)
-- [Multiple Linear Regression](#mlr)
-- [Logistic Regression](#lr)
+    - [Multiple Linear Regression](#mlr)
+    - [Logistic Regression](#lr)
 - [Fase 2](#Fase2)
-- [Random Forests](#rf)
-- [Neural Networks](#nn)
+    - [Random Forests](#rf)
+    - [Neural Networks](#nn)
 - [Fase 3](#Fase3)
-- [Support Vector Machines](#svm)
-- [Bayesian Networks](#bn)
+    - [Support Vector Machines](#svm)
+    - [Bayesian Networks](#bn)
 - [Conclusie](#AlgeheleConclusie)
 - [Auteurs](#Auteurs)
 
@@ -96,6 +96,7 @@ Hier toelichten dat dit per model anders is!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 ## <a name="Fase1"></a> Fase 1
 ### <a name="mlr"></a> Multiple linear regression
+#### Beschrijving
 Multiple linear regression is een machine learning model die binnen supervised learning wordt toegepast. Dit model zoekt zoekt een relatie tussen afhankelijke en een of meer onafhankelijke variabelen door de best passende rechte lijn te plaatsen. In deze toepassing zoekt het model in de dataset "Carprices" een lineair verband tussen de afhankelijke variabele, carprice, en de overige features die zijn over gebleven na de data preperatie.
 
 #### Code
@@ -176,7 +177,7 @@ plt.show()
 
 ![](LinearverbandPredyTesty.png)
 
-#### Conclusie
+#### Evaluatie
 Het uiteindelijke resultaat laat zien dat er een rmse is van ongeveer 3000 euro met r2 score van ongeveer 83 procent. Dit laat zien dat er een vrij goed lineair verband is tussen "Carprice" en alle andere features. Er kan dus met ongeveer 83 procent zekerheid worden voorspeld wat de prijs van een auto zal zijn op basis van deze dataset. De rmse ziet er ook vrij normaal uit aangezien de gemiddelde prijs van een auto rond de 13000 euro ligt. Een rmse van 3000 euro ziet er daarom niet gek uit. Tevens is er ook een logisch verband te zien in de plot waarbij de voorspeelde target tegenover de daadwerkelijk target is gezet.
 
 #### Feedback
@@ -184,6 +185,7 @@ In de feedback momenten, werd er vooral aangekaart dat we meer aandacht moesten 
 Zo is er aangeraden om de kolom "CarName" op te splitsen in merknamen i.p.v. type auto's. Ook werd als tip gegeven om aan de hand van de heatmap te kijken welke attributen een goede correlatie hadden en dus een biassed uitkomst konden leveren.
 
 ### <a name="lr"></a> Logistic regression
+#### Beschrijving
 Logistic regression is een machine learning model die binnen supervised learning wordt toegepast voor classificatie. In de statistiek wordt logistische regressie gebruikt om een geclassificeerde uitkomstvariabele te relateren aan een of meer variabelen. Hierbij is de geclassificeerde uitkomstvariabele dichotoom. In dit model wordt wederom de prijs van de auto als target variabele gebruikt. In dit geval is het belangrijk dat deze variabele omgezet wordt naar een binaire vorm, zo zijn de prijzen opgedeeld in hoog of laag. Afhankelijk van het gemiddelde is bepaald of de prijs van een auto laag of hoog is.
 
 #### Code
@@ -304,7 +306,7 @@ ROC curve:
 ![](ROClogisticregression.png)
 
 
-#### Conclusie
+#### Evaluatie
 Het uiteindelijke resultaat laat zien dat er een accuracy score is van ongeveer 88 procent. Dit laat zien dat er geen goed verband is tussen de geclassificeerde output variabele en de andere features. Tevens geeft de ROC score een mooie lijn aan die snel stijgt en een AUC score heeft van 0.95. Wat wel interessant is om te zien is dat dit model een klein beetje beter presteert dan bij multiple linear regression. Hier is de output score ongeveer 5 procent hoger. Blijkbaar is er een beter logistisch verband tussen de target value en de een lineair verband.
 
 #### Feedback
@@ -312,6 +314,7 @@ Tijdens het feedbackmoment werd er aangekaart dat de evaluatie technieken werden
 
 ## <a name="Fase2"></a> Fase 2
 ### <a name="rf"></a> Random forests 
+#### Beschrijving
 Random forests zijn een ensemble-leermethode voor classificatie, die werken door een veelvoud aan beslissingsbomen te construeren tijdens de training. Op basis van de het gemiddelde of de modus van alle uitkomsten wordt de outputvalue geclassificeerd. In dit model wordt
 Een belangrijke parameter bij Random forests zijn het aantal decision trees die van toepassing zijn in het model om de beste score te krijgen. Zoals te zien hier onder, is geanalyseerd welke hoeveelheid aan desicion trees benodigd zou zijn voor de beste score. 1000 en 10000 decision trees hebben uiteindelijk de beste score. 1000 trees zal worden gehanteerd binnen de code omdat daarvan de compile tijd korter zal zijn. Interessant om te zien is dat bij een random forest van 100000 trees de score weer lager wordt, dit heeft waarschijnlijk te maken met overfitting.
 
@@ -442,13 +445,14 @@ ROC curve:
 
 ![](ROCrandomforestclassifier.png)
 
-#### Conclusie
+#### Evaluatie
 Het uiteindelijke resultaat laat zien dat er een accuracy is van ongeveer 87 procent bij een randomforest van 1000 bomen. Net als voorgaande modellen laat dit model zien dat er een goed verband is tussen de target feature en de andere features. Net als bij de logistic regression is hier een goede ROC curve te zien, waarbij de lijn vrij snel stijgt en een AUC score aanwezig is van 0.93. Echter geeft het logistic regression model een accurater model neer met een verschil van 1 procent. Tevens is de AUC score ook hoger met een verschil van 3 procent.
 
 #### Feedback
 Bij het feedbackmoment zijn er een paar vragen gestelt m.b.t. de visualisatie van het resultaat. Wij waren er nog niet mee bekend dat we de confusion matrix en de ROC curve bij alle classificatie modellen konden gebruiken voor de visualisatie. Na het feedback moment zijn deze toegevoegd voor verduidelijking van het resultaat.
 
-### <a name="nn"></a> Neurale netwerken 
+### <a name="nn"></a> Neurale netwerken
+#### Beschrijving
 Toelichting parameters model
 
 #### Code
@@ -570,7 +574,7 @@ ROC curve:
 
 ![](ROCneuralnetworkclassifier.png)
 
-#### Conclusie
+#### Evaluatie
 
 #### Feedback
 -er is sprake van overfitting door te veel nodes en hiddenlayers 8,8,8
@@ -579,7 +583,7 @@ ROC curve:
 
 ## <a name="Fase3"></a> Fase 3
 ### <a name="svm"></a> Support vector machines
-Toelichting
+#### Beschrijving
 ligt keuze van parameters toe 
 
 #### Code
@@ -699,7 +703,7 @@ ROC curve:
 
 ![](ROCsvm.png)
 
-#### Conclusie
+#### Evaluatie
 Bij iedere conclusie is het belangrijk te evalueren waarom er een goed of geen goed verband is in de dataset, wat de uitkomst is en wat de relatie is met de parameters. Onderbouw dit met het classificatie model.
 
 #### Feedback
@@ -710,7 +714,7 @@ gamma = grote in margin
 roc curve in elkaar zetten voor verschillen van model
 
 ### <a name="bn"></a> Bayesian networks
-Toelichting
+#### Beschrijving
 
 #### Voorbeeld 1.0
 Dit voorbeeld laat zien wat de kansen zijn rondom de toelating van een denkbeeldige studie. Hierbij zijn vier nodes tezien: Examlevel, IQlevel, Marks en Admission.
@@ -799,7 +803,7 @@ p(a0) = 0.726
 
 p(a1) = 0.274
 
-#### Conclusie
+#### Evaluatie
 Te zien in voorbeeld1.0 is dat de kans om toegelaten te worden op basis van 3 factoren is ongeveer 70%. Dit leek in eerste instantie vrij hoog als toelating voor een studie. Daarom is een tweede voorbeeld uitgewerkt waarbij een extra factor, Studylevel, is toegevoegd. Dit om te onderzoeken of het niveau van studiewerk impact zou hebben op de toelatings kans van de denkbeeldige studie. Wat interessant is om te zien, is dat met de toegevoegde factor, in voorbeeld2.0, de kans op toelating met 2% stijgt.
 
 #### Feedback
