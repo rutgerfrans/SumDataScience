@@ -781,14 +781,10 @@ ROC curve:
 ![](ROCsvm.png)
 
 #### Evaluatie
-Bij iedere conclusie is het belangrijk te evalueren waarom er een goed of geen goed verband is in de dataset, wat de uitkomst is en wat de relatie is met de parameters. Onderbouw dit met het classificatie model.
+Bij dit model valt te concluderen dat er een erg goed verband is tussen de target value en de onafhankelijke features. Met een accuracy score van ongeveer 91 procent en een AUC score van 96 procent is dit de best toegepaste techniek tot nu toe. Ook is het sterke verband aan de snelle stijging van ROC curve te zien.
 
 #### Feedback
--c, gamma en aantal iter aanpassen, zijn de parameters waar je mee kunt spelen
-bij scale wordt er meer gerbruik gemaakt van de variantie, variantie is meer aanwezig bij continue variabelen 
-c = hoe fout tollerant, in welke mate misclaccificatie
-gamma = grote in margin
-roc curve in elkaar zetten voor verschillen van model
+Tijdens het feedback moment zijn de parameters toegelicht, aangezien deze onduidelijk waren. Op basis van de toelichting zijn we de parameters gaan analyseren om de beste resultaten te vinden.
 
 ### <a name="bn"></a> Bayesian networks
 #### Beschrijving 
