@@ -94,11 +94,11 @@ Als derde stap is gekeken of normalisatie nodig zou zijn. In eerste instantie wa
 ###### Regressie modellen
 |        | Normalisatie              |Geen normalisatie           | Resultaat  |
 |--------|---------------------------|----------------------------|------------| 
-|        | Rmse:        | R2-Score:  | Rmse:      | R2-Score:     |            |
-| MLR    | 2.95\*10^15  | -1.588     | 3041.88    | 0.831         | Nier Norm. |
-| RFR    | 2481.73      | 0.887      | 2480.93    | 0.887         | Wel  Norm. |
-| NNR    | 2826.09      | 0.854      | 3804.39    | 0.735         | Wel  Norm. |
-| SVR    | 2437.45      | 0.891      | 101782.57  | -188.40       | Wel  Norm. |
+|        | Rmse:          R2-Score:  | Rmse:        R2-Score:     |            |
+| MLR    | 2.95\*10^15    -1.588     | 3041.88      0.831         | Nier Norm. |
+| RFR    | 2481.73        0.887      | 2480.93      0.887         | Wel  Norm. |
+| NNR    | 2826.09        0.854      | 3804.39      0.735         | Wel  Norm. |
+| SVR    | 2437.45        0.891      | 101782.57    -188.40       | Wel  Norm. |
 
 ###### Classificatie modellen
 |        | multiple linear regression | 
