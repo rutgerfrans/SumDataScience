@@ -760,6 +760,9 @@ roc curve in elkaar zetten voor verschillen van model
 
 ### <a name="bn"></a> Bayesian networks
 #### Beschrijving
+Support vector machines is een machinelearning methode die wordt toegepast om, netzoals de logistische regressie, uitkomstvariabelen te classificeren. De uitkomstvariabelen is wederom dichotoom en bestaat dus uit een 1 of 0, hoog of laag, etc. De support vector machine maakt hierbij geen gebruik van kansen en ook niet van een s-curve om de classificatie te bepalen. Support vector machines maken gebruik van hyperplanes om datapunten te classificeren. Deze hyperplanes scheiden de datapunten aan de hand van een margin, dit is de maximale afstand van de support vectors aan beide kanten van de scheiding. Support vectors zijn de vectoren/datapunten die het dichstbij de scheiding liggen.
+
+Supportvector machines kunnen in meerdere dimensies worden toegepast. Dit kan in 1 dimensie, waarbij er één lijn is waar de datapunten zich op bevinden en deze gescheiden worden door een hyperplane in de vorm van punten op de lijn. Maar ook in 2 dimensies kunnen support vector machines worden toegepast. Hierbij is er een x en y geplot waarin de datapunten zijn verdeeld en gescheiden worden door een hyperplane die bestaat uit drie lijnen. De middelste representeerd de scheiding/classificatie en de buitenste lijnen zijn de parallel lopende support vector lijnen die de margin bepalen, ook wel een 1 dimensionale hyperplane. Bij 3 dimensies zijn de datapunten verdeeld over drie assen waarbij deze gescheiden worden door een 2 dimensionale hyperplane. Dit zijn drie vlakken waarvan het middelste vlak de classifier is en de twee buitenste vlakken de supportvectorvlakken vormen die de margin weergeven. 
 
 #### Voorbeeld 1.0
 Dit voorbeeld laat zien wat de kansen zijn rondom de toelating van een denkbeeldige studie. Hierbij zijn vier nodes tezien: Examlevel, IQlevel, Marks en Admission.
