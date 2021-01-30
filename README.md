@@ -788,6 +788,11 @@ Tijdens het feedback moment zijn de parameters toegelicht, aangezien deze onduid
 
 ### <a name="bn"></a> Bayesian networks
 #### Beschrijving 
+Bayesian network is een model binnen de machinelearning die toegepast wordt voor "probabilistic reasoning". Hierbij worden de kanstheorie gecombineerd met logisch beredeneren. Bayesian networks worden dan ook vooral toegepast op problemen met onzekerheid. Door het toepassen van kansberekening kan de kans dat een event plaatvindt worden berekend. Dit wordt gedaan door een netwerk aan nodes te creëren die onderling een bepaald verband hebben. Zo kan de ene node een childnode zijn en de ander een parentnode zijn. Dit houdt in dat de childnode afhankelijk is van de parentnode, en dat de kans dat de childnode plaatsvindt beïnvloed wordt door de parentnode. In voorbeeld1.0 en voorbeeld2.0 wordt de praktijk van bayesian networks beter toeglicht. 
+
+Bij deze voorbeelden zijn onderstaande bronnen benaderd:
+- https://www.youtube.com/watch?v=SkC8S3wuIfg&t=1504s
+- https://www.youtube.com/watch?v=4fcqyzVJwHM
 
 #### Voorbeeld 1.0
 Dit voorbeeld laat zien wat de kansen zijn rondom de toelating van een denkbeeldige studie. Hierbij zijn vier nodes tezien: Examlevel, IQlevel, Marks en Admission.
