@@ -24,7 +24,8 @@ Voor de minor Data Science pi7 zijn 6 opdrachten gemaakt verdeelt in 3 fases.
 2. Fase 2: Random Forests en Neurale netwerken 
 3. Fase 3: Support vector machines en Bayesian networks
 
-### <a name="Datasetbeschrijving"></a> Dataset Beschrijving attributen en target
+### <a name="Dataselectie"></a> Data selectie
+#### <a name="Datasetbeschrijving"></a> Dataset Beschrijving attributen en target
 Voor de verschillende opdrachten in de drie fases, is gekozen om onderstaande dataset toe te passen. De dataset, "Dataset Carprices", is een set aan data die bestaat uit 26 attributen die iets zeggen over 205 type auto's.
 
 
