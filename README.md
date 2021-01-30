@@ -298,7 +298,7 @@ ROC curve:
 
 
 #### Evaluatie
-Het uiteindelijke resultaat laat zien dat er een accuracy score is van ongeveer 88 procent. Dit laat zien dat er geen goed verband is tussen de geclassificeerde output variabele en de andere features. Tevens geeft de ROC score een mooie lijn aan die snel stijgt en een AUC score heeft van 0.95. Wat wel interessant is om te zien is dat dit model een klein beetje beter presteert dan bij multiple linear regression. Hier is de output score ongeveer 5 procent hoger. Blijkbaar is er een beter logistisch verband tussen de target value dan een lineair verband.
+Het uiteindelijke resultaat laat zien dat er een accuracy score is van ongeveer 88 procent. Dit laat zien dat er geen goed verband is tussen de geclassificeerde output variabele en de andere features. Tevens geeft de ROC score een mooie lijn aan die snel stijgt en een AUC score heeft van 0.95.
 
 #### Feedback
 Tijdens het feedbackmoment werd er aangekaart dat de evaluatie technieken werden toegepast over het getrainde model. Bij logistic regression hoort een confusion matrix en ROC curve toegepast te worden om te evalueren hoe goed het model presteert.
@@ -310,7 +310,8 @@ Randomforests is een voorbeeld van ensemble-leermethodes voor classificatie en r
 
 Een belangrijke parameter bij randomforests zijn het aantal decisiontrees die van toepassing zijn in het model om de beste score te krijgen. Zoals te zien hier onder, is geanalyseerd welke hoeveelheid aan desicion trees benodigd zou zijn voor de beste score bij een regressor-, en classifiermodel. 
 
-Aantal bomen regressor model:
+##### Aantal bomen regressor model:
+Te zien in onderstaande resultaten lopen de scores langzaam op. Interessant om te zien is dat het model blijkbaar bij 100 bomen even slechter presteert en vervolgens bij duizend bomen weer een stukje beter presteert. Er is in dit model gekozen voor 10000 bomen aangezien de bereken tijd voor het resultaat van 10000 bomen niet rendabel is voor het verschil dat het levert.
 
 | Trees  | R2-score           |
 |--------|--------------------|
@@ -322,7 +323,7 @@ Aantal bomen regressor model:
 | 10000  | 0.8874014607427503 |
 | 100000 | 0.8875302857180773 |
 
-Aantal bomen classifier model:
+##### Aantal bomen classifier model:
 1000 en 10000 decision trees hebben uiteindelijk de beste score. 1000 trees zal worden gehanteerd binnen de code omdat daarvan de compile tijd korter zal zijn. Interessant om te zien is dat bij een random forest van 100000 trees de score weer lager wordt, dit heeft waarschijnlijk te maken met overfitting.
 
 | Trees  | Accuracy score     |
@@ -375,7 +376,7 @@ x = (x-x.min())/(x.max()-x.min())
 
 x_train, x_test, y_train, y_test = train_test_split(x,y, test_size=0.3 ,random_state=7)
 
-model = RandomForestRegressor(n_estimators=1000000, random_state=1)
+model = RandomForestRegressor(n_estimators=10000, random_state=1)
 
 
 model.fit(x_train, y_train)
@@ -472,8 +473,8 @@ print("Classification Report:\n",classification_report(y_test,y_pred))
 print("Accuracy score:\n",accuracy_score(y_test, y_pred))
 ~~~~
 #### Output Regressor
-- RMSE:  3041.884027168188 
-- R2:  0.8308355282333387
+- RMSE: 2481.7295515565033
+- R2: 0.8874014607427503
 
 #### Output Classifier
 AUC score:
@@ -489,7 +490,7 @@ Classification Report:
 |              | precision | recall | f1-score | support |
 |--------------|-----------|--------|----------|---------|
 | 0            | 0.91      | 0.91   | 0.91     | 44      |
-| 1            | 0.78      | 0.78   | 0.78     | 18       |
+| 1            | 0.78      | 0.78   | 0.78     | 18      |
 | accuracy     |           |        | 0.87     | 62      |
 | macro avg    | 0.84      | 0.84   | 0.84     | 62      |
 | weighted avg | 0.87      | 0.87   | 0.87     | 62      |
@@ -502,7 +503,11 @@ ROC curve:
 ![](ROCrandomforestclassifier.png)
 
 #### Evaluatie
-Het uiteindelijke resultaat laat zien dat er een accuracy is van ongeveer 87 procent bij een randomforest van 1000 bomen. Net als voorgaande modellen laat dit model zien dat er een goed verband is tussen de target feature en de andere features. Net als bij de logistic regression is hier een goede ROC curve te zien, waarbij de lijn vrij snel stijgt en een AUC score aanwezig is van 0.93. Echter geeft het logistic regression model een accurater model neer met een verschil van 1 procent. Tevens is de AUC score ook hoger met een verschil van 3 procent.
+##### Regressor:
+Het resultaat geeft weer dat het model een R2-score geeft van ongeveer 88 procent en een RMSE van 2481 euro. Dit houdt in dat de randomforest regressor beter werkt op de dataset dan de multiple linear regression. Dit houdt in dat de randomforest regressor minder variantie heeft dan de multiple linear regression en dus betere voorspellingen kan maken.
+
+##### Classifier
+Het classifier resultaat laat zien dat er een accuracy is van ongeveer 87 procent bij een randomforest van 1000 bomen. Net als voorgaande modellen laat dit model zien dat er een goed verband is tussen de target feature en de andere features. Net als bij de logistic regression is hier een goede ROC curve te zien, waarbij de lijn vrij snel stijgt en een AUC score aanwezig is van 0.93. Echter geeft het logistic regression model een accurater model weer met een verschil van 1 procent. Tevens is de AUC score ook hoger met een verschil van 3 procent.
 
 #### Feedback
 Bij het feedbackmoment zijn er een paar vragen gestelt m.b.t. de visualisatie van het resultaat. Wij waren er nog niet mee bekend dat we de confusion matrix en de ROC curve bij alle classificatie modellen konden gebruiken voor de visualisatie. Na het feedback moment zijn deze toegevoegd voor verduidelijking van het resultaat.
