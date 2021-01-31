@@ -13,6 +13,7 @@
 - [Fase 3](#Fase3)
     - [Support Vector Machines](#svm)
     - [Bayesian Networks](#bn)
+- [Discussie](#Discussie)
 - [Conclusie](#AlgeheleConclusie)
 - [Auteurs](#Auteurs)
 
@@ -1125,6 +1126,9 @@ Te zien in voorbeeld1.0 is dat de kans om toegelaten te worden op basis van 3 fa
 #### Feedback
 In het feedback moment is de uitleg over bayesian networks toegelicht en kregen we als feedback om onze bronnen bij de uitleg te vermelden. Ook hadden we een vraagteken rondom het verschil in resultaat van voorbeeld1.0 en voorbeeld2.0 waarbij aangegeven werd dat de R2-score hoger wordt als er nieuwe features worden toegevoegd.
 
+## <a name="Discussie"></a> Discussie
+Als teruggeblikt wordt op dit groeirapport valt op dat één manier van feature engineering mist, namelijk de analyse naar independent variabelen die veel voorspellende invloed uitoefenen op de dependent variabele. De dataset heeft na bewerking immers 73 features, aan de hand van deze analyse zouden features die geen of nauwelijks voorspellende invloed hebben op de dependent variabele kunnen worden verwijderd. Zodoende wordt het model versimpeld en kunnen resultaten en berekentijden efficiënter worden. Naast deze manier van feature engineering is wel gekeken naar de optimalisatie van de dataset rondom standaardisatie, normalisatie en het verwijderen van features die volgens de heatmap hoog correleerde. Om de conclusie en tussen evaluaties te kunnen verbeteren zou er in de toekomst naar de independend features met veel voorspellende invloed kunnen worden gekeken. 
+
 ## <a name="AlgeheleConclusie"></a> Conclusie
 ### Conclusie regressor models
 Te zien in onderstaande tabel, uit alle RMSE- en R2-scores van de regressie modellen, dat de Support vector machine het beste scored. Echter kom het model van de randomforest erg dichtbij alleen is de RMSE daarvan een stuk hoger. Het neural network model heeft ook een vrij hoge score, maar zoals eerder al geconcludeerd bij de evaluatie was deze zo wisselvallig dit model waarschijnlijk niet van toepassing is op deze dataset.
@@ -1142,7 +1146,6 @@ Als we alle accuracy en AUC scores naast elkaar leggen is duidelijk te zien dat 
 |----------------|---------------------|----------------|----------------|------------------------|
 | Accuracy score | 0.887               | 0.871          | 0.871          | **0.919**              |
 | AUC score      | 0.95                | 0.93           | 0.93           | **0.96**               |
-
 
 ## <a name="Auteurs"></a> Auteurs
 - Rutger de Groen https://rutgerfrans.com/
